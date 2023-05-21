@@ -44,10 +44,10 @@ export default function FloatingMenu() {
               }
             >
               <article>
-                <div>
+                <Link href="/main">
                   <FontAwesomeIcon icon={faHouseChimney} size="lg" />
                   <p>홈</p>
-                </div>
+                </Link>
                 <div
                   onClick={() => {
                     setSearchState(!searchState);
@@ -60,10 +60,10 @@ export default function FloatingMenu() {
                   <FontAwesomeIcon icon={faPencil} />
                   <p>글쓰기</p>
                 </div>
-                <div>
+                <Link href="/profile">
                   <FontAwesomeIcon icon={faUser} />
                   <p>프로필</p>
-                </div>
+                </Link>
               </article>
             </div>
           </div>

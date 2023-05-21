@@ -88,7 +88,9 @@
   width: 100%;
 }
 .menuListBox article div,
-.menuListBoxSearch article div {
+.menuListBoxSearch article div,
+.menuListBox article a,
+.menuListBoxSearch article a {
   display: flex;
   align-items: center;
   width: 90%;
@@ -99,27 +101,19 @@
   color: #554735;
   cursor: pointer;
 }
-.menuListBox article a {
-  display: flex;
-  align-items: center;
-  width: 90%;
-  margin: 0 10px 20px 10px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #554735;
-  cursor: pointer;
-}
+
 .menuListBox article div p,
 .menuListBox article a p,
-.menuListBoxSearch article div p {
+.menuListBoxSearch article div p,
+.menuListBoxSearch article a p {
   transition: 0.3s;
 }
 .menuListBox article div p,
 .menuListBox article a p {
   opacity: 1;
 }
-.menuListBoxSearch article div p {
+.menuListBoxSearch article div p,
+.menuListBoxSearch article a p {
   opacity: 0;
 }
 
@@ -132,7 +126,8 @@
 }
 .menuListBox article div svg,
 .menuListBox article a svg,
-.menuListBoxSearch article div svg {
+.menuListBoxSearch article div svg,
+.menuListBoxSearch article a svg {
   margin-right: 20px;
   padding: 5px;
   font-size: 25px;

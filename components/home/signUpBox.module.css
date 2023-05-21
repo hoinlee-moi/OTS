@@ -1,11 +1,4 @@
-.logoBox {
-  height: 100%;
-}
-.logoBox img {
-  transform: scale(1.2);
-  width: 100%;
-  height: 100%;
-}
+
 .signUpBox {
   display: flex;
   align-items: center;
@@ -14,7 +7,7 @@
   margin-right: 30px;
   box-sizing: border-box;
 }
-.signUpBox button {
+.signUpBox >button {
   margin-right: auto;
   padding: 10px;
   font-weight: bold;
@@ -28,9 +21,7 @@
 }
 
 @media (max-width: 500px) {
-  .logoBox {
-    height: 100%;
-  }
+ 
   .signUpBox {
     width: 180px;
     margin: 0;

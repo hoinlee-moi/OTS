@@ -1,8 +1,10 @@
 "use client";
 
-import styles from "../../app/page.module.css";
+import styles from "./homeModal.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SignUp from "./SignUp";
+import Login from "./Login";
 
 type modalPorps = {
   content: string;
@@ -23,7 +25,7 @@ export default function HomeModal({ content, modalClose }: modalPorps) {
         <span onClick={() => modalClose(false)}>
           <FontAwesomeIcon icon={faXmark} />
         </span>
-        {/* {content === "signUp" ? <SignUp /> : <Login />} */}
+        {content === "signUp" ? <SignUp /> : <Login />}
       </section>
     </div>
   );

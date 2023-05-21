@@ -21,9 +21,20 @@
   background-color: rgba(255, 255, 255, 0.493);
   backdrop-filter: blur(10px);
 }
+.logoBox {
+  height: 100%;
+}
+.logoBox img {
+  transform: scale(1.2);
+  width: 100%;
+  height: 100%;
+}
 
 @media (max-width: 500px) {
   .container header {
     height: 60px;
+  }
+  .logoBox {
+    height: 100%;
   }
 }

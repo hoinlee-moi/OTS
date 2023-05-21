@@ -1,0 +1,29 @@
+.container::-webkit-scrollbar {
+  display: none;
+}
+.container {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+}
+.container section {
+  overflow: hidden;
+}
+.container header {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.493);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 500px) {
+  .container header {
+    height: 60px;
+  }
+}

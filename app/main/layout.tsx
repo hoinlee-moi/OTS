@@ -1,4 +1,4 @@
-import FloatingMenu from "./FloatingMenu";
+import FloatingMenu from "../../components/main/FloatingMenu";
 import styles from "./page.module.css";
 
 type props = {

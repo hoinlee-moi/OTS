@@ -1,6 +1,6 @@
 "use client";
 import React, { useState,useEffect } from "react";
-import styles from "./page.module.css";
+import styles from "./Floating.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 

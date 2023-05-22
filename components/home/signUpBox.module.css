@@ -15,7 +15,7 @@
   background-color: #ffaaa1;
   cursor: pointer;
 }
-.signUpBox button:hover {
+.signUpBox>button:hover {
   color: #000;
   background-color: #ff887b;
 }

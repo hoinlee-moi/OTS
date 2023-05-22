@@ -9,8 +9,6 @@ import HomeSection03 from "./HomeSection03";
 export default function Sections() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [modalState, setModalState] = useState(false);
-  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -22,7 +20,7 @@ export default function Sections() {
   useEffect(() => {
     const wheelHandler = (e: WheelEvent) => {
       e.preventDefault();
-      if (isScrolling || modalState) return;
+      if (isScrolling) return;
       setIsScrolling(true);
       const { deltaY } = e;
       if (containerRef.current) {
@@ -56,7 +54,7 @@ export default function Sections() {
     return () => {
       containerRefCurrent?.removeEventListener("wheel", wheelHandler);
     };
-  }, [isScrolling, modalState]);
+  }, [isScrolling]);
 
   const scrollEnd = (bool: boolean) => {
     if (bool) {

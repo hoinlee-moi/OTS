@@ -3,5 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom left, fuchsia 600, rose 500, amber 300);
+  width: 100px;
+  height: 100px;
+  background-color: black;
 }

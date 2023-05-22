@@ -7,5 +7,5 @@ type Props = {
 };
 
 export default function Avatar() {
-  return <div></div>;
+  return <div className={styles.baseStyle}></div>;
 }

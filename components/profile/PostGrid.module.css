@@ -1,0 +1,11 @@
+.gridContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.gridPosts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem /* 16px */;
+}

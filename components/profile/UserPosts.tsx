@@ -7,7 +7,9 @@ export default function UserPosts() {
     <section>
       <ul className={styles.menuList}>
         {tabs.map(({ type }) => (
-          <li className={styles.manuName} key={type}></li>
+          <li className={styles.manuName} key={type}>
+            <span className={styles.listName}>{type}</span>
+          </li>
         ))}
       </ul>
     </section>

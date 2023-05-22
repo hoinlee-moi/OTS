@@ -1,3 +1,5 @@
+import PostBoard from "@/components/main/PostBoard";
+
 export default function Main() {
   return (
     <div>
@@ -9,6 +11,7 @@ export default function Main() {
             </ul>
         </div>
       <h2>안녕 메인</h2>
+      <PostBoard />
     </div>
   );
 }

@@ -1,0 +1,16 @@
+.menuList {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.menuName {
+  margin-left: 3rem /* 48px */;
+  margin-right: 3rem /* 48px */;
+  cursor: pointer;
+  border: 1px rgb(0 0 0);
+}
+
+.listName {
+  display: inline;
+}

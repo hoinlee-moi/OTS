@@ -60,7 +60,7 @@ export default function FloatingMenu() {
                   <FontAwesomeIcon icon={faPencil} />
                   <p>글쓰기</p>
                 </div>
-                <Link href="/profile">
+                <Link href="/main/profile">
                   <FontAwesomeIcon icon={faUser} />
                   <p>프로필</p>
                 </Link>

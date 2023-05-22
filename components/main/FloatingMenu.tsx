@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import styles from "./Floating.module.css";
-import FloatingSearch from "./FloatingSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import styles from './Floating.module.css';
+import FloatingSearch from './FloatingSearch';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHouseChimney,
   faMagnifyingGlass,
   faPencil,
   faUtensils,
-} from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import Link from "next/link";
+} from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import Link from 'next/link';
 
 export default function FloatingMenu() {
   const [searchState, setSearchState] = useState(false);
@@ -60,7 +60,7 @@ export default function FloatingMenu() {
                   <FontAwesomeIcon icon={faPencil} />
                   <p>글쓰기</p>
                 </div>
-                <Link href="/profile">
+                <Link href="/main/profile">
                   <FontAwesomeIcon icon={faUser} />
                   <p>프로필</p>
                 </Link>

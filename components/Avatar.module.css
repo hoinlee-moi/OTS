@@ -1,0 +1,7 @@
+.baseStyle {
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom left, fuchsia 600, rose 500, amber 300);
+}

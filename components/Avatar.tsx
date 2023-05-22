@@ -1,10 +1,11 @@
-type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
+import styles from './Avatar.module.css';
 
-export default function Avatar({ image }: { image?: string | null }) {
-  return (
-    <></>
-    // <div className={getContainerStyle(size)}>
-    //   <img />
-    // </div>
-  );
+type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
+type Props = {
+  image?: string | null;
+  size?: AvatarSize;
+};
+
+export default function Avatar() {
+  return <div></div>;
 }

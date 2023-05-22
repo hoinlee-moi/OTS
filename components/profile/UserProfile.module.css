@@ -1,7 +1,46 @@
 .sectionContaner {
   width: 100%;
-  max-width: 1280px;
-  overflow: auto;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3rem; /* 48px */
+  padding-bottom: 3rem; /* 48px */
+  border-bottom: 1px solid #e4e4e4;
+}
+
+@media (min-width: 768px) {
+  .sectionContainer {
+    flex-direction: row;
+  }
+
+  .responsiveContainer {
+    margin-left: 10px;
+  }
+
+  .userInfo {
+    flex-direction: row;
+  }
+
+  .userName {
+    margin-right: 2rem; /* 32px */
+    margin-bottom: 0px;
+  }
+}
+
+.responsiveContainer {
+  flex-basis: 33.333333%;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userName {
+  font-size: 1.5rem /* 24px */;
+  line-height: 2rem /* 32px */;
+  margin-top: 0.5rem /* 8px */;
+  margin-bottom: 0.5rem /* 8px */;
 }

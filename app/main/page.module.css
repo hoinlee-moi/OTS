@@ -8,7 +8,7 @@
 
 .boardContainer {
   width: calc(100% - 350px);
-  min-height: 100%;
+  min-height: 100vh;
   margin-left: 350px;
   background-color: #f5f6f7;
 }

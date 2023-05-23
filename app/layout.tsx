@@ -1,7 +1,7 @@
-import "./globals.css";
-import { Inter, Noto_Sans_KR } from "next/font/google";
+import './globals.css';
+import { Inter, Noto_Sans_KR } from 'next/font/google';
 
-const inter = Noto_Sans_KR({ weight: "500", subsets: ["latin"] });
+const inter = Noto_Sans_KR({ weight: '500', subsets: ['latin'] });
 
 // export const metadata = {
 //   title: 'Create Next App',
@@ -13,7 +13,7 @@ type props = {
 export default function RootLayout({ children }: props) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="{inter.className}">{children}</body>
     </html>
   );
 }

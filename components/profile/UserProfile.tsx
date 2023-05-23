@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Avatar from '../Avatar';
 import Button from '../Button';
-import EditModal from '../EditModal';
+import EditModal from './EditModal';
 import styles from './UserProfile.module.css';
 
 export default function UserProfile() {

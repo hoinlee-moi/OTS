@@ -1,7 +1,7 @@
 'use clinet';
 import { useState, useRef } from 'react';
 import styles from './EditModal.module.css';
-import Button from './Button';
+import Button from '../Button';
 
 type Props = {
   onClose: () => void;

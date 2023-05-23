@@ -1,3 +1,4 @@
+import AuthContext from '@/context/AuthContext';
 import './globals.css';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 
@@ -13,7 +14,9 @@ type props = {
 export default function RootLayout({ children }: props) {
   return (
     <html lang="en">
-      <body className="{inter.className}">{children}</body>
+      <body className="{inter.className}">
+        <AuthContext>{children}</AuthContext>
+      </body>
     </html>
   );
 }

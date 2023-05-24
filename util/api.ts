@@ -17,7 +17,7 @@ type loginData = {
 export const emailDuplicate = async (userEmail: string) => {
   try {
     const response = await axios.get(
-      `/api/auth/emailIds/${userEmail}/exists`
+      `/api/auth/duplicate?email=${userEmail}`
     );
     return response.status;
   } catch (err) {
@@ -28,7 +28,7 @@ export const emailDuplicate = async (userEmail: string) => {
 export const nickNameDuplicate = async (userNick: string) => {
   try {
     const response = await axios.get(
-      `/api/auth/nicknames/${userNick}/exists`
+      `/api/auth/duplicate?nickname=${userNick}`
     );
     return response.status;
   } catch (err) {
@@ -39,7 +39,7 @@ export const nickNameDuplicate = async (userNick: string) => {
 export const signUp = async (userData: signData) => {
   try {
     const response = await axios.post(
-      "/auth/signup",
+      "/api/auth/signup",
       userData
     );
     return response.status;

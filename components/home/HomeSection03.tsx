@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./homeSection03.module.css";
+import styles from "./HomeSection03.module.css";
 import ImageArray from "./ImageArray";
 import SignUp from "./SignUp";
 

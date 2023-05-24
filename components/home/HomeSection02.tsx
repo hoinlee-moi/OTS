@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./homeSection02.module.css";
+import styles from "./HomeSection02.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 

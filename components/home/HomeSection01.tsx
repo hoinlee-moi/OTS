@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./homeSection01.module.css";
+import styles from "./HomeSection01.module.css";
 import ImageArray from "./ImageArray";
 
 export default function HomeSection01() {

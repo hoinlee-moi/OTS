@@ -1,6 +1,6 @@
 'use client'
 import { useCallback } from "react";
-import styles from "./homeModal.module.css"
+import styles from "./HomeModal.module.css"
 
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAOLOGIN_API_KEY}&redirect_uri=${process.env.KAKAOLOGIN_REDIRECT_URI}`;
 

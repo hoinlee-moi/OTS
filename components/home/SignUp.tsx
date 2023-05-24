@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./homeModal.module.css";
+import styles from "./HomeModal.module.css";
 import useInput from "@/hooks/useInput";
-import { cookies } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";

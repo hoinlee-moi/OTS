@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./homeModal.module.css";
+import styles from "./HomeModal.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SignUp from "./SignUp";

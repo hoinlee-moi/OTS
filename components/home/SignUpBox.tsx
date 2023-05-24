@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./signUpBox.module.css";
+import styles from "./SignUpBox.module.css";
 import HomeModal from "./HomeModal";
 
 export default function SignUpBox() {

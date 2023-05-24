@@ -19,7 +19,7 @@ export const emailDuplicate = async (userEmail: string) => {
     const response = await axios.get(
       `/api/auth/duplicate?email=${userEmail}`
     );
-    return response.status;
+    return response;
   } catch (err) {
     throw err;
   }
@@ -30,7 +30,7 @@ export const nickNameDuplicate = async (userNick: string) => {
     const response = await axios.get(
       `/api/auth/duplicate?nickname=${userNick}`
     );
-    return response.status;
+    return response;
   } catch (err) {
     throw err;
   }
@@ -42,7 +42,7 @@ export const signUp = async (userData: signData) => {
       "/api/auth/signup",
       userData
     );
-    return response.status;
+    return response;
   } catch (err) {
     throw err;
   }

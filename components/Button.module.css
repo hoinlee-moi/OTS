@@ -1,0 +1,35 @@
+.buttonContainer {
+  display: inline-block;
+  border: 0px;
+  border-radius: 0.375rem;
+  padding: 0.5rem 2rem;
+  font-weight: bold;
+  color: white;
+  line-height: 1rem;
+  cursor: pointer;
+}
+
+.red {
+  background-color: red;
+}
+
+.sky {
+  background-color: skyblue;
+}
+
+.disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:active {
+  opacity: 1;
+}
+
+.button:focus {
+  outline: none;
+}

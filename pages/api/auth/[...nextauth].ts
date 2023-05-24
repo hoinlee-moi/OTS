@@ -1,10 +1,49 @@
-import { connectDB } from "@/util/database";
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import { connectDB } from '@/util/database';
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 
-export const authOptions = {
-
+export const authOptions: NextAuthOptions = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_ID || '',
+      clientSecret: process.env.GOOGLE_OAUTH_SECRET || '',
+    }),
+  ],
+  callbacks: {
+    async signIn({ user: { id, name, image, email } }) {
+      if (!email) {
+        return false;
+      }
+      // addUser({
+      //   id,
+      //   name: name || '',
+      //   image,
+      //   email,
+      //   nickname: email.split('@')[0],
+      // });
+      return true;
+    },
+    async session({ session, token }) {
+      const user = session?.user;
+      if (user) {
+        session.user = {
+          ...user,
+          // nickname: user.email?.split('@')[0] || '',
+          // id: token.id as string,
+        };
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+  },
+  //   pages: {
+  //     signIn: '/',
+  //   },
 };
-
-  
+export default NextAuth(authOptions);

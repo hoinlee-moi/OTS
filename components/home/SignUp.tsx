@@ -8,14 +8,9 @@ import { useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";
 import KakaoSignUp from "./KakaoSignUp";
+import { REGULAR } from "@/util/reg";
 
-export const reg = {
-  regPs: new RegExp(
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,14}$/
-  ),
-  regEmail: new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/),
-  regNickname: new RegExp(/^(?=.*[a-z0-9가-힣])[a-z0-9가-힣-_]{2,12}$/),
-};
+export const reg = REGULAR;
 
 export default function SignUp() {
   const router = useRouter();
@@ -92,9 +87,15 @@ export default function SignUp() {
           const response = await emailDuplicate(inputValue);
           if (response === 200) setEmailDupStatus(true);
         } catch (err) {
-          console.log(err);
-          setEmailCheck(true);
-          setAlertMs("사용중인 E-Mail입니다");
+          if ((err as { status: number }).status === 200) {
+            setEmailCheck(true);
+            setAlertMs("E-Mail이 올바르지 않습니다");
+            return;
+          }
+          if ((err as { status: number }).status === 400) {
+            setEmailCheck(true);
+            setAlertMs("사용중인 E-Mail입니다");
+          }
           // 에러 처리
         }
       }

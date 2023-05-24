@@ -119,7 +119,6 @@ export default function SignUp() {
           const response = await nickNameDuplicate(e.target.value);
           if (response.status === 200) {
             setNickDupStatus(true);
-            console.log(nickDupStatus, "왜그래");
           }
         } catch (err) {
           console.log(err);
@@ -158,7 +157,7 @@ export default function SignUp() {
         const response = await signUp(signData);
         if (response.status === 201) {
           alert("회원가입이 완료되었습니다. 로그인 해주세요");
-          router.refresh();
+          router.push('/');
           // const loginData = {
           //   emailId: userData.email,
           //   password: userData.password,

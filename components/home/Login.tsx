@@ -1,41 +1,51 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
-import styles from './homeModal.module.css';
-import useInput from '@/hooks/useInput';
-import { useRouter } from 'next/navigation';
-import { cookies } from 'next/dist/client/components/headers';
-import { login } from '@/util/api';
-import KakaoSignUp from './KakaoSignUp';
-import { signIn } from 'next-auth/react';
+import React, { useState, useEffect, useCallback } from "react";
+import styles from "./homeModal.module.css";
+import useInput from "@/hooks/useInput";
+import { useRouter } from "next/navigation";
+import { cookies } from "next/dist/client/components/headers";
+import { login } from "@/util/api";
+import KakaoSignUp from "./KakaoSignUp";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const router = useRouter();
   const [userData, setUserData] = useInput({
-    emailId: '',
-    password: '',
+    emailId: "",
+    password: "",
   });
-  const [loginFailMs, setLoginFailMs] = useState('');
+  const [loginFailMs, setLoginFailMs] = useState("");
 
   useEffect(() => {
-    setLoginFailMs('');
+    setLoginFailMs("");
   }, [userData]);
 
   const loginHandle = useCallback(async () => {
-    if (userData.emailId === '' || userData.password === '') {
-      setLoginFailMs('아직 입력되지 않은부분이 있습니다');
+    if (userData.emailId === "" || userData.password === "") {
+      setLoginFailMs("아직 입력되지 않은부분이 있습니다");
       return;
     }
     try {
-      const response = await login(userData);
-      if (response.status === 201) {
-        cookies().set('accessToken', response.data.accessToken);
-        cookies().set('refreshToken', response.data.refreshToken);
-        sessionStorage.setItem('emailId', response.data.emailId);
-        router.push('/main');
-      }
+      const response = await signIn("credentials", {
+        ...userData,
+        redirect: false,
+        callbackUrl : "/main"
+      });
+      if (response?.ok === false)
+        setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
+      if (response?.status === 200&&response?.ok ===true) router.push(response.url as string);
+
+      // const response = await login(userData);
+      // if (response.status === 201) {
+      //   cookies().set('accessToken', response.data.accessToken);
+      //   cookies().set('refreshToken', response.data.refreshToken);
+      //   sessionStorage.setItem('emailId', response.data.emailId);
+      //   router.push('/main');
+      // }
     } catch (err) {
-      setLoginFailMs('E-Mail 또는 비밀번호가 올바르지 않습니다');
+      console.log(err);
+      setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
     }
   }, [userData]);
 
@@ -67,7 +77,7 @@ export default function Login() {
             onChange={setUserData}
           />
         </div>
-        {userData !== '' && <p>{loginFailMs}</p>}
+        {userData !== "" && <p>{loginFailMs}</p>}
         <button onClick={loginHandle}>로그인</button>
       </div>
       <KakaoSignUp />

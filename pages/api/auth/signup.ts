@@ -7,7 +7,7 @@ if(req.method == "POST") {
    const hash = await bcrypt.hash(req.body.password,10)
    req.body.password = hash
    req.body.profileUrl = ""
-   req.body.sex = "none"
+   req.body.gender = "none"
    const db = (await connectDB).db('OTS')
    await db.collection('user').insertOne(req.body)
    res.status(201).end()

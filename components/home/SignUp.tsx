@@ -85,10 +85,9 @@ export default function SignUp() {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
-          if (response === 200) {
-            console.log(response)
-            setEmailDupStatus(true)
-          };
+          if (response.status === 200) {
+            setEmailDupStatus(true);
+          }
         } catch (err) {
           if ((err as { status: number }).status === 400) {
             setEmailCheck(true);
@@ -103,7 +102,7 @@ export default function SignUp() {
         }
       }
     },
-    [userData.email]
+    [userData.email, emailDupStatus]
   );
 
   const nickCheckHandle = useCallback(
@@ -118,7 +117,10 @@ export default function SignUp() {
       if (!nickDupStatus) {
         try {
           const response = await nickNameDuplicate(e.target.value);
-          if (response === 200) setNickDupStatus(true);
+          if (response.status === 200) {
+            setNickDupStatus(true);
+            console.log(nickDupStatus, "왜그래");
+          }
         } catch (err) {
           console.log(err);
           setNickCheck(true);
@@ -126,7 +128,7 @@ export default function SignUp() {
         }
       }
     },
-    [userData.nickname]
+    [userData.nickname, nickDupStatus]
   );
 
   const signUpHandle = useCallback(async () => {
@@ -154,29 +156,33 @@ export default function SignUp() {
 
       try {
         const response = await signUp(signData);
-        if (response === 201) {
-          const loginData = {
-            emailId: userData.email,
-            password: userData.password,
-          };
-          try {
-            const res = await login(loginData);
-            if (res.status === 201) {
-              cookies().set("accessToken", res.data.accessToken);
-              cookies().set("refreshToken", res.data.refreshToken);
-              sessionStorage.setItem("emailId", res.data.emailId);
-              router.push("/main");
-            }
-          } catch (err) {
-            alert("서버와 접속이 끊어졌습니다. 다시 로그인 해주세요");
-          }
+        if (response.status === 201) {
+          alert("회원가입이 완료되었습니다. 로그인 해주세요");
+          router.refresh();
+          // const loginData = {
+          //   emailId: userData.email,
+          //   password: userData.password,
+          // };
+          // try {
+          //   const res = await login(loginData);
+          //   if (res.status === 201) {
+          //     alert("회원가입이 완료되었습니다. 로그인 해주세요")
+          //     router.push("/main")
+          //     // cookies().set("accessToken", res.data.accessToken);
+          //     // cookies().set("refreshToken", res.data.refreshToken);
+          //     // sessionStorage.setItem("emailId", res.data.emailId);
+          //     // router.push("/main");
+          //   }
+          // } catch (err) {
+          //   alert("서버와 접속이 끊어졌습니다. 다시 로그인 해주세요");
+          // }
         }
       } catch (err) {
         console.log(err);
         setAlertMs("회원가입에 실패하였습니다. 잠시후 다시 실행해주세요");
       }
     }
-  }, [userData]);
+  }, [userData, nickDupStatus, emailDupStatus]);
 
   return (
     <div>

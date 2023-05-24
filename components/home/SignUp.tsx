@@ -85,14 +85,17 @@ export default function SignUp() {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
-          if (response === 200) setEmailDupStatus(true);
+          if (response === 200) {
+            console.log(response)
+            setEmailDupStatus(true)
+          };
         } catch (err) {
-          if ((err as { status: number }).status === 200) {
+          if ((err as { status: number }).status === 400) {
             setEmailCheck(true);
             setAlertMs("E-Mail이 올바르지 않습니다");
             return;
           }
-          if ((err as { status: number }).status === 400) {
+          if ((err as { status: number }).status === 409) {
             setEmailCheck(true);
             setAlertMs("사용중인 E-Mail입니다");
           }

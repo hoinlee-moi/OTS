@@ -4,10 +4,10 @@ export default (initalValue: any) => {
 //   const [uploadedImages, setUploadedImages] = useRecoilState<any>(UploadFiles)
   const [uploadedImages, setUploadedImages] = useState(initalValue.list);
   const handleFiles = useCallback(
-    (files: File[]) => {
+    (files: FileList) => {
       console.log(files,uploadedImages)
       if (files.length > initalValue.max) return;
-      setUploadedImages((state:File[])=>[...state, ...files].slice(0, initalValue.max));
+      setUploadedImages((state:FileList)=>[...state, ...files].slice(0, initalValue.max));
       
     },
     [uploadedImages]

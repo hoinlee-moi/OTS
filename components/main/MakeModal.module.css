@@ -25,21 +25,23 @@
   animation: modalAni 0.2s;
   overflow: hidden;
 }
-.imgContainer{
-    width: 100%;
-    height: 100%;
-}
 
+.modalTitle {
+  width: 100%;
+  height: 67px;
+  text-align: center;
+  border-bottom: 1px solid #d4d4d4;
+}
+.imgContainer {
+  width: 100%;
+  height: calc(100% - 67px);
+  position: relative;
+}
 .imgWrap {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-.modalTitle {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid #d4d4d4;
 }
 .imgWrap {
   display: flex;
@@ -53,13 +55,14 @@
   align-items: center;
 }
 .textBox {
-  margin-top: 25px;
+  margin: 30px 0;
 }
 .textBox h3 {
   font-weight: 30;
   font-size: 25px;
+  margin: 0;
 }
-.imgWrap span {
+.textBox span {
   color: #535353;
 }
 
@@ -80,13 +83,22 @@
 .fileUploadLabel:hover {
   background-color: #c31952;
 }
+
 .uploadLabelChange {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   right: 0;
   bottom: 0;
-  margin: 0 10px 10px 0;
+  margin: 0 30px 30px 0;
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: #00000081;
+}
+.uploadLabelChange svg {
+  width: 100%;
+  height: 100%;
+  color: #fff;
 }
 .uploadInput {
   display: none;
@@ -96,11 +108,9 @@
 .uploadAlert {
   width: 80%;
   height: 10%;
-
   display: none;
   justify-content: center;
   align-items: center;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -119,13 +129,115 @@
   animation: fade 3s linear;
 }
 
+/* ImagePreview */
 .imageBox {
-    width: 100%;
-    height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 .imageBox img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+.imageBox button {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  font-size: 40px;
+  color: #fff;
+  background-color: #00000081;
+  cursor: pointer;
+}
+.leftBtn {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+.rightBtn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
+
+/* resizeBtn */
+.resizeBtn {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.resizeBtn > div {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 100%;
+  background-color: #00000081;
+}
+.resizeBtn > div svg {
+  width: 100%;
+  height: 100%;
+  color: #e4e4e4;
+}
+.resizeBtn > div:hover {
+  background-color: #00000034;
+  color: #e4e4e481;
+}
+.sizeBtnWrap {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  width: 100px;
+  /* text-align: center; */
+  border-radius: 10px;
+  background-color: #00000096;
+  overflow: hidden;
+}
+.sizeBtnWrap li {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  color: rgb(158, 158, 158);
+  border-bottom: 1px solid #fff;
+}
+.sizeBtnWrap li span {
+  display: inline-block;
+  border: 2px solid rgb(158, 158, 158);
+  border-radius: 5px;
+  width: 25px;
+}
+.sizeBtnWrap li:last-child {
+  border-bottom: 0;
+}
+.sizeBtnWrap li:first-child svg {
+  font-size: 25px;
+  margin-left: 15px;
+}
+.sizeBtnWrap li:nth-child(2) span {
+  aspect-ratio: 1/1;
+  margin-left: 15px;
+}
+.sizeBtnWrap li:nth-child(3) span {
+  aspect-ratio: 4/5;
+  margin-left: 15px;
+}
+.sizeBtnWrap li:last-child span {
+  aspect-ratio: 16/9;
+  margin-left: 5px;
+}
+.clickLi {
+  color: #fff !important;
+  background-color: #000000a6;
+}
+.clickLi span {
+  border: 2px solid #fff !important;
 }
 
 @keyframes fade {

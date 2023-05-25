@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./MakeModal.module.css";
-import { faImages, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
+import { faImages } from "@fortawesome/free-regular-svg-icons";
 import useFileUpload from "@/hooks/useFileUpload";
 import useAlert from "@/hooks/useAlert";
 import ModalImgPreview from "./ModalImgPreview";
-import { FontawesomeObject } from "@fortawesome/fontawesome-svg-core";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function ModalImage() {
   const [uploadedImages, setUploadedImages] = useFileUpload({
@@ -72,7 +72,7 @@ export default function ModalImage() {
   }, [uploadedImages]);
   return (
     <label
-      htmlFor="fileUpload"
+      htmlFor={`${uploadedImages.length < 1 && "fileUpload"}`}
       className={styles.imgContainer}
       ref={uploadBoxRef}
     >
@@ -86,6 +86,7 @@ export default function ModalImage() {
             </div>
             <div className={styles.textBox}>
               <h3>사진을 이곳에 끌어다 놓으세요</h3>
+              <span>최대 3장</span>
             </div>
           </div>
         )}
@@ -100,10 +101,10 @@ export default function ModalImage() {
           {uploadedImages.length < 1 ? (
             "컴퓨터에서 선택"
           ) : (
-            <FontAwesomeIcon icon={faPlusSquare} />
+            <FontAwesomeIcon icon={faPlus} />
           )}
         </label>
-        <span>최대 3장</span>
+
         <input
           className={styles.uploadInput}
           type="file"

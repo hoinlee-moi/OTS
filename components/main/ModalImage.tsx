@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./MakeModal.module.css";
 import { faImages } from "@fortawesome/free-regular-svg-icons";
@@ -6,25 +6,25 @@ import useFileUpload from "@/hooks/useFileUpload";
 import useAlert from "@/hooks/useAlert";
 import ModalImgPreview from "./ModalImgPreview";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { newPostContext } from "./MakeModal";
 
-type props = {
-  setPostData: React.Dispatch<React.SetStateAction<any>>;
-  imgData?: FileList;
-};
-export default function ModalImage({ setPostData, imgData }: props) {
+
+
+export default function ModalImage() {
   const [uploadedImages, setUploadedImages] = useFileUpload({
     list: [],
     max: 3,
   });
+  const {postData,setPostData} = useContext(newPostContext)
   const [uploadAlert, setUploadAlert] = useAlert(false);
   const dragHover = useRef<SVGSVGElement>(null);
   const uploadBoxRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (imgData) {
-      if (imgData.length > 0) {
-        setUploadedImages(imgData);
+    if (postData) {
+      if (postData.file.length > 0) {
+        setUploadedImages(postData.file);
       }
     }
   }, []);

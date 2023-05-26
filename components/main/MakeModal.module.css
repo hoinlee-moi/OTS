@@ -269,6 +269,13 @@
   border: 2px solid #fff !important;
 }
 
+/* content */
+.contentContainer {
+  width: 100%;
+  height: calc(100% - 67px);
+  position: relative;
+}
+
 @keyframes fade {
   0%,
   100% {

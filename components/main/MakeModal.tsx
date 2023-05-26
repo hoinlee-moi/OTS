@@ -13,13 +13,31 @@ type data = {
   email: string;
   nickname: string;
   content: string;
+  file: any;
+  imgRatio: string;
+  foodList: [];
+  nuKcal: number;
+  nuCarb: number;
+  nuPro: number;
+  nuFat: number;
 };
+export const newPostContext = React.createContext<any>({});
 
 export default function MakeModal({ closeModal }: props) {
-  const [postData, setPostData] = useState<any>();
+  const [postData, setPostData] = useState<data>({
+    email: "",
+    nickname: "",
+    content: "",
+    file: [],
+    imgRatio: "",
+    foodList: [],
+    nuKcal: 0,
+    nuCarb: 0,
+    nuPro: 0,
+    nuFat: 0,
+  });
   const [modalAlert, setModalAlert] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  console.log(postData);
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
       if (postData.file.length > 0) {
@@ -58,39 +76,38 @@ export default function MakeModal({ closeModal }: props) {
   );
 
   return (
-    <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
-      <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
-      {modalAlert && (
-        <AlertModal
-          closeModal={() => setModalAlert(false)}
-          buttonFunc={closeCheckRepeat}
-        >
-          글쓰기를 취소 할까요?
-        </AlertModal>
-      )}
-      <section
-        className={styles.modalContent}
-        onMouseDown={(e) => e.stopPropagation()}
-      >
-        <div className={styles.modalTitle}>
-          {postData?.file.length > 0 && (
-            <span onClick={backPageHandle}>
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </span>
-          )}
-          <h3>새 게시물 만들기</h3>
-          {postData?.file.length > 0 && (
-            <p onClick={nextPageHandle}>{pageIndex === 0 ? "다음" : "작성"}</p>
-          )}
-        </div>
-        {pageIndex === 0 && (
-          <ModalImage
-            setPostData={setPostData}
-            imgData={postData && postData.file}
-          />
+    <newPostContext.Provider value={{postData,setPostData}}>
+      <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
+        <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
+        {modalAlert && (
+          <AlertModal
+            closeModal={() => setModalAlert(false)}
+            buttonFunc={closeCheckRepeat}
+          >
+            글쓰기를 취소 할까요?
+          </AlertModal>
         )}
-        {pageIndex === 1 && <ModalContent setPostData={setPostData} />}
-      </section>
-    </div>
+        <section
+          className={styles.modalContent}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          <div className={styles.modalTitle}>
+            {postData?.file.length > 0 && (
+              <span onClick={backPageHandle}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </span>
+            )}
+            <h3>새 게시물 만들기</h3>
+            {postData?.file.length > 0 && (
+              <p onClick={nextPageHandle}>
+                {pageIndex === 0 ? "다음" : "작성"}
+              </p>
+            )}
+          </div>
+          {pageIndex === 0 && <ModalImage />}
+          {pageIndex === 1 && <ModalContent setPostData={setPostData} />}
+        </section>
+      </div>
+    </newPostContext.Provider>
   );
 }

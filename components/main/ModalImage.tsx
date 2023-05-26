@@ -7,7 +7,11 @@ import useAlert from "@/hooks/useAlert";
 import ModalImgPreview from "./ModalImgPreview";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function ModalImage() {
+type props = {
+  setPostData: React.Dispatch<React.SetStateAction<any>>;
+  imgData?: FileList;
+};
+export default function ModalImage({ setPostData, imgData }: props) {
   const [uploadedImages, setUploadedImages] = useFileUpload({
     list: [],
     max: 3,
@@ -16,6 +20,20 @@ export default function ModalImage() {
   const dragHover = useRef<SVGSVGElement>(null);
   const uploadBoxRef = useRef<HTMLLabelElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (imgData) {
+      if (imgData.length > 0) {
+        setUploadedImages(imgData);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setPostData((snap: any) => {
+      return { ...snap, file: uploadedImages };
+    });
+  }, [uploadedImages]);
 
   useEffect(() => {
     const uploadBox = uploadBoxRef.current;

@@ -5,7 +5,6 @@ export default (initalValue: any) => {
   const [uploadedImages, setUploadedImages] = useState(initalValue.list);
   const handleFiles = useCallback(
     (files: FileList) => {
-      console.log(files,uploadedImages)
       if (files.length > initalValue.max) return;
       setUploadedImages((state:FileList)=>[...state, ...files].slice(0, initalValue.max));
       

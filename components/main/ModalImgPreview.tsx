@@ -25,7 +25,6 @@ export default function ModalImgPreview({ uploadFiles }: props) {
   useEffect(() => {
     const imgCurRef = imgRef.current;
     if (imgCurRef) {
-      console.log(imageSize)
       if (imageSize === "0") {
         imgCurRef.style.height = "100%"
         imgCurRef.style.width = "100%"

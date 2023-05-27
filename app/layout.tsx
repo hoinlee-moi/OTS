@@ -14,8 +14,8 @@ type props = {
   children: React.ReactNode;
 };
 export default async function RootLayout({ children }: props) {
-  let session = await getServerSession(authOptions);
-  console.log(session);
+  // let session = await getServerSession(authOptions);
+  // console.log(session);
   return (
     <html lang="en">
       <body className="{inter.className}">

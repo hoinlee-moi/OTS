@@ -14,10 +14,14 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import MakeModal from "./MakeModal";
 
+
+
+
 export default function FloatingMenu() {
   const [searchState, setSearchState] = useState(false);
   const [loading, setLoading] = useState(false);
   const [makeModal,setMakeModal] = useState(false)
+
 
   useEffect(() => {
     setLoading(true);

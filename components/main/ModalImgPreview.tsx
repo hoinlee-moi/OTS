@@ -1,22 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./MakeModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleLeft,
-  faAngleRight,
-  faArrowsUpDownLeftRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ImageResize from "./ImageResize";
+import { newPostContext } from "./MakeModal";
 
 type props = {
   uploadFiles: File[];
 };
 
 export default function ModalImgPreview({ uploadFiles }: props) {
+  const { postData, setPostData } = useContext(newPostContext);
   const imgRef = useRef<HTMLImageElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState<any>();
   const [imageSize, setImageSize] = useState("");
+
+  useEffect(() => {
+    if (postData.imgRatio !== "") {
+      setImageSize(postData.imgRatio);
+    }
+  }, []);
 
   useEffect(() => {
     handleFileRead(uploadFiles[currentIndex]);
@@ -25,27 +29,29 @@ export default function ModalImgPreview({ uploadFiles }: props) {
   useEffect(() => {
     const imgCurRef = imgRef.current;
     if (imgCurRef) {
-      console.log(imageSize)
       if (imageSize === "0") {
-        imgCurRef.style.height = "100%"
-        imgCurRef.style.width = "100%"
+        imgCurRef.style.height = "100%";
+        imgCurRef.style.width = "100%";
         imgCurRef.style.objectFit = "contain";
       }
-      if(imageSize === "1/1") {
-        imgCurRef.style.objectFit = "cover"
-        imgCurRef.style.height = "100%"
-        imgCurRef.style.width = "100%"
+      if (imageSize === "1/1") {
+        imgCurRef.style.objectFit = "cover";
+        imgCurRef.style.height = "100%";
+        imgCurRef.style.width = "100%";
       }
-      if(imageSize === "4/5") {
-        imgCurRef.style.objectFit = "cover"
-        imgCurRef.style.height = "100%"
-        imgCurRef.style.width = "calc(100% * 4/5)"
+      if (imageSize === "4/5") {
+        imgCurRef.style.objectFit = "cover";
+        imgCurRef.style.height = "100%";
+        imgCurRef.style.width = "calc(100% * 4/5)";
       }
-      if(imageSize === "16/9") {
-        imgCurRef.style.objectFit = "cover"
-        imgCurRef.style.height = "calc(100% * 9/16)"
-        imgCurRef.style.width = "100%"
+      if (imageSize === "16/9") {
+        imgCurRef.style.objectFit = "cover";
+        imgCurRef.style.height = "calc(100% * 9/16)";
+        imgCurRef.style.width = "100%";
       }
+      setPostData((snap: any) => {
+        return { ...snap, imgRatio: imageSize };
+      });
     }
   }, [imageSize]);
 
@@ -89,9 +95,7 @@ export default function ModalImgPreview({ uploadFiles }: props) {
           )}
         </>
       )}
-      {currentImage && (
-        <img src={currentImage} alt={`Image ${currentIndex}`} ref={imgRef} />
-      )}
+      <img src={currentImage} alt={`Image ${currentIndex}`} ref={imgRef} />
     </div>
   );
 }

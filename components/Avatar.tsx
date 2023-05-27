@@ -6,6 +6,14 @@ type Props = {
   size?: AvatarSize;
 };
 
-export default function Avatar() {
-  return <div className={styles.baseStyle}></div>;
+export default function Avatar({ image }) {
+  return (
+    <div className={styles.baseStyle}>
+      <img
+        alt="user profile"
+        src={image ?? undefined}
+        referrerPolicy="no-referrer"
+      />
+    </div>
+  );
 }

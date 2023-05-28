@@ -1,7 +1,9 @@
 'use clinet';
-import { useState, useRef } from 'react';
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import styles from './EditModal.module.css';
 import Button from '../Button';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 type Props = {
   onClose: () => void;
@@ -10,7 +12,41 @@ type Props = {
 export default function EditModal({ onClose }: Props) {
   const [nickname, setNickname] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const [error, setError] = useState<string>();
+  const [file, setFile] = useState<File>();
+  const [gender, setGender] = useState('none');
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const files = e.target?.files;
+    if (files && files[0]) {
+      setFile(files[0]);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    formData.append('gender', gender);
+    formData.append('nickname', nickname);
+
+    if (file) {
+      formData.append('profileUrl', file);
+    }
+
+    try {
+      const response = axios.post('/api/auth/editProfile', {
+        body: formData,
+      });
+
+      // if (!response.ok) {
+      //   throw new Error(`${response.status} ${response.statusText}`);
+      // }
+      router.push('/main/profile');
+    } catch (err) {
+      throw err;
+    }
+  };
 
   return (
     <section
@@ -39,19 +75,45 @@ export default function EditModal({ onClose }: Props) {
             ></input>
           </div>
           <div className={styles.fair}>
-            <p>소개</p>
-            <textarea
-              className={styles.introTeaxtarea}
-              name="text"
-              id="input-text"
-              required
-              rows={10}
-              placeholder={'Write a caption...'}
-              ref={textRef}
+            <p>프로필 이미지</p>
+            <input
+              className="hidden"
+              name="input"
+              id="input-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleChange}
             />
           </div>
+          <div className={styles.fair}>
+            <p>성별</p>
+            <label className={styles.genderForm}>
+              <input
+                type="radio"
+                name="usergender"
+                value="male"
+                onChange={(e) => setGender(e.target.value)}
+              />
+              남성
+              <input
+                type="radio"
+                name="usergender"
+                value="female"
+                onChange={(e) => setGender(e.target.value)}
+              />
+              여성
+              <input
+                type="radio"
+                name="usergender"
+                value="none"
+                onChange={(e) => setGender(e.target.value)}
+                defaultChecked
+              />
+              그 외
+            </label>
+          </div>
         </form>
-        <Button text="제출" onClick={() => {}}></Button>
+        <Button text="제출" onClick={handleSubmit} />
       </div>
     </section>
   );

@@ -60,3 +60,12 @@
   padding: 0.5625rem 0.75rem;
   margin: 10px;
 }
+
+.genderForm {
+  display: inline-flex;
+  cursor: pointer;
+  gap: 6px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+}

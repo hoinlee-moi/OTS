@@ -6,7 +6,7 @@ export default (bool: boolean):[boolean,()=>void] => {
     setAlertCheck(true);
     setTimeout(() => {
       setAlertCheck(false);
-    }, 5000);
+    }, 3500);
   };
   return [alertCheck, checkTranse];
 };

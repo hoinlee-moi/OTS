@@ -1,7 +1,6 @@
 import axios from "axios";
 import { cookies } from "next/dist/client/components/headers";
 
-
 type signData = {
   emailId: string;
   password: string;
@@ -16,12 +15,10 @@ type loginData = {
 
 export const emailDuplicate = async (userEmail: string) => {
   try {
-    const response = await axios.get(
-      `/api/auth/duplicate?email=${userEmail}`
-    );
+    const response = await axios.get(`/api/auth/duplicate?email=${userEmail}`);
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -31,63 +28,54 @@ export const nickNameDuplicate = async (userNick: string) => {
       `/api/auth/duplicate?nickname=${userNick}`
     );
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
 export const signUp = async (userData: signData) => {
   try {
-    const response = await axios.post(
-      "/api/auth/signup",
-      userData
-    );
+    const response = await axios.post("/api/auth/signup", userData);
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
 export const login = async (userData: loginData) => {
   try {
-    const response = await axios.post(
-      "/auth/login",
-      userData
-    );
+    const response = await axios.post("/auth/login", userData);
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
 export const getBoardPostList = async (page: number) => {
   try {
-    const response = await axios.get(
-      `/api/posts?page=${page}`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get("accessToken")}`,
-        },
-      }
-    );
+    const response = await axios.get(`/api/posts?page=${page}`);
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
 };
 
 export const getDetailPost = async (postId: number) => {
   try {
+    const response = await axios.get(`api/post/${postId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getFoodSearch = async (foodName: string) => {
+  try {
     const response = await axios.get(
-      `api/posts/${postId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${cookies().get("accessToken")}`,
-        },
-      }
+      `/api/post/foodSearch?foodName=${foodName}`
     );
-    return response
-  } catch (err) {
-    throw err;
+    return response;
+  } catch (error) {
+    throw error;
   }
 };

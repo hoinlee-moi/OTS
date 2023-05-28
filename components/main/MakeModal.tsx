@@ -9,7 +9,7 @@ import ModalContent from "./ModalContent";
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
-type data = {
+export type data = {
   email: string;
   nickname: string;
   content: string;
@@ -105,7 +105,7 @@ export default function MakeModal({ closeModal }: props) {
             )}
           </div>
           {pageIndex === 0 && <ModalImage />}
-          {pageIndex === 1 && <ModalContent setPostData={setPostData} />}
+          {pageIndex === 1 && <ModalContent />}
         </section>
       </div>
     </newPostContext.Provider>

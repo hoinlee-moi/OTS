@@ -117,7 +117,7 @@ export default function ModalImage() {
           }
         >
           {uploadedImages.length < 1 ? (
-            "컴퓨터에서 선택"
+            "사진 업로드하기"
           ) : (
             <FontAwesomeIcon icon={faPlus} />
           )}

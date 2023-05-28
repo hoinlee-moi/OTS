@@ -3,6 +3,7 @@ import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import styles from './EditModal.module.css';
 import Button from '../Button';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 type Props = {
   onClose: () => void;
@@ -24,23 +25,27 @@ export default function EditModal({ onClose }: Props) {
     }
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append('gender', '');
-    formData.append('profileUrl', file);
+    formData.append('gender', gender);
     formData.append('nickname', nickname);
 
-    fetch('', { method: 'POST', body: formData })
-      .then((res) => {
-        if (!res.ok) {
-          setError(`${res.status} ${res.statusText}`);
-          return;
-        }
-        router.push('/main/profile');
-      })
-      .catch((err) => setError(err.toString()));
+    if (file) {
+      formData.append('profileUrl', file);
+    }
+
+    try {
+      const response = axios.post('/api/auth/editProfile', {
+        body: formData,
+      });
+
+      // if (!response.ok) {
+      //   throw new Error(`${response.status} ${response.statusText}`);
+      // }
+      router.push('/main/profile');
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
@@ -108,7 +113,7 @@ export default function EditModal({ onClose }: Props) {
             </label>
           </div>
         </form>
-        <Button text="제출" onClick={() => {}}></Button>
+        <Button text="제출" onClick={handleSubmit} />
       </div>
     </section>
   );

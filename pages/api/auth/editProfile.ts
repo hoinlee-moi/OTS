@@ -1,20 +1,30 @@
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import { connectDB } from '@/util/database';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './[...nextauth]';
+import { NextRequest } from 'next/server';
 
-export default async function handler(
-  req: NextApiRequest,
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
+
+export default async function POST(
+  request: NextRequest,
   res: NextApiResponse
 ) {
-  console.log(req.body);
-  if (req.method == 'POST') {
-    let session = await getServerSession(req, res, authOptions);
-    if (session) {
-      const user = session.user as any;
-      try {
+  const data = await request.formData()
+  console.log(data.get("profileUrl"))
+  res.status(200).end()
+    // let session = await getServerSession(req, res, authOptions);
+    // if (session) {
+    //   const user = session.user as any;
+    //   try {
         // console.log(formData.get('gender'));
-        const db = (await connectDB).db('OTS');
+        // const db = (await connectDB).db('OTS');
         // await db.collection('user').updateOne(
         //   {
         //     _id: user._id,
@@ -28,13 +38,13 @@ export default async function handler(
         //   }
         // );
 
-        res.status(200).end();
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
-      }
-    } else {
-      res.status(405).json({ message: 'Method Not Allowed' });
-    }
-  }
+    //     res.status(200).end();
+    //   } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ message: 'Internal Server Error' });
+    //   }
+    // } else {
+    //   res.status(405).json({ message: 'Method Not Allowed' });
+    // }
+  // }
 }

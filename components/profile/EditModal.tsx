@@ -1,20 +1,20 @@
-'use clinet';
-import { useState, useRef, ChangeEvent, FormEvent } from 'react';
-import styles from './EditModal.module.css';
-import Button from '../Button';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
+"use clinet";
+import { useState, useRef, ChangeEvent, FormEvent } from "react";
+import styles from "./EditModal.module.css";
+import Button from "../Button";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type Props = {
   onClose: () => void;
 };
 
 export default function EditModal({ onClose }: Props) {
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string>();
   const [file, setFile] = useState<File>();
-  const [gender, setGender] = useState('none');
+  const [gender, setGender] = useState("none");
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,23 +26,21 @@ export default function EditModal({ onClose }: Props) {
   };
 
   const handleSubmit = async () => {
-    const formData = new FormData();
-    formData.append('gender', gender);
-    formData.append('nickname', nickname);
 
-    if (file) {
-      formData.append('profileUrl', file);
-    }
 
     try {
-      const response = axios.post('/api/auth/editProfile', {
-        body: formData,
-      });
-
+      const formData = new FormData();
+      formData.set("nickname",nickname)
+      formData.set("gender",gender)
+    if (file) {
+      formData.set("profileUrl", file);
+    }
+      const response = axios.post("/api/edit", formData);
+      console.log((await response).data)
       // if (!response.ok) {
       //   throw new Error(`${response.status} ${response.statusText}`);
       // }
-      router.push('/main/profile');
+      router.push("/main/profile");
     } catch (err) {
       throw err;
     }
@@ -67,6 +65,7 @@ export default function EditModal({ onClose }: Props) {
             <input
               className={styles.nicknameInput}
               type="text"
+              name="nickname"
               ref={inputRef}
               placeholder="닉네임을 입력해주세요."
               required
@@ -78,7 +77,7 @@ export default function EditModal({ onClose }: Props) {
             <p>프로필 이미지</p>
             <input
               className="hidden"
-              name="input"
+              name="file"
               id="input-upload"
               type="file"
               accept="image/*"

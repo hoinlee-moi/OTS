@@ -14,14 +14,10 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import MakeModal from "./MakeModal";
 
-
-
-
 export default function FloatingMenu() {
   const [searchState, setSearchState] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [makeModal,setMakeModal] = useState(false)
-
+  const [makeModal, setMakeModal] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +25,7 @@ export default function FloatingMenu() {
 
   return (
     <>
-      {makeModal&&<MakeModal closeModal={setMakeModal}/>}
+      {makeModal && <MakeModal closeModal={setMakeModal} />}
       <section className={styles.floatingContainer}>
         {loading && (
           <>
@@ -67,7 +63,7 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <p>검색</p>
                   </div>
-                  <div onClick={()=>setMakeModal(true)}>
+                  <div onClick={() => setMakeModal(true)}>
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>

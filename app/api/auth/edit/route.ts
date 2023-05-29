@@ -1,4 +1,5 @@
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
+
+import { authOptions } from "../[...nextauth]/route"
 import { firebaseStorage } from "@/util/firebase"
 import { ref } from "@firebase/storage"
 import { NextApiRequest } from "next"
@@ -8,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server"
 export async function POST(request: NextRequest) {
     const data = await request.formData()
     let session = await getServerSession(authOptions) as any
-    console.log(data.get("userProfile"))
+    console.log(session)
     if(!session) {
         return NextResponse.json({ error: 'not Login' }, { status: 500 })
     }

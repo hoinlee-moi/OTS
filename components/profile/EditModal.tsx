@@ -35,7 +35,7 @@ export default function EditModal({ onClose }: Props) {
     if (file) {
       formData.set("profileUrl", file);
     }
-      const response = axios.post("/api/edit", formData);
+      const response = axios.post("/api/auth/edit", formData);
       console.log((await response).data)
       // if (!response.ok) {
       //   throw new Error(`${response.status} ${response.statusText}`);

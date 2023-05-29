@@ -1,6 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/util/database";
-// import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
@@ -70,41 +69,9 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  // callbacks: {
-  //   async signIn({ user: { id, name, image, email } }) {
-  //     if (!email) {
-  //       return false;
-  //     }
-  //     // addUser({
-  //     //   id,
-  //     //   name: name || '',
-  //     //   image,
-  //     //   email,
-  //     //   nickname: email.split('@')[0],
-  //     // });
-  //     return true;
-  //   },
-  //   async session({ session, token }) {
-  //     const user = session?.user;
-  //     if (user) {
-  //       session.user = {
-  //         ...user,
-  //         // nickname: user.email?.split('@')[0] || '',
-  //         // id: token.id as string,
-  //       };
-  //     }
-  //     return session;
-  //   },
-  //   async jwt({ token, user }) {
-  //     if (user) {
-  //       token.id = user.id;
-  //     }
-  //     return token;
-  //   },
-  // },
-  //   pages: {
-  //     signIn: '/',
-  //   },
   secret: process.env.NEXT_PUBLIC_JWT_PASSWORD,
 };
-export default NextAuth(authOptions);
+
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

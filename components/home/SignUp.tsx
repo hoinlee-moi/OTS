@@ -3,15 +3,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./HomeModal.module.css";
 import useInput from "@/hooks/useInput";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";
 import KakaoSignUp from "./KakaoSignUp";
 import { REGULAR } from "@/util/reg";
 
+type props = {modalClose?: React.Dispatch<React.SetStateAction<boolean>>;}
+
 export const reg = REGULAR;
 
-export default function SignUp() {
+export default function SignUp({modalClose}:props) {
   const router = useRouter();
   const [userData, setUserData] = useInput({
     email: "",
@@ -128,7 +130,6 @@ export default function SignUp() {
     },
     [userData.nickname, nickDupStatus]
   );
-
   const signUpHandle = useCallback(async () => {
     if (
       userData.email === "" ||
@@ -155,8 +156,10 @@ export default function SignUp() {
       try {
         const response = await signUp(signData);
         if (response.status === 201) {
-          alert("회원가입이 완료되었습니다. 로그인 해주세요");
-          router.push('/');
+          alert("회원가입이 완료되었습니다")
+          modalClose&&modalClose(false)
+          // modalClose(false)
+          // redirect('/');
           // const loginData = {
           //   emailId: userData.email,
           //   password: userData.password,

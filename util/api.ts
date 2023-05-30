@@ -1,5 +1,7 @@
+
+import {foodList } from "@/components/main/MakeModal";
 import axios from "axios";
-import { cookies } from "next/dist/client/components/headers";
+
 
 type signData = {
   emailId: string;
@@ -10,6 +12,16 @@ type loginData = {
   emailId: string;
   password: string;
 };
+type postData = {
+  content: string;
+  file: {url:string,name:string}[];
+  imgRatio: string;
+  foodList: foodList;
+  nuKcal: number;
+  nuCarb: number;
+  nuPro: number;
+  nuFat: number;
+}
 
 // 카카오 로그인 부분은 컴포넌트 내에 작성하였습니다.
 
@@ -79,3 +91,12 @@ export const getFoodSearch = async (foodName: string) => {
     throw error;
   }
 };
+
+export const createPostWrite = async(postData:postData)=>{
+try {
+  const response = await axios.post("/api/post/create",postData)
+  return response
+} catch (error) {
+  throw error
+}
+}

@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user }: any) => {
       if (user) {
-        user.password=null
+        delete user.password
         token.user = {
           ...user,
         };

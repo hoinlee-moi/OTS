@@ -35,6 +35,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0"
+    "@types/bcrypt": "^5.0.0",
+    "encoding": "^0.1.13"
   }
 }

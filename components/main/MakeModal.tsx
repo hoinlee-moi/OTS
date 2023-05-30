@@ -5,28 +5,39 @@ import AlertModal from "../etc/AlertMdoal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faX } from "@fortawesome/free-solid-svg-icons";
 import ModalContent from "./ModalContent";
+import { createPostWrite } from "@/util/api";
+import { getStorage, ref, uploadBytes } from "@firebase/storage";
+import { app, fileDelete, fileUpload } from "@/util/firebase";
+import WorkStateModal from "../etc/WorkStateModal";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export type data = {
-  email: string;
-  nickname: string;
+export type food = {
+  name: string;
+  gram: string;
+  kcal: string;
+  carbo: string;
+  protien: string;
+  fat: string;
+};
+export type foodList = food[];
+
+export type newPostData = {
   content: string;
   file: any;
   imgRatio: string;
-  foodList: [];
+  foodList: foodList;
   nuKcal: number;
   nuCarb: number;
   nuPro: number;
   nuFat: number;
 };
+
 export const newPostContext = React.createContext<any>({});
 
 export default function MakeModal({ closeModal }: props) {
-  const [postData, setPostData] = useState<data>({
-    email: "",
-    nickname: "",
+  const [postData, setPostData] = useState<newPostData>({
     content: "",
     file: [],
     imgRatio: "",
@@ -38,6 +49,9 @@ export default function MakeModal({ closeModal }: props) {
   });
   const [modalAlert, setModalAlert] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
+  const [debounce, setDebounce] = useState(false);
+  const [writeState,setWriteState] = useState(false)
+
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
       if (postData.file.length > 0) {
@@ -75,9 +89,38 @@ export default function MakeModal({ closeModal }: props) {
     [modalAlert, postData]
   );
 
+  const createPostHandle = async () => {
+    if (debounce) {
+      return;
+    }
+    setDebounce(true);
+    if (postData.file.length > 0) {
+      const fileUrlArray = await fileUpload(postData.file, "board");
+      if (fileUrlArray.length > 0) {
+        const newPostData = {
+          ...postData,
+          file: fileUrlArray,
+        };
+        try {
+          const response = await createPostWrite(newPostData);
+          if(response.status===201) {
+
+          }
+        } catch (error) {
+          console.log(error);
+          await fileDelete(newPostData.file,"board")
+        }
+      } else {
+        alert("서버와의 연결이 올바르지 않습니다. 잠시후 다시 시도해주세요")
+      }
+    }
+    setDebounce(false);
+  };
+
   return (
-    <newPostContext.Provider value={{postData,setPostData}}>
+    <newPostContext.Provider value={{ postData, setPostData }}>
       <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
+        <WorkStateModal />
         <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
         {modalAlert && (
           <AlertModal
@@ -98,10 +141,14 @@ export default function MakeModal({ closeModal }: props) {
               </span>
             )}
             <h3>새 게시물 만들기</h3>
-            {postData?.file.length > 0 && (
-              <p onClick={nextPageHandle}>
-                {pageIndex === 0 ? "다음" : "작성"}
-              </p>
+            {postData?.file.length > 0 ? (
+              pageIndex === 0 ? (
+                <p onClick={nextPageHandle}>다음</p>
+              ) : (
+                <p onClick={createPostHandle}>작성</p>
+              )
+            ) : (
+              <></>
             )}
           </div>
           {pageIndex === 0 && <ModalImage />}

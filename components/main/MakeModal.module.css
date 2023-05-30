@@ -398,21 +398,34 @@
 .foodListWrap table {
   width: 100%;
 }
-.foodListWrap table tr {
+.calNuWrap,
+.foodListWrap table thead tr,
+.foodListWrap table tbody tr {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
+.foodListWrap table tbody tr {
+  background-color: #c31952;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.foodListWrap table tr:last-child {
+  animation: ani 0.5s;
+}
+.calNuWrap p,
 .foodListWrap table td {
   width: 15%;
   height: 30px;
   text-align: center;
   font-size: 18px;
 }
-.foodListWrap table tr:first-child td{
+.foodListWrap table thead td {
   font-size: 15px;
   font-weight: bold;
 }
+.calNuWrap p:nth-child(1),
+.calNuWrap p:nth-child(2),
 .foodListWrap table tr td:nth-child(1),
 .foodListWrap table tr td:nth-child(2) {
   width: 20%;
@@ -427,12 +440,17 @@
   font-size: 15px;
   color: #535353bb;
 }
+.calNuWrap p:last-child,
 .foodListWrap table td:last-child {
   width: 5%;
 }
 .foodListWrap table td:last-child span {
-  color: #c31952;
+  color: #fff;
   cursor: pointer;
+}
+.calNuWrap {
+  border-top: 1px solid #d7d7d7;
+  font-weight: 500;
 }
 
 @keyframes fade {
@@ -454,6 +472,7 @@
     transform: scale(1);
   }
 }
+
 
 @media (max-width: 400px) {
   .modalContent {
@@ -552,15 +571,15 @@
     font-size: 15px;
   }
   .foodListWrap table tr td:nth-child(1),
-  .foodListWrap table tr td:nth-child(2){
+  .foodListWrap table tr td:nth-child(2) {
     width: 40%;
   }
-  .foodListWrap table tr td:nth-child(2) span{
+  .foodListWrap table tr td:nth-child(2) span {
     font-size: 13px;
   }
   .foodListWrap table tr td:nth-child(3),
   .foodListWrap table tr td:nth-child(4),
-  .foodListWrap table tr td:nth-child(5){
+  .foodListWrap table tr td:nth-child(5) {
     display: none;
   }
 }

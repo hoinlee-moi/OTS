@@ -1,6 +1,6 @@
 "use client";
 
-import { app } from "@/util/firebase";
+
 import { getStorage, ref, getDownloadURL } from "@firebase/storage";
 import { useState } from "react";
 

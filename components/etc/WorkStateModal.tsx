@@ -55,10 +55,10 @@ export default function WorkStateModal({
               <circle cx="50%" cy="50%" r="50"></circle>
               <defs>
                 <linearGradient id="myGradient">
-                  <stop offset="0%" stop-color="#b8cbb8" />
-                  <stop offset="33%" stop-color="#cf6cc9" />
-                  <stop offset="66%" stop-color="#ee609c" />
-                  <stop offset="100%" stop-color="#ee609c" />
+                  <stop offset="0%" stopColor="#b8cbb8" />
+                  <stop offset="33%" stopColor="#cf6cc9" />
+                  <stop offset="66%" stopColor="#ee609c" />
+                  <stop offset="100%" stopColor="#ee609c" />
                 </linearGradient>
               </defs>
             </svg>

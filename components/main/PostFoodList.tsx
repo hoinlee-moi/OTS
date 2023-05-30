@@ -50,7 +50,6 @@ export default function PostFoodList() {
           nuFat: nutrient.fat,
         };
       });
-      console.log(postData);
     }
   }, [postData.foodList]);
 

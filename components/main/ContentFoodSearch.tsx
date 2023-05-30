@@ -40,7 +40,7 @@ export default function ContentFoodSearch() {
       console.log(error);
       setSearchLoading(false);
     }
-    debounceTimeOut(3000);
+    debounceTimeOut(2000);
   };
   const postInsertfood = (food: food) => {
     if (postData.foodList) {
@@ -80,7 +80,7 @@ export default function ContentFoodSearch() {
       })[0];
       postInsertfood(food);
     }
-    debounceTimeOut(1000);
+    debounceTimeOut(500);
   };
 
   return (

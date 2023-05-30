@@ -65,7 +65,7 @@ export const login = async (userData: loginData) => {
 
 export const getBoardPostList = async (page: number) => {
   try {
-    const response = await axios.get(`/api/posts?page=${page}`);
+    const response = await axios.get(`/api/post/list?page=${page}`);
     return response;
   } catch (error) {
     throw error;

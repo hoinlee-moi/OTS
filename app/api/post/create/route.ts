@@ -17,6 +17,8 @@ export async function POST(request: NextRequest) {
         userId : new ObjectId(user._id),
         nickName:user.nickname,
         userProfile:user.profileUrl,
+        like:0,
+        comment:0,
         ...data
     }
     try {

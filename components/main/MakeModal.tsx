@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./MakeModal.module.css";
 import ModalImage from "./ModalImage";
 import AlertModal from "../etc/AlertMdoal";
@@ -50,9 +50,17 @@ export default function MakeModal({ closeModal }: props) {
   const [modalAlert, setModalAlert] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [debounce, setDebounce] = useState(false);
-  const [writeState,setWriteState] = useState(false)
+  const [writeState, setWriteState] = useState(false);
+  const [success, setSuccess] = useState("loading");
+
+  useEffect(() => {
+    if (success === "close") closeModal(false);
+  }, [success]);
 
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (writeState) {
+      return;
+    }
     if (e.button === 0) {
       if (postData.file.length > 0) {
         setModalAlert(true);
@@ -93,6 +101,7 @@ export default function MakeModal({ closeModal }: props) {
     if (debounce) {
       return;
     }
+    setWriteState(true);
     setDebounce(true);
     if (postData.file.length > 0) {
       const fileUrlArray = await fileUpload(postData.file, "board");
@@ -103,15 +112,16 @@ export default function MakeModal({ closeModal }: props) {
         };
         try {
           const response = await createPostWrite(newPostData);
-          if(response.status===201) {
-
+          if (response.status === 201) {
+            setSuccess("success");
           }
         } catch (error) {
           console.log(error);
-          await fileDelete(newPostData.file,"board")
+          await fileDelete(newPostData.file, "board");
+          setSuccess("fail");
         }
       } else {
-        alert("서버와의 연결이 올바르지 않습니다. 잠시후 다시 시도해주세요")
+        alert("서버와의 연결이 올바르지 않습니다. 잠시후 다시 시도해주세요");
       }
     }
     setDebounce(false);
@@ -120,7 +130,13 @@ export default function MakeModal({ closeModal }: props) {
   return (
     <newPostContext.Provider value={{ postData, setPostData }}>
       <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
-        <WorkStateModal />
+        {writeState && (
+          <WorkStateModal
+            closeModal={setWriteState}
+            success={success}
+            setSuccess={setSuccess}
+          />
+        )}
         <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
         {modalAlert && (
           <AlertModal

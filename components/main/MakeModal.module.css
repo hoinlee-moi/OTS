@@ -371,9 +371,10 @@
 }
 
 @keyframes loading {
-  from{
+  from {
     transform: translateX(-100%);
-  }to{
+  }
+  to {
     transform: translateX(100%);
   }
 }
@@ -412,7 +413,15 @@
   right: 10px;
   color: #535353bb;
 }
+
+/* foodList */
+
 .foodListWrap {
+  width: 100%;
+  height: 60%;
+  overflow: auto;
+}
+.list {
   width: 100%;
 }
 .foodListWrap table {
@@ -492,7 +501,6 @@
     transform: scale(1);
   }
 }
-
 
 @media (max-width: 400px) {
   .modalContent {
@@ -583,11 +591,13 @@
   .foodListWrap {
     position: absolute;
     left: 0;
+    height: 40%;
   }
   .foodListWrap thead tr td {
     font-size: 13px;
   }
-  .foodListWrap table tr td,.calNuWrap p {
+  .foodListWrap table tr td,
+  .calNuWrap p {
     font-size: 15px;
   }
   .foodListWrap table tr td:nth-child(1),

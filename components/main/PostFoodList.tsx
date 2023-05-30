@@ -56,40 +56,42 @@ export default function PostFoodList() {
 
   return (
     <div className={styles.foodListWrap}>
-      <table>
-        <thead>
-          <tr>
-            <td>음식</td>
-            <td>칼로리(Kcal)</td>
-            <td>탄수(g)</td>
-            <td>단백(g)</td>
-            <td>지방(g)</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          {postData.foodList &&
-            postData.foodList.map((item: any, idx: any) => {
-              return (
-                <tr id={idx.toString()} key={idx}>
-                  <td>{item.name}</td>
-                  <td>
-                    {item.kcal}
-                    <span>{`(${item.gram}g)`}</span>
-                  </td>
-                  <td>{item.carbo}g</td>
-                  <td>{item.protien}g</td>
-                  <td>{item.fat}g</td>
-                  <td onClick={listDeleteHandle}>
-                    <span>
-                      <FontAwesomeIcon icon={faX} />
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+      <div className={styles.list}>
+        <table>
+          <thead>
+            <tr>
+              <td>음식</td>
+              <td>칼로리(Kcal)</td>
+              <td>탄수(g)</td>
+              <td>단백(g)</td>
+              <td>지방(g)</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            {postData.foodList &&
+              postData.foodList.map((item: any, idx: any) => {
+                return (
+                  <tr id={idx.toString()} key={idx}>
+                    <td>{item.name}</td>
+                    <td>
+                      {item.kcal}
+                      <span>{`(${item.gram}g)`}</span>
+                    </td>
+                    <td>{item.carbo}g</td>
+                    <td>{item.protien}g</td>
+                    <td>{item.fat}g</td>
+                    <td onClick={listDeleteHandle}>
+                      <span>
+                        <FontAwesomeIcon icon={faX} />
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
       <div className={styles.calNuWrap}>
         <p>총량</p>
         <p>{postData.nuKcal}</p>

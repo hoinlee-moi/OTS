@@ -16,7 +16,7 @@ export type post = {
   file: postFile[];
   like: number;
   _id: string;
-}
+};
 type boardList = post[];
 export const postListContext = React.createContext<any>({});
 
@@ -27,7 +27,9 @@ export default function PostBoard() {
   const [pageEnd, setPageEnd] = useState(false);
   const [observer, setObserver] = useObserver(
     async (entry: any, observer: any) => {
-      getPostList();
+      if (page !== 1) {
+        await getPostList();
+      }
     },
     {}
   );
@@ -52,7 +54,6 @@ export default function PostBoard() {
         setPostList((snap) => {
           return [...snap, ...data];
         });
-        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -65,9 +66,9 @@ export default function PostBoard() {
   return (
     <postListContext.Provider value={{ postList }}>
       <div className={styles.postItemWrap}>
-        {postList.map((item,idx:number)=>{
-          let style = styles.postItemBox
-          if(idx%2===0) style = styles.postItemBox2
+        {postList.map((item, idx: number) => {
+          let style = styles.postItemBox;
+          if (idx % 2 === 0) style = styles.postItemBox2;
           return (
             <div className={style} key={idx}>
               {item.map((val) => {

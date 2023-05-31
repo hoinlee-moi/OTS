@@ -14,6 +14,8 @@ export default function ContentFoodSearch() {
   const [uploadAlert, setUploadAlert] = useAlert(false);
   const [debounce, setDebounce] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [searchFail, setSearchFail] = useState(false);
+
   const debounceTimeOut = (time: number) => {
     setTimeout(() => {
       setDebounce(false);
@@ -27,7 +29,9 @@ export default function ContentFoodSearch() {
   };
 
   const foodSearchHandle = async () => {
+    setSearchFail(false);
     setSearchLoading(true);
+    setFoodSearchList([])
     if (debounce) return;
     setDebounce(true);
     try {
@@ -39,6 +43,7 @@ export default function ContentFoodSearch() {
     } catch (error) {
       console.log(error);
       setSearchLoading(false);
+      setSearchFail(true);
     }
     debounceTimeOut(2000);
   };
@@ -69,14 +74,15 @@ export default function ContentFoodSearch() {
 
   const listInsertHandle = (e: React.MouseEvent<HTMLUListElement>) => {
     e.stopPropagation();
-    if (debounce) return;
 
-    setDebounce(true);
     const target = e.target as HTMLLIElement;
+    if (debounce || foodSearchList?.length === 0 || target.tagName === "UL")
+      return;
+    setDebounce(true);
     const li = target.closest("li") as HTMLLIElement;
     if (foodSearchList) {
       const food = foodSearchList?.filter((item, idx) => {
-        return idx.toString() === li.id;
+        return item.name === li.id;
       })[0];
       postInsertfood(food);
     }
@@ -104,12 +110,16 @@ export default function ContentFoodSearch() {
             <span></span>
           </div>
         )}
-
+        {searchFail && (
+          <div className={styles.loadingBox}>
+            <p>검색결과가 없습니다</p>
+          </div>
+        )}
         <ul onClick={listInsertHandle}>
           {foodSearchList &&
             foodSearchList.map((item, idx) => {
               return (
-                <li key={idx} id={idx.toString()}>
+                <li key={idx} id={item.name}>
                   {item.name}
                   <p>
                     {`${item.kcal}kcal`}

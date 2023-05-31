@@ -25,15 +25,18 @@ export async function GET(request: NextRequest) {
       const resData: any[] = [];
       let insertData: any[] = [];
       for (let i = 0; i <= postData.length - 1; i++) {
+        console.log(insertData.length,"...",resData.length,"....",i)
+        insertData.push(postData[i]);
+        if (i === postData.length - 1) {
+          resData.push(insertData);
+          break;
+        }
         if (insertData.length === 5) {
           resData.push(insertData);
           insertData = [];
         }
-        insertData.push(postData[i]);
-        if (i === postData.length - 1) {
-          resData.push(insertData);
-        }
       }
+      console.log(resData)
       return NextResponse.json({ resData, lastPage }, { status: 200 });
     } catch (error) {
       return NextResponse.json(

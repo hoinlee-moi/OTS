@@ -16,10 +16,15 @@ export default function Login() {
     password: "",
   });
   const [loginFailMs, setLoginFailMs] = useState("");
+  const [loginState, setLoginState] = useState(false);
 
   useEffect(() => {
     setLoginFailMs("");
   }, [userData]);
+
+  const keyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") loginHandle();
+  };
 
   const loginHandle = useCallback(async () => {
     if (userData.emailId === "" || userData.password === "") {
@@ -30,19 +35,12 @@ export default function Login() {
       const response = await signIn("credentials", {
         ...userData,
         redirect: false,
-        callbackUrl : "/main"
+        callbackUrl: "/main",
       });
       if (response?.ok === false)
         setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
-      if (response?.status === 200&&response?.ok ===true) router.push(response.url as string);
-
-      // const response = await login(userData);
-      // if (response.status === 201) {
-      //   cookies().set('accessToken', response.data.accessToken);
-      //   cookies().set('refreshToken', response.data.refreshToken);
-      //   sessionStorage.setItem('emailId', response.data.emailId);
-      //   router.push('/main');
-      // }
+      if (response?.status === 200 && response?.ok === true)
+        router.push(response.url as string);
     } catch (err) {
       console.log(err);
       setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
@@ -75,9 +73,15 @@ export default function Login() {
             name="password"
             maxLength={14}
             onChange={setUserData}
+            onKeyDown={keyDownHandle}
           />
         </div>
         {userData !== "" && <p>{loginFailMs}</p>}
+        {loginState && (
+          <svg>
+            <circle cx="50%" cy="50%" r="25"></circle>
+          </svg>
+        )}
         <button onClick={loginHandle}>로그인</button>
       </div>
       <KakaoSignUp />

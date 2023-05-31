@@ -325,7 +325,7 @@
 .searchList ul {
   box-sizing: border-box;
 }
-.searchList li {
+.searchList ul li {
   display: flex;
   align-items: center;
   min-width: 300px;

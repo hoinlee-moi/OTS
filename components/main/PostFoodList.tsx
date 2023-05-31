@@ -52,7 +52,6 @@ export default function PostFoodList() {
       });
     }
   }, [postData.foodList]);
-
   return (
     <div className={styles.foodListWrap}>
       <div className={styles.list}>
@@ -93,10 +92,10 @@ export default function PostFoodList() {
       </div>
       <div className={styles.calNuWrap}>
         <p>총량</p>
-        <p>{postData.nuKcal}</p>
-        <p>{postData.nuCarb}</p>
-        <p>{postData.nuPro}</p>
-        <p>{postData.nuFat}</p>
+        <p>{postData.foodList.length===0?0:postData.nuKcal}</p>
+        <p>{postData.foodList.length===0?0:postData.nuCarb}</p>
+        <p>{postData.foodList.length===0?0:postData.nuPro}</p>
+        <p>{postData.foodList.length===0?0:postData.nuFat}</p>
         <p></p>
       </div>
     </div>

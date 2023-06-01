@@ -1,0 +1,91 @@
+.modalBack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modalBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  max-height: 90%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fff;
+  animation: modalAni 0.2s;
+  overflow: hidden;
+}
+/* contentImg */
+.imgWrap {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000d8;
+}
+.imgOriginal,
+.imgOneOne {
+  width: 100%;
+  height: 90%;
+}
+.imgOriginal {
+  object-fit: contain;
+}
+.imgOneOne,
+.imgFourFifths,
+.imgSixteenNine {
+  object-fit: cover;
+}
+.imgFourFive {
+  width: calc(100% * 4 / 5);
+  height: 90%;
+}
+.imgSixteenNine {
+  width: 100%;
+  height: calc(90% * 9 / 16);
+}
+
+/* imgLoading */
+.loadingBox {
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.loadingBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, white, #d4d4d4, white);
+  animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* postDetailContent */
+
+.contentWrap {
+  width: 40%;
+  height: 100%;
+}
+.postUserWrap{
+    height: 50px;
+    border-bottom: 1px solid #d7d7d7;
+}

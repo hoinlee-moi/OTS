@@ -1,15 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./PostBoard.module.css"
+import styles from "./PostBoard.module.css";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { post } from "./PostBoard";
+import { post, postListContext } from "./PostBoard";
+import Link from "next/link";
+import { useContext } from "react";
 
-type props ={
-    listItem : post
-}
+type props = {
+  listItem: post;
+};
 
-export default function PostItem({listItem}:props) {
+export default function PostItem({ listItem }: props) {
+  const { setPostDetailId } = useContext(postListContext);
+
   return (
-    <div className={styles.postItem} >
+    <div
+      className={styles.postItem}
+      onClick={() => setPostDetailId(listItem._id)}
+    >
       <img src={listItem.file[0].url} alt="" />
       <div className={styles.hoverDetail}>
         <div>

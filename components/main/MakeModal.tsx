@@ -40,7 +40,7 @@ export default function MakeModal({ closeModal }: props) {
   const [postData, setPostData] = useState<newPostData>({
     content: "",
     file: [],
-    imgRatio: "",
+    imgRatio: "1/1",
     foodList: [],
     nuKcal: 0,
     nuCarb: 0,

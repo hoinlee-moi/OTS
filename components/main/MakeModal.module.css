@@ -24,7 +24,7 @@
   justify-content: center;
   position: relative;
   width: 90%;
-  max-width: 1200px;
+  max-width: calc(1200px * 0.7);
   max-height: 80%;
   aspect-ratio: 1/1;
   border-radius: 20px;

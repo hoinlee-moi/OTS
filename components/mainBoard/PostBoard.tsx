@@ -7,6 +7,7 @@ import { getStorage, ref, getDownloadURL } from "@firebase/storage";
 import Loading from "@/app/main/loading";
 import PostItem from "./PostItem";
 import { getBoardPostList } from "@/util/api";
+import PostDetail from "./PostDetail";
 type postFile = {
   name: string;
   url: string;
@@ -25,6 +26,7 @@ export default function PostBoard() {
   const [page, setPage] = useState(1);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [pageEnd, setPageEnd] = useState(false);
+  const [postDetailId,setPostDetailId] = useState("")
   const [observer, setObserver] = useObserver(
     async (entry: any, observer: any) => {
       if (page !== 1) {
@@ -33,6 +35,7 @@ export default function PostBoard() {
     },
     {}
   );
+  
   useEffect(() => {
     getPostList();
   }, []);
@@ -65,7 +68,8 @@ export default function PostBoard() {
   };
 
   return (
-    <postListContext.Provider value={{ postList }}>
+    <postListContext.Provider value={{ postList,postDetailId,setPostDetailId }}>
+      {postDetailId&&<PostDetail />}
       <div className={styles.postItemWrap}>
         {postList.map((item, idx: number) => {
           let style = styles.postItemBox;

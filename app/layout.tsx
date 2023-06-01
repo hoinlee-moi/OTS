@@ -4,7 +4,7 @@ import { Inter, Noto_Sans_KR } from 'next/font/google';
 
 
 
-const inter = Noto_Sans_KR({ weight: '500', subsets: ['latin'] });
+// const inter = Noto_Sans_KR({ weight: '500', subsets: ['latin'] });
 
 // export const metadata = {
 //   title: 'Create Next App',
@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: props) {
 
   return (
     <html lang="en">
-      <body className="{inter.className}">
+      <body >
         <AuthContext>{children}</AuthContext>
       </body>
     </html>

@@ -17,7 +17,7 @@ export default function ModalImgPreview({ uploadFiles }: props) {
   const [imageSize, setImageSize] = useState("");
 
   useEffect(() => {
-    if (postData.imgRatio !== "") {
+    if (postData.imgRatio !== "1/1") {
       setImageSize(postData.imgRatio);
     }
   }, []);
@@ -30,24 +30,24 @@ export default function ModalImgPreview({ uploadFiles }: props) {
     const imgCurRef = imgRef.current;
     if (imgCurRef) {
       if (imageSize === "0") {
-        imgCurRef.style.height = "100%";
         imgCurRef.style.width = "100%";
+        imgCurRef.style.height = "100%";
         imgCurRef.style.objectFit = "contain";
       }
       if (imageSize === "1/1") {
-        imgCurRef.style.objectFit = "cover";
-        imgCurRef.style.height = "100%";
         imgCurRef.style.width = "100%";
+        imgCurRef.style.height = "100%";
+        imgCurRef.style.objectFit = "cover";
       }
       if (imageSize === "4/5") {
-        imgCurRef.style.objectFit = "cover";
-        imgCurRef.style.height = "100%";
         imgCurRef.style.width = "calc(100% * 4/5)";
+        imgCurRef.style.height = "100%";
+        imgCurRef.style.objectFit = "cover";
       }
       if (imageSize === "16/9") {
-        imgCurRef.style.objectFit = "cover";
-        imgCurRef.style.height = "calc(100% * 9/16)";
         imgCurRef.style.width = "100%";
+        imgCurRef.style.height = "calc(100% * 9/16)";
+        imgCurRef.style.objectFit = "cover";
       }
       setPostData((snap: any) => {
         return { ...snap, imgRatio: imageSize };

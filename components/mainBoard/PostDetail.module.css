@@ -13,6 +13,7 @@
 
 .modalBody {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -25,6 +26,32 @@
   animation: modalAni 0.2s;
   overflow: hidden;
 }
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.modalTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #d4d4d4;
+}
+.modalTitle h3 {
+  margin: auto;
+}
+.contentContainer {
+  width: 100%;
+  height: calc(100% - 40px);
+  display: flex;
+}
+
 /* contentImg */
 .imgWrap {
   width: 70%;
@@ -37,23 +64,23 @@
 .imgOriginal,
 .imgOneOne {
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 .imgOriginal {
   object-fit: contain;
 }
 .imgOneOne,
-.imgFourFifths,
+.imgFourFive,
 .imgSixteenNine {
   object-fit: cover;
 }
 .imgFourFive {
   width: calc(100% * 4 / 5);
-  height: 90%;
+  height: 100%;
 }
 .imgSixteenNine {
   width: 100%;
-  height: calc(90% * 9 / 16);
+  height: calc(100% * 9 / 16);
 }
 
 /* imgLoading */
@@ -85,7 +112,81 @@
   width: 40%;
   height: 100%;
 }
-.postUserWrap{
-    height: 50px;
-    border-bottom: 1px solid #d7d7d7;
+.contentWrap img {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+.postUserWrap {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 10px 10px;
+  border-bottom: 1px solid #d7d7d7;
+}
+.postUserWrap div:nth-child(1) {
+  height: 40px;
+  width: 40px;
+}
+.postContentWrap {
+  height: calc(35% - 50px);
+  padding: 15px 15px;
+  border-bottom: 1px solid #d7d7d7;
+}
+.postContent p {
+  font-size: 16px;
+}
+
+/* foodList */
+.foodListWrap {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 50px;
+  padding: 10px;
+}
+.food {
+  display: inline-block;
+  position: relative;
+  height: 35px;
+  padding: 3px;
+  margin: 5px 5px;
+  background-color: #c31952;
+  cursor: pointer;
+}
+.foodName {
+  text-align: center;
+  font-size: 15px;
+}
+.foodName span {
+  font-size: 12px;
+  color: #d4d4d4;
+}
+.food > div {
+  visibility: hidden;
+  position: absolute;
+  z-index: 10;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80px;
+  background-color: #d7d7d7;
+  border-radius: 10px;
+}
+
+.food > div span:last-child {
+  position: absolute;
+  top: calc(100% - 5px);
+  left: 50%;
+  z-index: 5;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%) rotate(-45deg);
+  background-color: #d7d7d7;
+}
+
+.food:hover >div {
+    visibility: visible;
 }

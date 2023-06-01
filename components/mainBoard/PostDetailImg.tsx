@@ -18,11 +18,10 @@ export default function PostDetailImg({ imgRatio }: props) {
             break;
             case "16/9" : style = styles.imgSixteenNine
             break;
-            default : style = styles.imgOriginal
+            default : style = styles.imgFourFive
         }
         setImgState(style)
     },[imgRatio])
-    console.log(imgState)
   return (
     <div className={styles.imgWrap}>
       {!imgState ? (
@@ -31,7 +30,7 @@ export default function PostDetailImg({ imgRatio }: props) {
         </div>
       ) : (
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/myots-c8287.appspot.com/o/board%2F1685478354350_znr22hoa44_main_food_11.jpeg?alt=media&token=9f4f7d49-4223-4b9b-a7cb-7844d3e91a02"
+          src="https://firebasestorage.googleapis.com/v0/b/myots-c8287.appspot.com/o/board%2F1685478353389_hf9ytp8hqz_main_food_9.jpeg?alt=media&token=a45ddf71-5454-4d41-b455-66b0c4c7d95f"
           alt=""
           className={imgState}
         />

@@ -6,7 +6,7 @@ type Props = {
   size?: AvatarSize;
 };
 
-export default function Avatar({ image }) {
+export default function Avatar({ image }:any) {
   return (
     <div className={styles.baseStyle}>
       <img

@@ -4,6 +4,8 @@ import { foodList } from "../main/MakeModal";
 import { postListContext } from "./PostBoard";
 import PostDetailImg from "./PostDetailImg";
 import PostDetailContent from "./PostDetailContent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 type postData = {
   content: string;
@@ -31,12 +33,18 @@ export default function PostDetail() {
 
   return (
     <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
+        <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
       <div
         className={styles.modalBody}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        <PostDetailImg imgRatio={imgRatio} />
-        <PostDetailContent />
+        <div className={styles.modalTitle}>
+          <h3>오늘의 식단</h3>
+        </div>
+        <div className={styles.contentContainer}>
+          <PostDetailImg imgRatio={imgRatio} />
+          <PostDetailContent />
+        </div>
       </div>
     </div>
   );

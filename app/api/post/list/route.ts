@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
       }
       return NextResponse.json({ resData, lastPage }, { status: 200 });
     } catch (error) {
+      console.log(error)
       return NextResponse.json(
         { message: "Interner Server Error" },
         { status: 500 }

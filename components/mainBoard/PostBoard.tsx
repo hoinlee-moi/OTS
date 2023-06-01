@@ -56,11 +56,12 @@ export default function PostBoard() {
         });
       }
     } catch (error) {
+      setPageEnd(true)
       console.log(error);
-      setTimeout(() => {
-        setScrollLoading(false);
-      }, 2000);
     }
+    setTimeout(() => {
+      setScrollLoading(false);
+    }, 2000);
   };
 
   return (

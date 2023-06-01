@@ -45,7 +45,7 @@ export default function ContentFoodSearch() {
       setSearchLoading(false);
       setSearchFail(true);
     }
-    debounceTimeOut(2000);
+    setDebounce(false);
   };
   const postInsertfood = (food: food) => {
     if (postData.foodList) {
@@ -86,7 +86,7 @@ export default function ContentFoodSearch() {
       })[0];
       postInsertfood(food);
     }
-    debounceTimeOut(500);
+    debounceTimeOut(400);
   };
 
   return (

@@ -5,6 +5,7 @@ import styles from "./Floating.module.css";
 import FloatingSearch from "./FloatingSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDoorOpen,
   faHouseChimney,
   faMagnifyingGlass,
   faPencil,
@@ -13,6 +14,7 @@ import {
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import MakeModal from "./MakeModal";
+import { signOut } from "next-auth/react";
 
 export default function FloatingMenu() {
   const [searchState, setSearchState] = useState(false);
@@ -22,6 +24,8 @@ export default function FloatingMenu() {
   useEffect(() => {
     setLoading(true);
   }, []);
+
+  const logoutHandle = () => {};
 
   return (
     <>
@@ -71,6 +75,10 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>
+                  <div onClick={() => signOut()}>
+                    <FontAwesomeIcon icon={faDoorOpen} />
+                    <p>로그아웃</p>
+                  </div>
                 </article>
               </div>
             </div>

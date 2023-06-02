@@ -1,39 +1,98 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./PostDetail.module.css";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingCircle from "../etc/LoadingCircle";
+import { detailPostDataContext } from "./PostDetail";
 
-type props = {
-  imgRatio: string;
-};
+export default function PostDetailImg() {
+  const { postData } = useContext(detailPostDataContext);
+  const [imgState, setImgState] = useState<any>();
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imgLoading, setImgLoading] = useState(false);
+  const [image, setImage] = useState<any>();
 
-export default function PostDetailImg({ imgRatio }: props) {
-    const [imgState,setImgState] = useState<any>()
-    useEffect(()=>{
-        let style ;
-        switch(imgRatio){
-            case "0":style = styles.imgOriginal
-            break;
-            case "1/1": style = styles.imgOneOne
-            break;
-            case "4/5" : style = styles.imgFourFive
-            break;
-            case "16/9" : style = styles.imgSixteenNine
-            break;
-            default : style = styles.imgFourFive
-        }
-        setImgState(style)
-    },[imgRatio])
+  useEffect(() => {
+    let style;
+    if (postData) {
+      switch (postData.imgRatio) {
+        case "0":
+          style = styles.imgOriginal;
+          break;
+        case "1/1":
+          style = styles.imgOneOne;
+          break;
+        case "4/5":
+          style = styles.imgFourFive;
+          break;
+        case "16/9":
+          style = styles.imgSixteenNine;
+          break;
+        default:
+          style = styles.imgOneOne;
+      }
+      setImgState(style);
+    }
+  }, [postData]);
+
+  useEffect(() => {
+    if (postData) imgUp();
+  }, [currentIndex, postData]);
+
+  const handlePrevious = () => {
+    setImgLoading(true);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+  };
+
+  const handleNext = () => {
+    setImgLoading(true);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
+  };
+  const imgUp = () => {
+    setImgLoading(false);
+    setImage(postData.file[currentIndex].url);
+  };
+
   return (
     <div className={styles.imgWrap}>
-      {!imgState ? (
-        <div className={styles.loadingBox}>
-          <span></span>
+      {imgLoading ? (
+        <div className={styles.loading}>
+          <LoadingCircle />
         </div>
       ) : (
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/myots-c8287.appspot.com/o/board%2F1685478353389_hf9ytp8hqz_main_food_9.jpeg?alt=media&token=a45ddf71-5454-4d41-b455-66b0c4c7d95f"
-          alt=""
-          className={imgState}
-        />
+        image && (
+          <>
+            <Image
+              src={image}
+              alt={`Image ${currentIndex}`}
+              className={imgState}
+              width={1000}
+              height={1000}
+              ref={imgRef}
+              priority
+            />
+            {currentIndex !== 0 && (
+              <button
+                onClick={handlePrevious}
+                disabled={currentIndex === 0}
+                className={styles.leftBtn}
+              >
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </button>
+            )}
+            {image && currentIndex !== postData.file.length - 1 && (
+              <button
+                onClick={handleNext}
+                disabled={image && currentIndex === postData.file.length - 1}
+                className={styles.rightBtn}
+              >
+                <FontAwesomeIcon icon={faAngleRight} />
+              </button>
+            )}
+          </>
+        )
       )}
     </div>
   );

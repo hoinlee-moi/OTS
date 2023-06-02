@@ -4,6 +4,7 @@ import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { post, postListContext } from "./PostBoard";
 import Link from "next/link";
 import { useContext } from "react";
+import Image from "next/image";
 
 type props = {
   listItem: post;
@@ -17,7 +18,13 @@ export default function PostItem({ listItem }: props) {
       className={styles.postItem}
       onClick={() => setPostDetailId(listItem._id)}
     >
-      <img src={listItem.file[0].url} alt="" />
+      <Image
+        src={listItem.file[0].url}
+        alt=""
+        priority
+        fill
+        sizes="(max-width:300px),(max-height:600px)"
+      />
       <div className={styles.hoverDetail}>
         <div>
           <FontAwesomeIcon icon={faComment} />

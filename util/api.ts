@@ -72,7 +72,7 @@ export const getBoardPostList = async (page: number) => {
   }
 };
 
-export const getDetailPost = async (postId: number) => {
+export const getPostDetail = async (postId: number) => {
   try {
     const response = await axios.get(`api/post/${postId}`);
     return response;

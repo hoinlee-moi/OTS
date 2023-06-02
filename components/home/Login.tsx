@@ -31,19 +31,24 @@ export default function Login() {
       setLoginFailMs("아직 입력되지 않은부분이 있습니다");
       return;
     }
+    if (loginState) return;
+    setLoginState(true);
     try {
       const response = await signIn("credentials", {
         ...userData,
         redirect: false,
         callbackUrl: "/main",
       });
-      if (response?.ok === false)
+      if (response?.ok === false){
         setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
+        setLoginState(false)
+      }
       if (response?.status === 200 && response?.ok === true)
         router.push(response.url as string);
     } catch (err) {
       console.log(err);
       setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
+      setLoginState(false)
     }
   }, [userData]);
 
@@ -77,15 +82,22 @@ export default function Login() {
           />
         </div>
         {userData !== "" && <p>{loginFailMs}</p>}
-        {loginState && (
-          <svg>
-            <circle cx="50%" cy="50%" r="25"></circle>
-          </svg>
+        {loginState ? (
+          <div className={styles.loginLoading}>
+            <svg>
+              <circle cx="50%" cy="50%" r="25"></circle>
+            </svg>
+          </div>
+        ) : (
+          <button onClick={loginHandle}>로그인</button>
         )}
-        <button onClick={loginHandle}>로그인</button>
       </div>
-      <KakaoSignUp />
-      <button onClick={() => signIn()}>구글로 로그인</button>
+      {!loginState && (
+        <>
+          <KakaoSignUp />
+          <button onClick={() => signIn()}>구글로 로그인</button>
+        </>
+      )}
     </div>
   );
 }

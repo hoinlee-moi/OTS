@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./WorkStateModal.module.css";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import LoadingCircle from "./LoadingCircle";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,17 +52,7 @@ export default function WorkStateModal({
         )}
         {success === "loading" && (
           <div className={styles.ListLoading}>
-            <svg>
-              <circle cx="50%" cy="50%" r="50"></circle>
-              <defs>
-                <linearGradient id="myGradient">
-                  <stop offset="0%" stopColor="#b8cbb8" />
-                  <stop offset="33%" stopColor="#cf6cc9" />
-                  <stop offset="66%" stopColor="#ee609c" />
-                  <stop offset="100%" stopColor="#ee609c" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <LoadingCircle/>
           </div>
         )}
       </div>

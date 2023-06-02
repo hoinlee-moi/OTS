@@ -55,7 +55,7 @@ export default function FloatingMenu() {
                 }
               >
                 <article>
-                  <Link href="/main">
+                  <Link href="/main" prefetch={false} >
                     <FontAwesomeIcon icon={faHouseChimney} size="lg" />
                     <p>홈</p>
                   </Link>
@@ -71,7 +71,7 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>
-                  <Link href="/main/profile">
+                  <Link href="/main/profile" prefetch={false} >
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>

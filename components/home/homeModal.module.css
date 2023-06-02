@@ -145,6 +145,22 @@
     height: 100%;
     border-radius: 30px;
   }
+
+  .loginLoading svg {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 30px;
+    animation: lodingSpinAni 2s infinite linear;
+  }
+  .loginLoading circle {
+    stroke: #554735;
+    stroke-width: 2;
+    /* getTotalLength()로 stroke의길이를 얻어올수 있음 */
+    stroke-dasharray: 157;
+    stroke-dashoffset: 0;
+    fill: transparent;
+    animation: lodingAni 0.8s infinite linear;
+  }
   
 
   @keyframes modalAni {
@@ -153,5 +169,22 @@
     }
     100%{
       transform: scale(1);
+    }
+  }
+
+  @keyframes lodingSpinAni {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes lodingAni {
+    0% {
+      stroke-dashoffset: 157;
+    }
+    75% {
+      stroke-dashoffset: -147;
+    }
+    100% {
+      stroke-dashoffset: -157;
     }
   }

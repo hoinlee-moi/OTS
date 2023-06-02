@@ -54,6 +54,23 @@ export default function MakeModal({ closeModal }: props) {
   const [success, setSuccess] = useState("loading");
 
   useEffect(() => {
+    document.body.style.cssText = `
+    position: fixed; 
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = `
+      background-color: #f6f6f6;
+      min-height: 100vh;
+      margin: 0;
+      line-height: 1;`;
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+    };
+  }, []);
+
+  useEffect(() => {
     if (success === "close") closeModal(false);
   }, [success]);
 

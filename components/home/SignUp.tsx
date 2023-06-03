@@ -28,6 +28,7 @@ export default function SignUp({modalClose}:props) {
   const [rePsCheck, setRePsCheck] = useState(false);
   const [nikCheck, setNickCheck] = useState(false);
   const [alertMs, setAlertMs] = useState("");
+  const [signUpState, setSignUpState] = useState(false)
 
   useEffect(() => {
     setAlertMs("");
@@ -140,6 +141,9 @@ export default function SignUp({modalClose}:props) {
       setAlertMs("아직 입력되지 않은 부분이 있습니다");
       return;
     }
+
+    if(signUpState) return;
+
     if (
       emailDupStatus &&
       nickDupStatus &&
@@ -147,6 +151,7 @@ export default function SignUp({modalClose}:props) {
       !psCheck &&
       !rePsCheck
     ) {
+      setSignUpState(true)
       const signData = {
         emailId: userData.email,
         password: userData.password,
@@ -158,29 +163,11 @@ export default function SignUp({modalClose}:props) {
         if (response.status === 201) {
           alert("회원가입이 완료되었습니다")
           modalClose&&modalClose(false)
-          // modalClose(false)
-          // redirect('/');
-          // const loginData = {
-          //   emailId: userData.email,
-          //   password: userData.password,
-          // };
-          // try {
-          //   const res = await login(loginData);
-          //   if (res.status === 201) {
-          //     alert("회원가입이 완료되었습니다. 로그인 해주세요")
-          //     router.push("/main")
-          //     // cookies().set("accessToken", res.data.accessToken);
-          //     // cookies().set("refreshToken", res.data.refreshToken);
-          //     // sessionStorage.setItem("emailId", res.data.emailId);
-          //     // router.push("/main");
-          //   }
-          // } catch (err) {
-          //   alert("서버와 접속이 끊어졌습니다. 다시 로그인 해주세요");
-          // }
         }
       } catch (err) {
         console.log(err);
         setAlertMs("회원가입에 실패하였습니다. 잠시후 다시 실행해주세요");
+        setSignUpState(false)
       }
     }
   }, [userData, nickDupStatus, emailDupStatus]);
@@ -232,7 +219,7 @@ export default function SignUp({modalClose}:props) {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle}>회원가입</button>
+        <button onClick={signUpHandle} disabled={signUpState}>회원가입</button>
       </div>
       <KakaoSignUp />
     </div>

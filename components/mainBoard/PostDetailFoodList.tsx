@@ -1,19 +1,31 @@
+import { useContext } from "react";
 import styles from "./PostDetail.module.css";
+import { detailPostDataContext } from "./PostDetail";
+import { food } from "../main/MakeModal";
 
 export default function PostDetailFoodList() {
+  const { postData } = useContext(detailPostDataContext);
+
   return (
-    <div className={styles.food}>
-      <div className={styles.foodName}>
-        <p>음식이름겁나길게있는데이걸말할수있을가</p>
-      </div>
-      <div className={styles.foodDetail}>
-        <span>100g 당</span>
-        <span>1234(kcal)</span>
-        <span>탄 : 23(g)</span>
-        <span>단 : 40(g)</span>
-        <span>지 : 5(g)</span>
-        <span />
-      </div>
-    </div>
+    <>
+      {postData &&
+        postData.foodList.map((item: food) => {
+          return (
+            <div className={styles.food} key={item.name}>
+              <div className={styles.foodName}>
+                <p>{item.name}</p>
+              </div>
+              <div className={styles.foodDetail}>
+                <span>{item.gram}g 당</span>
+                <span>{item.kcal}(kcal)</span>
+                <span>탄 : {item.carbo}(g)</span>
+                <span>단 : {item.protien}(g)</span>
+                <span>지 : {item.fat}(g)</span>
+                <span />
+              </div>
+            </div>
+          );
+        })}
+    </>
   );
 }

@@ -1,4 +1,7 @@
+'use client'
+import { useEffect } from 'react';
 import styles from './Avatar.module.css';
+import Image from 'next/image';
 
 type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 type Props = {
@@ -9,10 +12,12 @@ type Props = {
 export default function Avatar({ image }:any) {
   return (
     <div className={styles.baseStyle}>
-      <img
+      <Image
         alt="user profile"
-        src={image ?? undefined}
+        src={image===""?"/assets/basic_profile.jpg":image}
         referrerPolicy="no-referrer"
+        width={50}
+        height={50}
       />
     </div>
   );

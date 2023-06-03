@@ -23,6 +23,11 @@ type postData = {
   nuFat: number;
 }
 
+type postComment = {
+  _id:string
+  comment:string
+}
+
 // 카카오 로그인 부분은 컴포넌트 내에 작성하였습니다.
 
 export const emailDuplicate = async (userEmail: string) => {
@@ -99,4 +104,22 @@ try {
 } catch (error) {
   throw error
 }
+}
+
+export const postCommentWrite = async(comment:postComment) => {
+  try {
+    const response = await axios.post("api/post/comment",comment)
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getCommentList = async() => {
+  try {
+    const response = await axios.get("api/post/comment")
+  } catch (error) {
+    throw error
+    
+  }
 }

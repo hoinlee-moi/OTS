@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   const data = await request.json();
   const hash = await bcrypt.hash(data.password, 10);
   data.password = hash;
-  data.profileUrl = "";
+  data.profileUrl = "/assets/basic_profile.jpg";
   data.gender = "none";
   try {
     const db = (await connectDB).db("OTS");

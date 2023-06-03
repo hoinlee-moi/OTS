@@ -57,6 +57,17 @@ export default function PostDetailImg() {
 
   return (
     <div className={styles.imgWrap}>
+      {postData && (
+        <div className={styles.nutrient}>
+          <ul>
+            <li>총합</li>
+            <li>칼로리 : {postData.nuKcal}</li>
+            <li>탄수화물 : {postData.nuCarb}</li>
+            <li>단백질 : {postData.nuPro}</li>
+            <li>지방 : {postData.nuFat}</li>
+          </ul>
+        </div>
+      )}
       {imgLoading ? (
         <div className={styles.loading}>
           <LoadingCircle />

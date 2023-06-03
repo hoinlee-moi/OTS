@@ -57,7 +57,6 @@ export default function PostDetail() {
       const response = await getPostDetail(postDetailId);
       if (response.status === 200) {
         setPostData(response.data);
-        console.log(response.data)
       }
     } catch (error) {
       alert("서버와의 접속이 올바르지 않습니다");

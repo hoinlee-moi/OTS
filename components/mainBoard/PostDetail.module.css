@@ -70,7 +70,7 @@
   border-radius: 8px;
   background-color: #ffffffad;
 }
-.nutrient ul{
+.nutrient ul {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -299,14 +299,69 @@
   padding: 10px;
 }
 .comment {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
 }
-.comment > div {
+.userProfileWrap {
+  display: flex;
+  height: 30px;
+}
+.userProfileWrap > div {
+  display: inline-block;
   width: 30px;
   height: 30px;
 }
 .comment p {
+  display: inline-block;
+  margin: 5px 0 10px 0;
+  word-break: break-word;
+}
+.editBtnWrap {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+}
+.editBtnWrap span {
+  font-size: 15px;
+  cursor: pointer;
+}
+.editBtnWrap span:nth-child(1) {
+  margin-right: 5px;
+}
+.editBtnWrap span:nth-child(2) {
+  color: red;
+}
+
+.commentUpdate {
+  position: relative;
+  display: flex;
+  align-items: cente0r;
+  width: 90%;
   margin-left: 10px;
+}
+.commentUpdate input {
+  width: 100%;
+  margin: 5px 0 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 40px 5px 5px;
+  outline: none;
+}
+.commentUpdate button {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  font-size: 14px;
+  padding: 5px ;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+  background-color: #c31952;
+  cursor: pointer;
 }

@@ -1,6 +1,5 @@
 import { connectDB } from "@/util/database";
 import { REGULAR } from "@/util/reg";
-import { Db } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -64,8 +63,8 @@ export async function GET(request: NextRequest) {
       );
     }
     try {
-      let dup = user.findOne({ nickname: userNickname });
-      if (!dup) {
+      let dup = await user.findOne({ nickname: userNickname });
+      if (dup) {
         return NextResponse.json(
           {
             message: "Duplicate nickname found",

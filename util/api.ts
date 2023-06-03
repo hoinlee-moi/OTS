@@ -27,6 +27,16 @@ type postComment = {
   _id:string
   comment:string
 }
+type deleteComment = {
+  _id:string
+  userId:string
+}
+
+type updateComment = {
+  _id:string
+  userId: string
+  comment: string
+}
 
 // 카카오 로그인 부분은 컴포넌트 내에 작성하였습니다.
 
@@ -115,11 +125,30 @@ export const postCommentWrite = async(comment:postComment) => {
   }
 }
 
-export const getCommentList = async() => {
+export const getCommentList = async(postId:string) => {
   try {
-    const response = await axios.get("api/post/comment")
+    const response = await axios.get(`api/post/comment?postId=${postId}`)
+    return response
   } catch (error) {
     throw error
     
+  }
+}
+
+export const deleteComment = async(data:deleteComment) => {
+  try {
+    const response = await axios.delete(`api/post/comment?commentId=${data._id}&userId=${data.userId}`)
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+export const putComment = async(data:updateComment) => {
+  try {
+    const response = await axios.put('api/post/comment',data)
+    return response
+  } catch (error) {
+    throw error
   }
 }

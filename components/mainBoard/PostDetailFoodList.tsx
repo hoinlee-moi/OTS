@@ -9,9 +9,9 @@ export default function PostDetailFoodList() {
   return (
     <>
       {postData &&
-        postData.foodList.map((item: food) => {
+        postData.foodList.map((item: food,idx:number) => {
           return (
-            <div className={styles.food} key={item.name}>
+            <div className={styles.food} key={idx}>
               <div className={styles.foodName}>
                 <p>{item.name}</p>
               </div>

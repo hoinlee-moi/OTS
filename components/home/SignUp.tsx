@@ -90,13 +90,13 @@ export default function SignUp({modalClose}:props) {
           if (response.status === 200) {
             setEmailDupStatus(true);
           }
-        } catch (err) {
-          if ((err as { status: number }).status === 400) {
+        } catch (err:any) {
+          if (err.response.status === 405) {
             setEmailCheck(true);
             setAlertMs("E-Mail이 올바르지 않습니다");
             return;
           }
-          if ((err as { status: number }).status === 409) {
+          if (err.response.status === 400) {
             setEmailCheck(true);
             setAlertMs("사용중인 E-Mail입니다");
           }
@@ -112,13 +112,14 @@ export default function SignUp({modalClose}:props) {
       if (!reg.regNickname.test(e.target.value)) {
         setNickCheck(true);
         setAlertMs(
-          "닉네임은 2~12자이내 한글,영문,_,-를 포함하여 만들수 있습니다"
+          "닉네임은 2~12자이내 한글,숫자,영문,_,-를 포함하여 만들수 있습니다"
         );
         return;
       }
       if (!nickDupStatus) {
         try {
           const response = await nickNameDuplicate(e.target.value);
+          console.log(response)
           if (response.status === 200) {
             setNickDupStatus(true);
           }

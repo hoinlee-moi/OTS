@@ -23,6 +23,11 @@ type postData = {
   nuFat: number;
 }
 
+type deletePost = {
+  userId:string
+  postId:string
+}
+
 type postComment = {
   _id:string
   comment:string
@@ -116,6 +121,15 @@ try {
 }
 }
 
+export const deletePost = async(deleteData:deletePost)=>{
+  try {
+    const response = await axios.post('api/post/edit',deleteData)
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
 export const postCommentWrite = async(comment:postComment) => {
   try {
     const response = await axios.post("api/post/comment",comment)
@@ -137,7 +151,7 @@ export const getCommentList = async(postId:string) => {
 
 export const deleteComment = async(data:deleteComment) => {
   try {
-    const response = await axios.delete(`api/post/comment?commentId=${data._id}&userId=${data.userId}`)
+    const response = await axios.post("api/post/comment/edit",data)
     return response
   } catch (error) {
     throw error

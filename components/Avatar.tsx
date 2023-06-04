@@ -1,6 +1,6 @@
 
 import { useEffect } from "react";
-import styles from "./Avatar.module.css";
+import styles from "./avatar.module.css";
 import Image from "next/image";
 
 type AvatarSize = "small" | "medium" | "large" | "xlarge";

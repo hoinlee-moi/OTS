@@ -1,4 +1,4 @@
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect } from "react";

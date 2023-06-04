@@ -28,6 +28,7 @@ export default function ImageArray({ props, order }: props) {
                 key={idx}
                 width={400}
                 height={450}
+                priority
               />
             );
           })
@@ -39,6 +40,7 @@ export default function ImageArray({ props, order }: props) {
                 key={idx}
                 width={400}
                 height={450}
+                priority
               />
             );
           })}

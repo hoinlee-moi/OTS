@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "../Avatar";
-import styles from "./PostDetail.module.css";
+import styles from "./postDetail.module.css";
 import { commentList } from "./PostDetailCommentList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faX } from "@fortawesome/free-solid-svg-icons";
@@ -16,16 +16,16 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
   const { data }: any = useSession();
   const [myComment, setMyComment] = useState(false);
   const [updateState, setUpdateState] = useState(false);
-  const [updateCommentVal,setUpdateCommentVal] = useState("")
-  const [update,setUpdate] = useState(false)
+  const [updateCommentVal, setUpdateCommentVal] = useState("");
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    if (data) {
-      if (data.user._id === comment.userId) {
-        setMyComment(true);
-      }
+    if (data.user._id.toString() === comment.userId.toString()) {
+      setMyComment(true);
+    } else{
+      setMyComment(false)
     }
-  }, [comment]);
+  }, [comment, data]);
 
   const keyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") updateComment();
@@ -40,35 +40,34 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
       try {
         const response = await deleteComment(deleteData);
         if (response.status === 200) {
-          alert("삭제가 완료 되었습니다");
           getPostComment();
         }
       } catch (error) {
-        alert("서버와 연결이 올바르지 않습니다")
+        alert("서버와 연결이 올바르지 않습니다");
         console.log(error);
       }
     }
   };
 
-  const updateComment = async() => {
-    if(update) return;
-    setUpdate(true)
+  const updateComment = async () => {
+    if (update) return;
+    setUpdate(true);
     const updateData = {
-      _id:comment._id,
+      _id: comment._id,
       userId: comment.userId,
-      comment: updateCommentVal
-    }
+      comment: updateCommentVal,
+    };
     try {
-      const response = await putComment(updateData)
-      setUpdate(false)
-      setUpdateState(false)
-      getPostComment()
+      const response = await putComment(updateData);
+      setUpdate(false);
+      setUpdateState(false);
+      getPostComment();
     } catch (error) {
-      console.log(error)
-      setUpdate(false)
-      alert("서버와 연결이 올바르지 않습니다")
+      console.log(error);
+      setUpdate(false);
+      alert("서버와 연결이 올바르지 않습니다");
     }
-  }
+  };
 
   return (
     <div className={styles.comment}>
@@ -80,8 +79,14 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
         <div>
           {updateState ? (
             <div className={styles.commentUpdate}>
-              <input type="text" onChange={(e)=>setUpdateCommentVal(e.target.value)} onKeyDown={keyDownHandle}/>
-              <button onClick={updateComment} disabled={update} >수정</button>
+              <input
+                type="text"
+                onChange={(e) => setUpdateCommentVal(e.target.value)}
+                onKeyDown={keyDownHandle}
+              />
+              <button onClick={updateComment} disabled={update}>
+                수정
+              </button>
             </div>
           ) : (
             <p>{comment.comment}</p>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import styles from "./PostDetail.module.css";
+import styles from "./postDetail.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";

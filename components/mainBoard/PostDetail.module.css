@@ -35,6 +35,7 @@
   cursor: pointer;
 }
 .modalTitle {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,6 +51,30 @@
   width: 100%;
   height: calc(100% - 40px);
   display: flex;
+}
+
+/* postEditBtn */
+.postEditBtn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.postEditBtn button {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #fff;
+  cursor: pointer;
+}
+.postEditBtn button:nth-child(1) {
+  color: rgb(27, 138, 241);
+}
+.postEditBtn button:nth-child(2) {
+  color: #c31952;
+  margin-left: 5px;
+}
+.postEditBtn button:hover {
+  color: #000;
 }
 
 /* contentImg */
@@ -204,7 +229,7 @@
 .foodListWrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   padding: 10px;
   border-bottom: 1px solid #d7d7d7;
 }
@@ -365,3 +390,6 @@
   background-color: #c31952;
   cursor: pointer;
 }
+
+
+

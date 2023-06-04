@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import styles from "./PostBoard.module.css";
+import styles from "./postBoard.module.css";
 import useObserver from "@/hooks/useObserve";
 import { getStorage, ref, getDownloadURL } from "@firebase/storage";
 import Loading from "@/app/main/loading";
@@ -28,6 +28,7 @@ export default function PostBoard() {
   const [scrollLoading, setScrollLoading] = useState(false);
   const [pageEnd, setPageEnd] = useState(false);
   const [postDetailId,setPostDetailId] = useState("")
+  const [deleteRefresh,setDeleteRefresh] = useState(false)
   const [observer, setObserver] = useObserver(
     async (entry: any, observer: any) => {
       if (page !== 1) {
@@ -40,6 +41,7 @@ export default function PostBoard() {
   useEffect(() => {
     getPostList();
   }, []);
+
 
   const getPostList = async () => {
     if (scrollLoading || pageEnd) {
@@ -69,7 +71,7 @@ export default function PostBoard() {
   };
 
   return (
-    <postListContext.Provider value={{ postList,postDetailId,setPostDetailId }}>
+    <postListContext.Provider value={{ postList,setPostList,postDetailId,setPostDetailId }}>
       {postDetailId&&<PostDetail />}
       <div className={styles.postItemWrap}>
         {postList.map((item, idx: number) => {

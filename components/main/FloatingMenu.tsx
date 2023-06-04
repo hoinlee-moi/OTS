@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "./Floating.module.css";
+import styles from "./floating.module.css";
 import FloatingSearch from "./FloatingSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

@@ -1,5 +1,5 @@
 import { getFoodSearch } from "@/util/api";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import { useContext, useState } from "react";
 import { food, foodList, newPostContext, newPostData } from "./MakeModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

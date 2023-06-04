@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { detailPostDataContext } from "./PostDetail";
-import styles from "./PostDetail.module.css";
+import styles from "./postDetail.module.css";
 
 import Avatar from "../Avatar";
 import PostDetailFoodList from "./PostDetailFoodList";

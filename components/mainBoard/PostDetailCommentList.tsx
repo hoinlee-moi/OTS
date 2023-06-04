@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import styles from "./PostDetail.module.css";
+import styles from "./postDetail.module.css";
 import PostDetailComment from "./PostDetailComment";
 import { detailPostDataContext } from "./PostDetail";
 import { postCommentWrite } from "@/util/api";
@@ -61,6 +61,8 @@ export default function PostDetailCommentList() {
       setPostState(false);
     }
   };
+
+  
 
   return (
     <div className={styles.commentWrap}>

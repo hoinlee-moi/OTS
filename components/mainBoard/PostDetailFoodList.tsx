@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styles from "./PostDetail.module.css";
+import styles from "./postDetail.module.css";
 import { detailPostDataContext } from "./PostDetail";
 import { food } from "../main/MakeModal";
 

@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import PostFoodList from "./PostFoodList";
 import { newPostData, newPostContext } from "./MakeModal";
 import ContentFoodSearch from "./ContentFoodSearch";

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import ModalImage from "./ModalImage";
 import AlertModal from "../etc/AlertMdoal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -131,6 +131,7 @@ export default function MakeModal({ closeModal }: props) {
           const response = await createPostWrite(newPostData);
           if (response.status === 201) {
             setSuccess("success");
+            // 프로필 페이지로 이동해서 작성 한 글 보여주기
           }
         } catch (error) {
           console.log(error);

@@ -1,4 +1,4 @@
-import styles from "./AlertModal.module.css";
+import styles from "./alertModal.module.css";
 
 type props = {
   closeModal: () => void;

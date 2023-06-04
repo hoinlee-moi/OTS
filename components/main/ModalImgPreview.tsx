@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ImageResize from "./ImageResize";

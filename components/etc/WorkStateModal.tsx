@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./WorkStateModal.module.css";
+import styles from "./workStateModal.module.css";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import LoadingCircle from "./LoadingCircle";
 

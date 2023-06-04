@@ -24,7 +24,7 @@
   justify-content: center;
   position: relative;
   width: 90%;
-  max-width: calc(1200px * 0.7);
+  max-width: 1200px ;
   max-height: 80%;
   aspect-ratio: 1/1;
   border-radius: 20px;
@@ -502,7 +502,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 1050px) {
   .modalContent {
     height: 80%;
     aspect-ratio: 0;
@@ -558,14 +558,14 @@
     margin: 10px 10px;
     font-size: 1em;
   }
-  .searchList li {
+  .searchList ul li {
     display: block;
     min-width: auto;
     max-height: 120px;
     word-break: normal;
     text-align: center;
   }
-  .searchList li p {
+  .searchList ul li p {
     text-align: center;
     margin-left: 0;
   }
@@ -593,6 +593,9 @@
     left: 0;
     height: 40%;
   }
+}
+
+@media (max-width:450px) {
   .foodListWrap thead tr td {
     font-size: 13px;
   }

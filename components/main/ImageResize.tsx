@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import { faArrowsUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";

@@ -66,7 +66,6 @@ export default function PostDetail() {
   }, []);
 
   useEffect(() => {
-    console.log(postData)
     if (data.user._id === postData?.userId) setUserPost(true);
     else setUserPost(false);
     if (postData) setEditPostContent(postData.content);

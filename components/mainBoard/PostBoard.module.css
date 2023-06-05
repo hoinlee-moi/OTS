@@ -120,3 +120,17 @@
     stroke-dashoffset: -157;
   }
 }
+@media (max-width:750px) {
+  .postItemBox,.postItemBox2{
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    padding: 10px;
+    transition: 0.5s;
+  }
+  .postItem{
+    margin-bottom: 10px;
+    width: 80%;
+    transition: 0.5s;
+  }
+}

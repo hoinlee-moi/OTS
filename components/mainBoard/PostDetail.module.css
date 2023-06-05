@@ -11,6 +11,10 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.phoneCloseBtn{
+  display: none;
+}
+
 .modalBody {
   display: flex;
   flex-direction: column;
@@ -409,21 +413,31 @@
   cursor: pointer;
 }
 
-@media (max-widt:550px) {
+@media (max-width:550px) {
   .modalBody {
+    position: relative;
     width: 100%;
     height: 100%;
     max-height: none;
     aspect-ratio: 0;
     border-radius: 0;
+    overflow: auto;
   }
-  .modalTitle h2:after {
+  .phoneCloseBtn {
     position: absolute;
-    right: 0;
+    display: inline-block;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    content: "X";
     font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  .postEditBtn {
+    right: 40px;
+  }
+  .postEditBtn button:nth-child(1) {
+    margin-right: 10px;
   }
   .contentContainer {
     flex-direction: column;
@@ -433,6 +447,9 @@
   }
   .contentWrap{
     width: 100%;
+  }
+  .postContentWrap {
+    height: auto;
   }
 }
 

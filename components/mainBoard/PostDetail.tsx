@@ -159,6 +159,7 @@ export default function PostDetail() {
           onMouseDown={(e) => e.stopPropagation()}
         >
           <div className={styles.modalTitle}>
+          <FontAwesomeIcon icon={faX} className={styles.phoneCloseBtn} onClick={()=>setPostDetailId("")}/>
             <h3>오늘의 식단</h3>
             {userPost && (
               <div className={styles.postEditBtn}>

@@ -6,15 +6,16 @@ import PostDetailImg from "./PostDetailImg";
 import PostDetailContent from "./PostDetailContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { deletePost, getPostDetail } from "@/util/api";
+import { deletePost, getPostDetail, updatePost } from "@/util/api";
 import { useSession } from "next-auth/react";
+import MakeModal from "../main/MakeModal";
 
 type file = {
   name: string;
   url: string;
 };
 
-type postData = {
+export type postData = {
   content: string;
   file: file[];
   imgRatio: string;
@@ -31,14 +32,17 @@ type postData = {
 };
 
 export const detailPostDataContext = React.createContext<any>({});
+export const detailPostFuncContext = React.createContext<any>({});
 
 export default function PostDetail() {
-  const { postDetailId, setPostDetailId, setPostList } =
-    useContext(postListContext);
+  const { postDetailId, setPostDetailId } = useContext(postListContext);
   const { data }: any = useSession();
   const [postData, setPostData] = useState<postData>();
   const [userPost, setUserPost] = useState(false);
-  const [deleteState,setDeleteState] = useState(false)
+  const [deleteState, setDeleteState] = useState(false);
+  const [editState, setEditState] = useState(false);
+  const [editPostContent, setEditPostContent] = useState("");
+  const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -62,8 +66,10 @@ export default function PostDetail() {
   }, []);
 
   useEffect(() => {
+    console.log(postData)
     if (data.user._id === postData?.userId) setUserPost(true);
     else setUserPost(false);
+    if (postData) setEditPostContent(postData.content);
   }, [postData]);
 
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -75,38 +81,77 @@ export default function PostDetail() {
       const response = await getPostDetail(postDetailId);
       if (response.status === 200) {
         setPostData(response.data);
-        window.location.reload()
       }
     } catch (error) {
-      alert("서버와의 접속이 올바르지 않습니다");
+      alert("서버와의 연결이 올바르지 않습니다");
       setPostDetailId("");
     }
   };
 
   const deletePostHandle = async () => {
-    if(deleteState) return;
+    if (deleteState) return;
     if (window.confirm("삭제하시겠습니까?")) {
       if (postData) {
-        setDeleteState(true)
+        setDeleteState(true);
         const deleteData = {
-          postId : postData._id,
+          postId: postData._id,
           userId: postData.userId,
         };
         try {
           const response = await deletePost(deleteData);
-          setDeleteState(false)
+          setDeleteState(false);
           if (response.status === 200) {
             setPostDetailId("");
+            window.location.reload();
           }
         } catch (error) {
-          setDeleteState(false)
+          alert("서버와의 연결이 올바르지 않습니다");
+          setDeleteState(false);
         }
       }
     }
   };
 
+  const updatePostHandle = async () => {
+    if (updateState) return;
+
+    if (postData) {
+      if (editPostContent === postData?.content) {
+        setEditState(false);
+      }
+      setUpdateState(true);
+      const updateData = {
+        postId: postData._id,
+        userId: postData.userId,
+        content: editPostContent,
+      };
+      try {
+        const response = await updatePost(updateData);
+        console.log(response);
+        setUpdateState(false);
+        setEditState(false);
+        setPostData((snap: any) => {
+          return { ...snap, content: editPostContent };
+        });
+      } catch (error) {
+        console.log(error);
+        alert("서버와의 연결이 올바르지 않습니다");
+        setUpdateState(false);
+      }
+    }
+  };
+
   return (
-    <detailPostDataContext.Provider value={{ postData, setPostData }}>
+    <detailPostDataContext.Provider
+      value={{
+        postData,
+        setPostData,
+        editState,
+        setEditState,
+        editPostContent,
+        setEditPostContent,
+      }}
+    >
       <div className={styles.modalBack} onMouseDown={mouseDownHandle}>
         <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
         <div
@@ -117,8 +162,18 @@ export default function PostDetail() {
             <h3>오늘의 식단</h3>
             {userPost && (
               <div className={styles.postEditBtn}>
-                <button>수정</button>
-                <button onClick={deletePostHandle} disabled={deleteState}>삭제</button>
+                {editState ? (
+                  <button onClick={updatePostHandle} disabled={updateState}>
+                    수정완료
+                  </button>
+                ) : (
+                  <>
+                    <button onClick={() => setEditState(true)}>수정</button>
+                    <button onClick={deletePostHandle} disabled={deleteState}>
+                      삭제
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </div>

@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -379,7 +379,7 @@
   }
 }
 
-/* content-contetn,foodList */
+/* content,foodList */
 
 .contentWrap {
   width: 50%;

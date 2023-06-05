@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faX } from "@fortawesome/free-solid-svg-icons";
 import ModalContent from "./ModalContent";
 import { createPostWrite } from "@/util/api";
-import { getStorage, ref, uploadBytes } from "@firebase/storage";
-import { app, fileDelete, fileUpload } from "@/util/firebase";
+import { fileDelete, fileUpload } from "@/util/firebase";
 import WorkStateModal from "../etc/WorkStateModal";
+import { postData } from "../mainBoard/PostDetail";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -69,6 +69,8 @@ export default function MakeModal({ closeModal }: props) {
       window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     };
   }, []);
+
+
 
   useEffect(() => {
     if (success === "close") closeModal(false);

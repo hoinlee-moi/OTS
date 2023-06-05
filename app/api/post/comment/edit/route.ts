@@ -29,6 +29,7 @@ export async function POST(request:NextRequest) {
   export async function PUT(request:NextRequest) {
     const session = await getServerSession(authOptions);
     const data = await request.json()
+    console.log(data)
     if(session) {
       const user = session.user as any
       if(user._id===data.userId){

@@ -27,6 +27,11 @@ type deletePost = {
   userId:string
   postId:string
 }
+type updatePost ={
+  postId : string
+  userId : string
+  content: string
+}
 
 type postComment = {
   _id:string
@@ -130,6 +135,15 @@ export const deletePost = async(deleteData:deletePost)=>{
   }
 }
 
+export const updatePost = async(updateData:updatePost)=>{
+  try {
+    const response = await axios.put('api/post/edit',updateData)
+    return response
+  } catch (error) {
+    return error
+  }
+}
+
 export const postCommentWrite = async(comment:postComment) => {
   try {
     const response = await axios.post("api/post/comment",comment)
@@ -160,7 +174,7 @@ export const deleteComment = async(data:deleteComment) => {
 
 export const putComment = async(data:updateComment) => {
   try {
-    const response = await axios.put('api/post/comment',data)
+    const response = await axios.put('api/post/comment/edit',data)
     return response
   } catch (error) {
     throw error

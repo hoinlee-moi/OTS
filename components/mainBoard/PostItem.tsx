@@ -24,6 +24,8 @@ export default function PostItem({ listItem }: props) {
         priority
         fill
         sizes="(max-width:300px),(max-height:600px)"
+        placeholder="blur"
+        blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
       />
       <div className={styles.hoverDetail}>
         <div>

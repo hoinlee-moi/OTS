@@ -7,27 +7,37 @@ import PostDetailFoodList from "./PostDetailFoodList";
 import PostDetailCommentList from "./PostDetailCommentList";
 
 export default function PostDetailContent() {
-  const {postData} = useContext(detailPostDataContext)
+  const { postData, editState,editPostContent ,setEditPostContent } = useContext(
+    detailPostDataContext
+  );
 
   return (
     <div className={styles.contentWrap}>
       <div className={styles.postUserWrap}>
         <div>
-          <Avatar image={postData&&postData.userProfile} />
+          <Avatar image={postData && postData.userProfile} />
         </div>
-        <p>{postData&&postData.nickName}</p>
-        <div>
-        </div>
+        <p>{postData && postData.nickName}</p>
+        <div></div>
       </div>
       <div className={styles.postContentWrap}>
         <div className={styles.postContent}>
-          <p>{postData&&postData.content}</p>
+          {editState ? (
+            <textarea
+              name="content"
+              maxLength={300}
+              onChange={(e) => setEditPostContent(e.target.value)}
+              value={editPostContent}
+            />
+          ) : (
+            <p>{postData && postData.content}</p>
+          )}
         </div>
       </div>
       <div className={styles.foodListWrap}>
         <PostDetailFoodList />
       </div>
-      <PostDetailCommentList/>
+      <PostDetailCommentList />
     </div>
   );
 }

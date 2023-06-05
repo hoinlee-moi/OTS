@@ -29,6 +29,8 @@ export default function ImageArray({ props, order }: props) {
                 width={400}
                 height={450}
                 priority
+                placeholder="blur"
+                blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
               />
             );
           })
@@ -41,6 +43,8 @@ export default function ImageArray({ props, order }: props) {
                 width={400}
                 height={450}
                 priority
+                placeholder="blur"
+                blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
               />
             );
           })}

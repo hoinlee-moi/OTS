@@ -25,7 +25,7 @@ export default function FloatingMenu() {
     setLoading(true);
   }, []);
 
-  const logoutHandle = () => {};
+  
 
   return (
     <>
@@ -71,7 +71,7 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>
-                  <Link href="/main/profile" prefetch={false} >
+                  <Link href="/main/profile/email" prefetch={false} >
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>

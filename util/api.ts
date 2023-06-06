@@ -128,7 +128,7 @@ try {
 
 export const deletePost = async(deleteData:deletePost)=>{
   try {
-    const response = await axios.post('api/post/edit',deleteData)
+    const response = await axios.post('/api/post/edit',deleteData)
     return response
   } catch (error) {
     throw error
@@ -137,7 +137,7 @@ export const deletePost = async(deleteData:deletePost)=>{
 
 export const updatePost = async(updateData:updatePost)=>{
   try {
-    const response = await axios.put('api/post/edit',updateData)
+    const response = await axios.put('/api/post/edit',updateData)
     return response
   } catch (error) {
     return error
@@ -146,7 +146,7 @@ export const updatePost = async(updateData:updatePost)=>{
 
 export const postCommentWrite = async(comment:postComment) => {
   try {
-    const response = await axios.post("api/post/comment",comment)
+    const response = await axios.post("/api/post/comment",comment)
     return response
   } catch (error) {
     throw error
@@ -155,7 +155,7 @@ export const postCommentWrite = async(comment:postComment) => {
 
 export const getCommentList = async(postId:string) => {
   try {
-    const response = await axios.get(`api/post/comment?postId=${postId}`)
+    const response = await axios.get(`/api/post/comment?postId=${postId}`)
     return response
   } catch (error) {
     throw error
@@ -165,7 +165,7 @@ export const getCommentList = async(postId:string) => {
 
 export const deleteComment = async(data:deleteComment) => {
   try {
-    const response = await axios.post("api/post/comment/edit",data)
+    const response = await axios.post("/api/post/comment/edit",data)
     return response
   } catch (error) {
     throw error
@@ -174,7 +174,16 @@ export const deleteComment = async(data:deleteComment) => {
 
 export const putComment = async(data:updateComment) => {
   try {
-    const response = await axios.put('api/post/comment/edit',data)
+    const response = await axios.put('/api/post/comment/edit',data)
+    return response
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getUserProfile = async(email:string)=>{
+  try {
+    const response = await axios.get(`/api/user/${email}`)
     return response
   } catch (error) {
     throw error

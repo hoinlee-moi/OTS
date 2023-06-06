@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./postBoard.module.css";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { post, postListContext } from "./PostBoard";
-import Link from "next/link";
 import { useContext } from "react";
 import Image from "next/image";
 

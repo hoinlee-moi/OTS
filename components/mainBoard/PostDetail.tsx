@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { deletePost, getPostDetail, updatePost } from "@/util/api";
 import { useSession } from "next-auth/react";
-import MakeModal from "../main/MakeModal";
+import { userPostContext } from "../profile/BoardWrap";
+import { fileDelete } from "@/util/firebase";
 
 type file = {
   name: string;
@@ -34,8 +35,9 @@ export type postData = {
 export const detailPostDataContext = React.createContext<any>({});
 export const detailPostFuncContext = React.createContext<any>({});
 
-export default function PostDetail() {
+export default function PostDetail({ profile }: { profile: true | undefined }) {
   const { postDetailId, setPostDetailId } = useContext(postListContext);
+  const { userPostId, setUserPostId } = useContext(userPostContext);
   const { data }: any = useSession();
   const [postData, setPostData] = useState<postData>();
   const [userPost, setUserPost] = useState(false);
@@ -71,19 +73,29 @@ export default function PostDetail() {
     if (postData) setEditPostContent(postData.content);
   }, [postData]);
 
+  const closeHandle = () => {
+    if (profile) setUserPostId("");
+    else setPostDetailId("");
+  };
+
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.button === 0) setPostDetailId("");
+    if (e.button === 0) {
+      closeHandle();
+    }
   };
 
   const getPostDetailData = async () => {
+    const id = profile ? userPostId : postDetailId;
+
     try {
-      const response = await getPostDetail(postDetailId);
+      const response = await getPostDetail(id);
       if (response.status === 200) {
         setPostData(response.data);
       }
     } catch (error) {
+      console.log(error);
       alert("서버와의 연결이 올바르지 않습니다");
-      setPostDetailId("");
+      closeHandle();
     }
   };
 
@@ -100,7 +112,7 @@ export default function PostDetail() {
           const response = await deletePost(deleteData);
           setDeleteState(false);
           if (response.status === 200) {
-            setPostDetailId("");
+            await fileDelete(postData.file,"board")
             window.location.reload();
           }
         } catch (error) {
@@ -158,7 +170,11 @@ export default function PostDetail() {
           onMouseDown={(e) => e.stopPropagation()}
         >
           <div className={styles.modalTitle}>
-          <FontAwesomeIcon icon={faX} className={styles.phoneCloseBtn} onClick={()=>setPostDetailId("")}/>
+            <FontAwesomeIcon
+              icon={faX}
+              className={styles.phoneCloseBtn}
+              onClick={closeHandle}
+            />
             <h3>오늘의 식단</h3>
             {userPost && (
               <div className={styles.postEditBtn}>

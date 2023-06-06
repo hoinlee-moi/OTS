@@ -15,7 +15,7 @@ export default function PostDetailContent() {
     <div className={styles.contentWrap}>
       <div className={styles.postUserWrap}>
         <div>
-          <Avatar image={postData && postData.userProfile} />
+          <Avatar image={postData && postData.userProfile} nickname={postData&&postData.nickName}/>
         </div>
         <p>{postData && postData.nickName}</p>
         <div></div>

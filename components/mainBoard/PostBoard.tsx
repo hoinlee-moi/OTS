@@ -27,7 +27,6 @@ export default function PostBoard() {
   const [scrollLoading, setScrollLoading] = useState(false);
   const [pageEnd, setPageEnd] = useState(false);
   const [postDetailId, setPostDetailId] = useState("");
-  const [deleteRefresh, setDeleteRefresh] = useState(false);
   const [observer, setObserver] = useObserver(
     async (entry: any, observer: any) => {
       if (page !== 1) {
@@ -72,7 +71,7 @@ export default function PostBoard() {
     <postListContext.Provider
       value={{ postList, setPostList, postDetailId, setPostDetailId }}
     >
-      {postDetailId && <PostDetail />}
+      {postDetailId && <PostDetail profile={undefined}/>}
       <div className={styles.postItemWrap}>
         {postList.map((item, idx: number) => {
           let style = styles.postItemBox;

@@ -1,6 +1,8 @@
+import styles from "./loadingCicle.module.css"
+
 export default function LoadingCircle() {
   return (
-    <svg>
+    <svg className={styles.loading}>
       <circle cx="50%" cy="50%" r="25"></circle>
       <defs>
         <linearGradient id="myGradient">

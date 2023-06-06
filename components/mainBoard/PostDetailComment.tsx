@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Avatar from "../Avatar";
 import styles from "./postDetail.module.css";
 import { commentList } from "./PostDetailCommentList";
@@ -12,7 +12,7 @@ type props = {
   getPostComment: any;
 };
 
-export default function PostDetailComment({ comment, getPostComment }: props) {
+const PostDetailComment=({ comment, getPostComment }: props)=> {
   const { data }: any = useSession();
   const [myComment, setMyComment] = useState(false);
   const [updateState, setUpdateState] = useState(false);
@@ -27,11 +27,11 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
     }
   }, [comment, data]);
 
-  const keyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandle = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") updateComment();
-  };
+  },[]);
 
-  const deleteCommentHandle = async () => {
+  const deleteCommentHandle = useCallback( async () => {
     if (window.confirm("삭제하시겠습니까?")) {
       const deleteData = {
         _id: comment._id,
@@ -48,9 +48,9 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
         console.log(error);
       }
     }
-  };
+  },[comment]);
 
-  const updateComment = async () => {
+  const updateComment = useCallback( async () => {
     if (update) return;
     setUpdate(true);
     const updateData = {
@@ -68,12 +68,12 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
       setUpdate(false);
       alert("서버와 연결이 올바르지 않습니다");
     }
-  };
+  },[comment,updateCommentVal]);
 
   return (
     <div className={styles.comment}>
       <div className={styles.userProfileWrap}>
-        <Avatar image={comment.userProfile} />
+        <Avatar image={comment.userProfile} nickname={comment.nickname} />
         <p>{comment.nickname}</p>
       </div>
       <div>
@@ -107,3 +107,5 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
     </div>
   );
 }
+
+export default React.memo(PostDetailComment)

@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./postBoard.module.css";
-import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
-import { post, postListContext } from "./PostBoard";
-import { useContext } from "react";
+import { faComment } from "@fortawesome/free-regular-svg-icons";
+import { post } from "./PostBoard";
+
 import Image from "next/image";
 
 type props = {
@@ -10,8 +10,6 @@ type props = {
 };
 
 export default function PostItem({ listItem }: props) {
-  const { setPostDetailId } = useContext(postListContext);
-
   return (
     <>
       <Image

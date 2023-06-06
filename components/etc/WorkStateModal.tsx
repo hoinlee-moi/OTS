@@ -14,14 +14,13 @@ export default function WorkStateModal({
   success,
   setSuccess,
 }: props) {
-  
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
       if (success === "fail") closeModal(false);
       if (success === "success") {
-        closeModal(false)
-        setSuccess("close")
-      };
+        closeModal(false);
+        setSuccess("close");
+      }
     }
   };
   return (
@@ -52,7 +51,17 @@ export default function WorkStateModal({
         )}
         {success === "loading" && (
           <div className={styles.ListLoading}>
-            <LoadingCircle/>
+            <svg>
+              <circle cx="50%" cy="50%" r="25"></circle>
+              <defs>
+                <linearGradient id="myGradient">
+                  <stop offset="0%" stopColor="#b8cbb8" />
+                  <stop offset="33%" stopColor="#cf6cc9" />
+                  <stop offset="66%" stopColor="#ee609c" />
+                  <stop offset="100%" stopColor="#ee609c" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
         )}
       </div>

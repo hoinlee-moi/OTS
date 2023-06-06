@@ -101,9 +101,9 @@ export const getBoardPostList = async (page: number) => {
   }
 };
 
-export const getPostDetail = async (postId: number) => {
+export const getPostDetail = async (postId: string) => {
   try {
-    const response = await axios.get(`api/post/${postId}`);
+    const response = await axios.get(`/api/post/${postId}`);
     return response;
   } catch (error) {
     throw error;

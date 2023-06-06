@@ -41,43 +41,25 @@
 
 /* 로딩박스 */
 
-.ListLoading {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
+
+.loadingBox {
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
-.ListLoading svg {
-  width: 52px;
-  height: 52px;
-  margin-bottom: 30px;
-  animation: lodingSpinAni 2s infinite linear;
-}
-.ListLoading svg circle {
-  stroke: #554735;
-  stroke-width: 2;
-  /* getTotalLength()로 stroke의길이를 얻어올수 있음 */
-  stroke-dasharray: 157;
-  stroke-dashoffset: 0;
-  fill: transparent;
-  animation: lodingAni 0.8s infinite linear;
+.loadingBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, white, #d4d4d4, white);
+  animation: loading 3s linear infinite;
 }
 
-@keyframes lodingSpinAni {
-  100% {
-    transform: rotate(360deg);
+@keyframes loading {
+  from {
+    transform: translateX(-100%);
   }
-}
-@keyframes lodingAni {
-  0% {
-    stroke-dashoffset: 157;
-  }
-  75% {
-    stroke-dashoffset: -147;
-  }
-  100% {
-    stroke-dashoffset: -157;
+  to {
+    transform: translateX(100%);
   }
 }

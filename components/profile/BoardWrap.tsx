@@ -7,12 +7,13 @@ import { getUserPost } from "@/util/api";
 import LoadingCircle from "../etc/LoadingCircle";
 import useObserver from "@/hooks/useObserve";
 import { post } from "../mainBoard/PostBoard";
+import PostDetail from "../mainBoard/PostDetail";
 
 export const userPostContext = React.createContext<any>({});
 
 export default function BoardWrap({ param }: { param: { nickname: string } }) {
   const [pageLoading, setPageLoading] = useState(false);
-  const [postId, setPostId] = useState("");
+  const [userPostId, setUserPostId] = useState("");
   const [userPost, setUserPost] = useState<post[]>([]);
   const [tag, setTeg] = useState("all");
   const [page, setPage] = useState(1);
@@ -30,13 +31,13 @@ export default function BoardWrap({ param }: { param: { nickname: string } }) {
     setPageLoading(true);
   }, []);
 
-
   useEffect(() => {
     getUserPostHandle();
     setUserPost([]);
   }, [tag]);
 
   const getUserPostHandle = async () => {
+
     if (scrollLoading || pageEnd) {
       return;
     }
@@ -63,14 +64,13 @@ export default function BoardWrap({ param }: { param: { nickname: string } }) {
       setPageEnd(true);
       console.log(error);
     }
-    setTimeout(() => {
-      setScrollLoading(false);
-    }, 2000);
+
+    setScrollLoading(false);
   };
 
   return (
-    <userPostContext.Provider value={{ userPost, setPostId }}>
-      
+    <userPostContext.Provider value={{ userPost, userPostId, setUserPostId }}>
+      {userPostId && <PostDetail profile={true} />}
       {pageLoading && (
         <div className={styles.boardContainer}>
           <BoardTag setTeg={setTeg} setPageEnd={setPageEnd} setPage={setPage} />

@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const url = request.url.split("/");
   const id = url[url.length - 1];
+
   if (session) {
     const db = (await connectDB).db("OTS");
     try {

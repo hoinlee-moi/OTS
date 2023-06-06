@@ -39,11 +39,6 @@ export default function UserInfo({ userData }: props) {
 
         <button>프로필편집</button>
       </div>
-      {/* <div className={styles.userBoardCount}>
-        <p>
-          게시물<span>0</span>
-        </p>
-      </div> */}
     </div>
   );
 }

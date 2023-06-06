@@ -1,10 +1,22 @@
-import styles from "./profile.module.css"
+import { useContext } from "react";
+import styles from "./profile.module.css";
+import { userPostContext } from "./BoardWrap";
+
+import { post } from "../mainBoard/PostBoard";
+import PostItem from "../mainBoard/PostItem";
 export default function ProfileBoard() {
-    return (
-        <div className={styles.boardWrap}>
-          <article>
-            게시물
-          </article>
-        </div>
-    )
+  const { userPost,setPostId } = useContext(userPostContext);
+
+  return (
+    <div className={styles.boardWrap}>
+      {userPost &&
+        userPost.map((item: post) => {
+          return (
+            <article onClick={()=>setPostId(item._id)} key={item._id}>
+              <PostItem listItem={item} />
+            </article>
+          );
+        })}
+    </div>
+  );
 }

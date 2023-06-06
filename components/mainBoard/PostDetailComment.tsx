@@ -36,6 +36,7 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
       const deleteData = {
         _id: comment._id,
         userId: comment.userId,
+        postId:comment.postId
       };
       try {
         const response = await deleteComment(deleteData);
@@ -98,9 +99,9 @@ export default function PostDetailComment({ comment, getPostComment }: props) {
           <span onClick={() => setUpdateState(!updateState)}>
             <FontAwesomeIcon icon={faPen} />
           </span>
-          <span onClick={deleteCommentHandle}>
+          {!updateState&&<span onClick={deleteCommentHandle}>
             <FontAwesomeIcon icon={faX} />
-          </span>
+          </span>}
         </div>
       )}
     </div>

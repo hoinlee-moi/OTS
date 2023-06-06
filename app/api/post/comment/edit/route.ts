@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { commentUpdate } from "@/util/commentUpdate";
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
@@ -15,6 +16,7 @@ export async function POST(request:NextRequest) {
         try {
           const response = await db.collection('postComment').deleteOne({_id:new ObjectId(commentId) })
           if( response.acknowledged){
+            commentUpdate(data.postId)
             return NextResponse.json({message:"success"},{status:200})
           }
         } catch (error) {
@@ -29,7 +31,6 @@ export async function POST(request:NextRequest) {
   export async function PUT(request:NextRequest) {
     const session = await getServerSession(authOptions);
     const data = await request.json()
-    console.log(data)
     if(session) {
       const user = session.user as any
       if(user._id===data.userId){

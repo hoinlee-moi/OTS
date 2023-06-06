@@ -1,7 +1,5 @@
-
-import {foodList } from "@/components/main/MakeModal";
+import { foodList } from "@/components/main/MakeModal";
 import axios from "axios";
-
 
 type signData = {
   emailId: string;
@@ -14,40 +12,46 @@ type loginData = {
 };
 type postData = {
   content: string;
-  file: {url:string,name:string}[];
+  file: { url: string; name: string }[];
   imgRatio: string;
   foodList: foodList;
   nuKcal: number;
   nuCarb: number;
   nuPro: number;
   nuFat: number;
-}
+};
 
 type deletePost = {
-  userId:string
-  postId:string
-}
-type updatePost ={
-  postId : string
-  userId : string
-  content: string
-}
+  userId: string;
+  postId: string;
+};
+type updatePost = {
+  postId: string;
+  userId: string;
+  content: string;
+};
 
 type postComment = {
-  _id:string
-  comment:string
-}
+  _id: string;
+  comment: string;
+};
 type deleteComment = {
-  _id:string
-  userId:string
-}
+  _id: string;
+  userId: string;
+  postId: string;
+};
 
 type updateComment = {
-  _id:string
-  userId: string
-  comment: string
-}
+  _id: string;
+  userId: string;
+  comment: string;
+};
 
+type getUserPost = {
+  nickname: string;
+  state: string;
+  page:number
+};
 // 카카오 로그인 부분은 컴포넌트 내에 작성하였습니다.
 
 export const emailDuplicate = async (userEmail: string) => {
@@ -117,75 +121,85 @@ export const getFoodSearch = async (foodName: string) => {
   }
 };
 
-export const createPostWrite = async(postData:postData)=>{
-try {
-  const response = await axios.post("/api/post/create",postData)
-  return response
-} catch (error) {
-  throw error
-}
-}
-
-export const deletePost = async(deleteData:deletePost)=>{
+export const createPostWrite = async (postData: postData) => {
   try {
-    const response = await axios.post('/api/post/edit',deleteData)
-    return response
+    const response = await axios.post("/api/post/create", postData);
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export const updatePost = async(updateData:updatePost)=>{
+export const deletePost = async (deleteData: deletePost) => {
   try {
-    const response = await axios.put('/api/post/edit',updateData)
-    return response
+    const response = await axios.post("/api/post/edit", deleteData);
+    return response;
   } catch (error) {
-    return error
+    throw error;
   }
-}
+};
 
-export const postCommentWrite = async(comment:postComment) => {
+export const updatePost = async (updateData: updatePost) => {
   try {
-    const response = await axios.post("/api/post/comment",comment)
-    return response
+    const response = await axios.put("/api/post/edit", updateData);
+    return response;
   } catch (error) {
-    throw error
+    return error;
   }
-}
+};
 
-export const getCommentList = async(postId:string) => {
+export const postCommentWrite = async (comment: postComment) => {
   try {
-    const response = await axios.get(`/api/post/comment?postId=${postId}`)
-    return response
+    const response = await axios.post("/api/post/comment", comment);
+    return response;
   } catch (error) {
-    throw error
-    
+    throw error;
   }
-}
+};
 
-export const deleteComment = async(data:deleteComment) => {
+export const getCommentList = async (postId: string) => {
   try {
-    const response = await axios.post("/api/post/comment/edit",data)
-    return response
+    const response = await axios.get(`/api/post/comment?postId=${postId}`);
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export const putComment = async(data:updateComment) => {
+export const deleteComment = async (data: deleteComment) => {
   try {
-    const response = await axios.put('/api/post/comment/edit',data)
-    return response
+    const response = await axios.post("/api/post/comment/edit", data);
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export const getUserProfile = async(email:string)=>{
+export const putComment = async (data: updateComment) => {
   try {
-    const response = await axios.get(`/api/user/${email}`)
-    return response
+    const response = await axios.put("/api/post/comment/edit", data);
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
+
+export const getUserProfile = async (nickname: string) => {
+  try {
+    const response = await axios.get(`/api/user/${nickname}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getUserPost = async (userData: getUserPost) => {
+  try {
+    const response = await axios.get(
+      `/api/user/post?nickname=${userData.nickname}&state=${userData.state}&page=${userData.page}`
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

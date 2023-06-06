@@ -13,10 +13,7 @@ export default function PostItem({ listItem }: props) {
   const { setPostDetailId } = useContext(postListContext);
 
   return (
-    <div
-      className={styles.postItem}
-      onClick={() => setPostDetailId(listItem._id)}
-    >
+    <>
       <Image
         src={listItem.file[0].url}
         alt=""
@@ -35,15 +32,7 @@ export default function PostItem({ listItem }: props) {
               : listItem.comment}
           </p>
         </div>
-        <div>
-          <FontAwesomeIcon icon={faHeart} />
-          <p>
-            {listItem.like >= 10000
-              ? `${Math.floor((listItem.like / 10000) * 10) / 10}만`
-              : listItem.like}
-          </p>
-        </div>
       </div>
-    </div>
+    </>
   );
 }

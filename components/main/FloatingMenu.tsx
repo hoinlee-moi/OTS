@@ -14,13 +14,14 @@ import {
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import MakeModal from "./MakeModal";
+import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 
 export default function FloatingMenu() {
+  const{data}:any = useSession()
   const [searchState, setSearchState] = useState(false);
   const [loading, setLoading] = useState(false);
   const [makeModal, setMakeModal] = useState(false);
-
   useEffect(() => {
     setLoading(true);
   }, []);
@@ -71,7 +72,7 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>
-                  <Link href="/main/profile/email" prefetch={false} >
+                  <Link href={`/main/profile/${data&&data.user.nickname}`} prefetch={false} >
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>

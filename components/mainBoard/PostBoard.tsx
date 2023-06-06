@@ -16,7 +16,6 @@ type postFile = {
 export type post = {
   comment: number;
   file: postFile[];
-  like: number;
   _id: string;
 };
 type boardList = post[];
@@ -27,8 +26,8 @@ export default function PostBoard() {
   const [page, setPage] = useState(1);
   const [scrollLoading, setScrollLoading] = useState(false);
   const [pageEnd, setPageEnd] = useState(false);
-  const [postDetailId,setPostDetailId] = useState("")
-  const [deleteRefresh,setDeleteRefresh] = useState(false)
+  const [postDetailId, setPostDetailId] = useState("");
+  const [deleteRefresh, setDeleteRefresh] = useState(false);
   const [observer, setObserver] = useObserver(
     async (entry: any, observer: any) => {
       if (page !== 1) {
@@ -37,11 +36,10 @@ export default function PostBoard() {
     },
     {}
   );
-  
+
   useEffect(() => {
     getPostList();
   }, []);
-
 
   const getPostList = async () => {
     if (scrollLoading || pageEnd) {
@@ -62,7 +60,7 @@ export default function PostBoard() {
         });
       }
     } catch (error) {
-      setPageEnd(true)
+      setPageEnd(true);
       console.log(error);
     }
     setTimeout(() => {
@@ -71,8 +69,10 @@ export default function PostBoard() {
   };
 
   return (
-    <postListContext.Provider value={{ postList,setPostList,postDetailId,setPostDetailId }}>
-      {postDetailId&&<PostDetail />}
+    <postListContext.Provider
+      value={{ postList, setPostList, postDetailId, setPostDetailId }}
+    >
+      {postDetailId && <PostDetail />}
       <div className={styles.postItemWrap}>
         {postList.map((item, idx: number) => {
           let style = styles.postItemBox;
@@ -80,7 +80,15 @@ export default function PostBoard() {
           return (
             <div className={style} key={idx}>
               {item.map((val) => {
-                return <PostItem listItem={val} key={val._id} />;
+                return (
+                  <div
+                    className={styles.postItem}
+                    onClick={() => setPostDetailId(val._id)}
+                    key={val._id}
+                  >
+                    <PostItem listItem={val} />
+                  </div>
+                );
               })}
             </div>
           );
@@ -89,9 +97,7 @@ export default function PostBoard() {
           {pageEnd ? (
             <p>마지막 게시글입니다</p>
           ) : (
-            scrollLoading && (
-              <LoadingCircle/>
-            )
+            scrollLoading && <LoadingCircle />
           )}
         </div>
       </div>

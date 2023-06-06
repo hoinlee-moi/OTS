@@ -413,7 +413,7 @@
   cursor: pointer;
 }
 
-@media (max-width:550px) {
+@media (max-width:750px) {
   .modalBody {
     position: relative;
     width: 100%;

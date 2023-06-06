@@ -1,7 +1,9 @@
+import { ObjectId } from 'mongodb';
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/util/database";
+import { commentUpdate } from '@/util/commentUpdate';
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -34,6 +36,9 @@ export async function POST(request: NextRequest) {
       };
       const respons = await db.collection("postComment").insertOne(commentData);
       if (respons.acknowledged) {
+        commentUpdate(data._id)
+        // const commentCount = (await db.collection('postComment').find({postId:data._id}).toArray()).length
+        // const commentCountUpdate = await db.collection('post').updateOne({_id:new ObjectId(data._id)},{"$set":{"comment":commentCount}})
         return NextResponse.json(
           { message: "success PostComment" },
           { status: 200 }

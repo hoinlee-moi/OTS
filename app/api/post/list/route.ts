@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
         .collection("post")
         .find({})
         .skip((page - 1) * 15)
-        .project({ _id: 1, like: 1, comment: 1, file: 1 })
+        .project({ _id: 1, comment: 1, file: 1 })
         .sort({ _id: -1 })
         .limit(ITEMS_PER_PAGE)
         .toArray();

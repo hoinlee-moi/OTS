@@ -1,29 +1,46 @@
 "use client";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import UserInfo from "./UserInfo";
 import UserProfileImg from "./UserProfileImg";
 import styles from "./profile.module.css";
 import { getUserProfile } from "@/util/api";
+import ProfileEditModal from "./ProfileEditModal";
+
+export type editData={
+  nickname:string,
+  profileImgFile:File[],
+  gender: string,
+}
+
+export const profileUserDataContext = createContext<any>({});
 
 export default function ProfileWrap({
   param,
 }: {
   param: { nickname: string };
 }) {
-  const [pageLoading, setPageLoadin] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [userData, setUserData] = useState<any>();
+  const [editUserData , setEditUserData] = useState<editData>({
+    nickname:"",
+    profileImgFile:[],
+    gender: "",
+  })
+  const [profilEdit, setProfileEdit] = useState(false);
   const { data }: any = useSession();
 
   useEffect(() => {
-    setPageLoadin(true);
+    setPageLoading(true);
   }, []);
 
   useEffect(() => {
-    if (param.nickname !== data.user.nickname) {
-      getUserData();
-    } else {
-      setUserData(data.user);
+    if (data) {
+      if (param.nickname !== data.user.nickname) {
+        getUserData();
+      } else {
+        setUserData(data.user);
+      }
     }
   }, [data]);
 
@@ -37,17 +54,21 @@ export default function ProfileWrap({
     }
   };
   return (
-    <>
-      {pageLoading && (
-        <div className={styles.profileWrap}>
-          {userData && (
-            <>
-              <UserProfileImg profile={userData.profileUrl} />
-              <UserInfo userData={userData} />
-            </>
-          )}
-        </div>
-      )}
-    </>
+      <profileUserDataContext.Provider value={{ userData,editUserData,setEditUserData }}>
+        {profilEdit && <ProfileEditModal closeModal={setProfileEdit} />}
+        {pageLoading && (
+          <div className={styles.profileWrap}>
+            {userData && (
+              <>
+                <UserProfileImg profile={userData.profileUrl} />
+                <UserInfo />
+              </>
+            )}
+            {data?.user.nickname === userData?.nickname && (
+              <button onClick={() => setProfileEdit(true)}>프로필편집</button>
+            )}
+          </div>
+        )}
+      </profileUserDataContext.Provider>
   );
 }

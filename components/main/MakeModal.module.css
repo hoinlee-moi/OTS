@@ -33,6 +33,15 @@
   overflow: hidden;
 }
 
+@keyframes modalAni {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .modalTitle {
   display: flex;
   justify-content: space-between;
@@ -493,14 +502,7 @@
     opacity: 1;
   }
 }
-@keyframes modalAni {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+
 
 @media (max-width: 1050px) {
   .modalContent {

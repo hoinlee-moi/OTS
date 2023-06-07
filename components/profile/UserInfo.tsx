@@ -1,6 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./profile.module.css";
-import { faPerson, faPersonDress, faPersonHalfDress } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPerson,
+  faPersonDress,
+  faPersonHalfDress,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { profileUserDataContext } from "./ProfileWrap";
 
 export type userData = {
   emailId: string;
@@ -9,11 +15,10 @@ export type userData = {
   profileUrl: string;
   _id: string;
 };
-type props = {
-  userData: userData;
-};
 
-export default function UserInfo({ userData }: props) {
+
+export default function UserInfo() {
+  const {userData} = useContext(profileUserDataContext)
   return (
     <div className={styles.userInfoWrap}>
       <div className={styles.userInfo}>
@@ -25,19 +30,12 @@ export default function UserInfo({ userData }: props) {
           />
         )}
         {userData.gender === "male" && (
-          <FontAwesomeIcon
-            icon={faPerson}
-            className={styles.genderNone}
-          />
+          <FontAwesomeIcon icon={faPerson} className={styles.genderNone} />
         )}
         {userData.gender === "female" && (
-          <FontAwesomeIcon
-            icon={faPersonDress}
-            className={styles.genderNone}
-          />
+          <FontAwesomeIcon icon={faPersonDress} className={styles.genderNone} />
         )}
-
-        <button>프로필편집</button>
+        
       </div>
     </div>
   );

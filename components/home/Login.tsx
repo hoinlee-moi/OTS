@@ -4,8 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import styles from "./HomeModal.module.css";
 import useInput from "@/hooks/useInput";
 import { useRouter } from "next/navigation";
-import { cookies } from "next/dist/client/components/headers";
-import { login } from "@/util/api";
 import KakaoSignUp from "./KakaoSignUp";
 import { signIn } from "next-auth/react";
 

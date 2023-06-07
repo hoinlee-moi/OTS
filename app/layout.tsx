@@ -1,6 +1,7 @@
 import AuthContext from '@/context/AuthContext';
 import './globals.css';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
+import { inter } from '@/util/font';
 
 
 
@@ -17,7 +18,7 @@ export default async function RootLayout({ children }: props) {
 
   return (
     <html lang="en">
-      <body >
+      <body className={inter.className} >
         <AuthContext>{children}</AuthContext>
       </body>
     </html>

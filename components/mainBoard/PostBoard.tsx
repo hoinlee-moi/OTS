@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./postBoard.module.css";
 import useObserver from "@/hooks/useObserve";
-import { getStorage, ref, getDownloadURL } from "@firebase/storage";
-import Loading from "@/app/main/loading";
 import PostItem from "./PostItem";
 import { getBoardPostList } from "@/util/api";
 import PostDetail from "./PostDetail";

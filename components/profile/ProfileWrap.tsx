@@ -33,6 +33,9 @@ export default function ProfileWrap({
   useEffect(() => {
     setPageLoading(true);
   }, []);
+  useEffect(() => {
+    // console.log(editUserData)
+  }, [editUserData]);
 
   useEffect(() => {
     if (data) {

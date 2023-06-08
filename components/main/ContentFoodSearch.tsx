@@ -1,3 +1,4 @@
+'use client'
 import { getFoodSearch } from "@/util/api";
 import styles from "./makeModal.module.css";
 import { useContext, useState } from "react";
@@ -5,7 +6,6 @@ import { food, foodList, newPostContext, newPostData } from "./MakeModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import useAlert from "@/hooks/useAlert";
-import Loading from "@/app/loading";
 
 export default function ContentFoodSearch() {
   const { postData, setPostData } = useContext(newPostContext);

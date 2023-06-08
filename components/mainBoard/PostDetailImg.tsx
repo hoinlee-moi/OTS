@@ -1,3 +1,4 @@
+'use client'
 import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./postDetail.module.css";
 import Image from "next/image";

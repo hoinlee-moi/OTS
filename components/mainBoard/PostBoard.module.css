@@ -70,12 +70,6 @@
 
 
 
-
-/* 플로팅 메뉴 아래쪽으로 띄우는 것과 아이템 리스트들이 grid가 아닌 flex로 자연스럽게 붙는 부분은 js영역 내에서 처리할 예정 */
-
-
-
-
 /* scrollLoading */
 .ListLoading {
   display: flex;

@@ -1,3 +1,4 @@
+'use client'
 import React, { useCallback, useEffect, useState } from "react";
 import Avatar from "../Avatar";
 import styles from "./postDetail.module.css";

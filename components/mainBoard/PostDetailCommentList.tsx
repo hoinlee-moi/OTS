@@ -1,3 +1,4 @@
+'use client'
 import { useContext, useEffect, useState } from "react";
 import styles from "./postDetail.module.css";
 import PostDetailComment from "./PostDetailComment";

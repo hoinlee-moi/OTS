@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./postDetail.module.css";
 import { foodList } from "../main/MakeModal";

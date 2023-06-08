@@ -20,15 +20,23 @@
   position: relative;
   width: 450px;
   aspect-ratio: 1/1.3;
-  padding: 20px;
   border-radius: 20px;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
   background-color: #fff;
   animation: modalAni 0.2s;
+  transition: 0.2s;
   overflow: hidden;
 }
-.editModal > div {
-  width: 80%;
-  height: 100%;
+.modalTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  border-bottom: 1px solid #fff;
+}
+.modalContent {
+  width: 70%;
 }
 
 @keyframes modalAni {
@@ -83,17 +91,17 @@
   font-weight: bold;
 }
 .nickname input {
-  width: 80%;
-  padding: 5px;
-  background-color: #d7d7d7;
-  font-size: 17px;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 18px;
   border-radius: 7px;
   outline: none;
   margin-top: 10px;
 }
 /* gender */
 .gender {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .gender p {
   margin-right: 10px;
@@ -104,8 +112,10 @@
   display: flex;
 }
 .gender label {
-  width: 70px;
-  /* margin: 0 10px; */
+  display: flex;
+  align-items: center;
+  width: 80px;
+  margin-top: 10px;
   font-size: 17px;
   font-weight: 500;
   cursor: pointer;
@@ -135,11 +145,12 @@
   font-size: 15px;
   font-weight: bold;
   border-radius: 7px;
-  background-color: #b3b3b3;
+  background-color: #baa8e4;
+  color: #fff;
   cursor: pointer;
 }
 .pwEditBtn:hover {
-  background-color: #585858;
+  background-color: #9070db;
   color: #fff;
 }
 
@@ -156,36 +167,120 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 .pwEdit {
-    width: 30%;
-    min-width: 350px;
-    height: 500px;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
+  position: relative;
+  width: 30%;
+  min-width: 400px;
+  height: 500px;
+  background: linear-gradient(to right, #d3cce3, #e9e4f0);
+  border-radius: 10px;
+  overflow: hidden;
+  animation: modalAni 0.2s;
+  transition: 0.2s;
+}
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 .title {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #d7d7d7;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #fff;
 }
-.pwEditWrap,.pwEditEx {
-    padding: 10px;
+.pwEditWrap,
+.pwEditEx {
+  padding: 10px;
 }
 
+.pwEditWrap div {
+  position: relative;
+}
 
-.pwEditWrap div p{
-    font-size: 18px;
-    font-weight: bold;
+.pwEditWrap div p {
+  font-size: 18px;
+  font-weight: bold;
 }
 .pwEditWrap div input {
-    width: 90%;
-    font-size: 20px;
-    margin: 10px 0;
+  width: 100%;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 25px 20px 5px 20px;
+  border-radius: 7px;
+  outline: none;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.labelPlaceholder {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: #b4b4b4;
+  transition: 0.2s;
+  cursor: text;
+}
+.pwEditWrap div:focus-within label,
+.inputLabel {
+  position: absolute;
+  top: 30%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #000;
+}
+
+.editBtn,
+.editBtnX {
+  display: block;
+  width: 90%;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  font-size: 15px;
+  color: #fff;
+  border-radius: 20px;
+}
+.editBtn {
+  cursor: pointer;
+  background-color: #9070db;
+}
+.editBtn:hover {
+}
+.editBtnX {
+  background-color: #baa8e4;
+  cursor: not-allowed;
+}
+
+.profileEditBtn {
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+}
+.profileEditBtn button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .editModal {
+    width: 300px;
+    aspect-ratio: 1/1.8;
     padding: 5px;
-    border-radius: 7px;
-    outline: none;
-    background-color: #d3d3d3;
+  }
+  .pwEdit {
+    min-width: 300px;
+  }
+  .pwEdit p {
+    font-size: 14px;
+    text-align: center;
+  }
 }

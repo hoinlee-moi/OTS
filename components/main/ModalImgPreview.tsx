@@ -1,3 +1,4 @@
+'use client'
 import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./makeModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

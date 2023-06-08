@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import styles from "./makeModal.module.css";
 import { faArrowsUpDownLeftRight } from "@fortawesome/free-solid-svg-icons";

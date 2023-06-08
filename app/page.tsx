@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import styles from "./page.module.css";
 import SignUpBox from "../components/home/SignUpBox";
 import Sections from "@/components/home/Sections";

@@ -23,7 +23,10 @@ const ProfileEditModal = ({ closeModal }: props) => {
         className={styles.editModal}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        <div>
+        <div className={styles.modalTitle}>
+          <h3>프로필 변경하기</h3>
+        </div>
+        <div className={styles.modalContent}>
           <ProfileEditImage />
           <ProfileEditInfo />
           <button
@@ -32,7 +35,10 @@ const ProfileEditModal = ({ closeModal }: props) => {
           >
             비밀번호 변경하기
           </button>
-          {passwordEdit && <ProfileEditPassword />}
+          {passwordEdit && <ProfileEditPassword closeModal={setPasswordEdit}/>}
+        </div>
+        <div className={styles.profileEditBtn}>
+        <button >변경하기</button>
         </div>
       </section>
     </div>

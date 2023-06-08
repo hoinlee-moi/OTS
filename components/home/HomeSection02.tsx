@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import styles from "./HomeSection02.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

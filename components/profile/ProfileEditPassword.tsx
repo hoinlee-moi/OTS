@@ -1,9 +1,57 @@
+import useInput from "@/hooks/useInput";
 import styles from "./editModal.module.css";
+import EditPasswordInput from "./EditPasswordInput";
+import React, { useContext, useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { REGULAR } from "@/util/reg";
+import { profileUserDataContext } from "./ProfileWrap";
 
-const ProfileEditPassword = () => {
+type props = {
+  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ProfileEditPassword = ({ closeModal }: props) => {
+  const {userData} = useContext(profileUserDataContext)
+  const [password, setPassword] = useInput({
+    curPw: "",
+    newPw: "",
+    newPwCheck: "",
+  });
+  const [editState, setEditState] = useState(true);
+
+  useEffect(() => {
+    const reg = REGULAR;
+    if (
+      reg.regPs.test(password.curPw) &&
+      reg.regPs.test(password.newPw) &&
+      reg.regPs.test(password.newPwCheck)
+    )
+      setEditState(true);
+    else setEditState(false);
+  }, [password]);
+
+  const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button === 0) {
+      closeModal(false);
+    }
+  };
+
+  const editPasswordHandle = async() => {
+    
+  }
+
   return (
-    <div className={styles.pwEditModalBack}>
-      <section className={styles.pwEdit}>
+    <div className={styles.pwEditModalBack} onMouseDown={mouseDownHandle}>
+      <section
+        className={styles.pwEdit}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <FontAwesomeIcon
+          icon={faX}
+          className={styles.closeBtn}
+          onClick={() => closeModal(false)}
+        />
         <div className={styles.title}>
           <h3>비밀번호 변경하기</h3>
         </div>
@@ -13,17 +61,14 @@ const ProfileEditPassword = () => {
             포함하여야 합니다
           </p>
         </div>
-        <div className={styles.pwEditWrap}>
-          <div>
-            <input type="text" placeholder="현재 비밀번호"/>
-          </div>
-          <div>
-            <input type="text" placeholder="새 비밀번호"/>
-          </div>
-          <div>
-            <input type="text" placeholder="새 비밀번호 재입력"/>
-          </div>
-        </div>
+        <EditPasswordInput password={password} setPassword={setPassword} />
+        <button
+          className={editState ? styles.editBtn : styles.editBtnX}
+          disabled={!editState}
+          onClick={editPasswordHandle}
+        >
+          비밀번호 변경하기
+        </button>
       </section>
     </div>
   );

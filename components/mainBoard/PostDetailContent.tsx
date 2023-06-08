@@ -1,3 +1,4 @@
+'use client'
 import { useContext } from "react";
 import { detailPostDataContext } from "./PostDetail";
 import styles from "./postDetail.module.css";

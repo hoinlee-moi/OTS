@@ -1,3 +1,4 @@
+'use client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./postBoard.module.css";
 import { faComment } from "@fortawesome/free-regular-svg-icons";

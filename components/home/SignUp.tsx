@@ -87,10 +87,12 @@ export default function SignUp({modalClose}:props) {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
+          console.log(response)
           if (response.status === 200) {
             setEmailDupStatus(true);
           }
         } catch (err:any) {
+          console.log(err)
           if (err.response.status === 405) {
             setEmailCheck(true);
             setAlertMs("E-Mail이 올바르지 않습니다");
@@ -119,7 +121,6 @@ export default function SignUp({modalClose}:props) {
       if (!nickDupStatus) {
         try {
           const response = await nickNameDuplicate(e.target.value);
-          console.log(response)
           if (response.status === 200) {
             setNickDupStatus(true);
           }
@@ -161,7 +162,7 @@ export default function SignUp({modalClose}:props) {
 
       try {
         const response = await signUp(signData);
-        if (response.status === 201) {
+        if (response.data.status === 201) {
           alert("회원가입이 완료되었습니다")
           modalClose&&modalClose(false)
         }

@@ -6,26 +6,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { REGULAR } from "@/util/reg";
 import { profileUserDataContext } from "./ProfileWrap";
+import { editPassword } from "@/util/api";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ProfileEditPassword = ({ closeModal }: props) => {
-  const {userData} = useContext(profileUserDataContext)
+  const { userData } = useContext(profileUserDataContext);
   const [password, setPassword] = useInput({
     curPw: "",
     newPw: "",
     newPwCheck: "",
   });
   const [editState, setEditState] = useState(true);
-
+  const [failMs,setFailMs] = useState("")
   useEffect(() => {
     const reg = REGULAR;
     if (
       reg.regPs.test(password.curPw) &&
       reg.regPs.test(password.newPw) &&
-      reg.regPs.test(password.newPwCheck)
+      reg.regPs.test(password.newPwCheck)&&
+      password.newPw===password.newPwCheck
     )
       setEditState(true);
     else setEditState(false);
@@ -37,9 +39,29 @@ const ProfileEditPassword = ({ closeModal }: props) => {
     }
   };
 
-  const editPasswordHandle = async() => {
-    
-  }
+  const editPasswordHandle = async () => {
+    if (!editState) return;
+    try {
+      const data = {
+        ...password,
+        userEmail: userData.emailId,
+      };
+      const response = await editPassword(data);
+      console.log(response)
+
+      if(response.status===200){
+        alert('비밀번호 변경이 완료되었습니다')
+        closeModal(false)
+      }
+    } catch (error:any) {
+      console.log(error)
+      if(error.response.data.message==="same password") {
+        setFailMs("동일한 비밀번호로 바꿀 수 없습니다")
+        return;
+      }
+      setFailMs('현재 비밀번호가 틀렸거나 올바르지 않은 접근입니다')
+    }
+  };
 
   return (
     <div className={styles.pwEditModalBack} onMouseDown={mouseDownHandle}>
@@ -62,6 +84,7 @@ const ProfileEditPassword = ({ closeModal }: props) => {
           </p>
         </div>
         <EditPasswordInput password={password} setPassword={setPassword} />
+        {failMs!==""&&<p className={styles.failMs}>{failMs}</p>}
         <button
           className={editState ? styles.editBtn : styles.editBtnX}
           disabled={!editState}

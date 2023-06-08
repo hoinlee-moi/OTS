@@ -2,6 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./workStateModal.module.css";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 
 
 type props = {
@@ -15,6 +16,9 @@ export default function WorkStateModal({
   success,
   setSuccess,
 }: props) {
+
+
+
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
       if (success === "fail") closeModal(false);

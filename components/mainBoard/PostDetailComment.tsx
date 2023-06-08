@@ -21,7 +21,7 @@ const PostDetailComment=({ comment, getPostComment }: props)=> {
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    if (data.user._id.toString() === comment.userId.toString()) {
+    if (data.user._id === comment.userId) {
       setMyComment(true);
     } else{
       setMyComment(false)

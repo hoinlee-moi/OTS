@@ -134,12 +134,12 @@ export default function MakeModal({ closeModal }: props) {
           const response = await createPostWrite(newPostData);
           if (response.status === 201) {
             setSuccess("success");
-            // 프로필 페이지로 이동해서 작성 한 글 보여주기
           }
         } catch (error) {
           console.log(error);
           await fileDelete(newPostData.file, "board");
           setSuccess("fail");
+          setWriteState(false)
         }
       } else {
         alert("서버와의 연결이 올바르지 않습니다. 잠시후 다시 시도해주세요");

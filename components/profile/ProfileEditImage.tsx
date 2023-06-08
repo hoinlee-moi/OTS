@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./editModal.module.css";
-import { editData, profileUserDataContext } from "./ProfileWrap";
+import { profileUserDataContext } from "./ProfileWrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import { editData } from "./ProfileEditModal";
+type props = {
+  setEditUserData : React.Dispatch<React.SetStateAction<editData>>
+}
 
-const ProfileEditImage = () => {
-  const { userData,setEditUserData } = useContext(profileUserDataContext);
+const ProfileEditImage = ({setEditUserData}:props) => {
+  const { userData } = useContext(profileUserDataContext);
   const [imgFile, setImgFile] = useState<string>();
 
   useEffect(() => {

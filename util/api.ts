@@ -50,7 +50,21 @@ type updateComment = {
 type getUserPost = {
   nickname: string;
   state: string;
-  page:number
+  page: number;
+};
+
+type editPassword = {
+  curPw: string;
+  newPw: string;
+  newPwCheck: string;
+  userEamil: string;
+};
+
+type profileEdit = {
+  email:string
+  nickname: string;
+  gender: string;
+  profileImgUrl: { name: string; url: string }[];
 };
 // 카카오 로그인 부분은 컴포넌트 내에 작성하였습니다.
 
@@ -201,5 +215,23 @@ export const getUserPost = async (userData: getUserPost) => {
     return response;
   } catch (error) {
     throw error;
+  }
+};
+
+export const editPassword = async (editData: editPassword) => {
+  try {
+    const response = await axios.put("/api/user/password", editData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const profileEdit = async (profileData: profileEdit) => {
+  try {
+    const response = await axios.put("/api/user/edit",profileData)
+    return response
+  } catch (error) {
+    throw error
   }
 };

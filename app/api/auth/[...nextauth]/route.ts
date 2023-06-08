@@ -55,12 +55,21 @@ export const authOptions: NextAuthOptions = {
     maxAge: 24 * 60 * 60,
   },
   callbacks: {
-    jwt: async ({ token, user }: any) => {
+    jwt: async ({ token, user, trigger, session }: any) => {
+      
       if (user) {
-        delete user.password
-        token.user = {
-          ...user,
-        };
+        delete user.password;
+          token.user = {
+            ...user,
+          };
+      }
+      if (trigger === "update") {
+        if (session.info) {
+          token.user = {
+            ...session.info,
+          };
+          ;
+        }
       }
       return token as any;
     },
@@ -71,7 +80,6 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

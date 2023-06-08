@@ -47,7 +47,11 @@ export const fileUpload = async (files: any, location: string) => {
   return fileUrlArray;
 };
 
-export const fileDelete = async(files:any,location:string) => {
+type files ={
+  url:string,
+  name:string
+}[]
+export const fileDelete = async(files:files,location:string) => {
   const storage = await getStorage(app)
   for(const file of files) {
     const imgRef = ref(storage,file.name)

@@ -59,7 +59,8 @@
   position: relative;
   width: 120px;
   height: 120px;
-  overflow: hidden;
+  background-color: #fff;
+  border-radius: 100%;
 }
 .imgBox img {
   border-radius: 100%;
@@ -86,9 +87,13 @@
 
 /* nickname */
 
-.nickname {
+.nickname p:nth-child(1) {
   font-size: 18px;
   font-weight: bold;
+}
+.editFailMs {
+  margin-top: 10px;
+  color: #c73512;
 }
 .nickname input {
   width: 100%;
@@ -269,6 +274,11 @@
   background-color: #fff;
   cursor: pointer;
 }
+.failMs {
+  color: #c73512;
+  text-align: center;
+}
+
 
 @media (max-width: 500px) {
   .editModal {

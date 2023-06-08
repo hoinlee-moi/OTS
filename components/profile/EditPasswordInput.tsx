@@ -25,7 +25,13 @@ const EditPasswordInput = ({ password, setPassword }: props) => {
   return (
     <div className={styles.pwEditWrap}>
       <div>
-        <input type="password" id="curPw" name="curPw" onChange={setPassword} />
+        <input
+          type="password"
+          id="curPw"
+          name="curPw"
+          onChange={setPassword}
+          maxLength={14}
+        />
         <label
           htmlFor="curPw"
           className={curPwLabel ? styles.inputLabel : styles.labelPlaceholder}
@@ -34,7 +40,13 @@ const EditPasswordInput = ({ password, setPassword }: props) => {
         </label>
       </div>
       <div>
-        <input type="password" id="newPw" name="newPw" onChange={setPassword} />
+        <input
+          type="password"
+          id="newPw"
+          name="newPw"
+          onChange={setPassword}
+          maxLength={14}
+        />
         <label
           htmlFor="newPw"
           className={newPwLabel ? styles.inputLabel : styles.labelPlaceholder}
@@ -48,6 +60,7 @@ const EditPasswordInput = ({ password, setPassword }: props) => {
           id="newPwCheck"
           name="newPwCheck"
           onChange={setPassword}
+          maxLength={14}
         />
         <label
           htmlFor="newPwCheck"

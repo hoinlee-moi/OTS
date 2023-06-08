@@ -7,11 +7,7 @@ import styles from "./profile.module.css";
 import { getUserProfile } from "@/util/api";
 import ProfileEditModal from "./ProfileEditModal";
 
-export type editData={
-  nickname:string,
-  profileImgFile:File[],
-  gender: string,
-}
+
 
 export const profileUserDataContext = createContext<any>({});
 
@@ -22,30 +18,18 @@ export default function ProfileWrap({
 }) {
   const [pageLoading, setPageLoading] = useState(false);
   const [userData, setUserData] = useState<any>();
-  const [editUserData , setEditUserData] = useState<editData>({
-    nickname:"",
-    profileImgFile:[],
-    gender: "",
-  })
+  
   const [profilEdit, setProfileEdit] = useState(false);
   const { data }: any = useSession();
 
   useEffect(() => {
     setPageLoading(true);
+    getUserData()
   }, []);
-  useEffect(() => {
-    // console.log(editUserData)
-  }, [editUserData]);
-
-  useEffect(() => {
-    if (data) {
-      if (param.nickname !== data.user.nickname) {
-        getUserData();
-      } else {
-        setUserData(data.user);
-      }
-    }
-  }, [data]);
+useEffect(()=>{
+console.log(userData,"유저데이터")
+console.log(data,"세션데이터")
+},[userData,data.user])
 
   const getUserData = async () => {
     try {
@@ -57,7 +41,7 @@ export default function ProfileWrap({
     }
   };
   return (
-      <profileUserDataContext.Provider value={{ userData,editUserData,setEditUserData }}>
+      <profileUserDataContext.Provider value={{ userData }}>
         {profilEdit && <ProfileEditModal closeModal={setProfileEdit} />}
         {pageLoading && (
           <div className={styles.profileWrap}>

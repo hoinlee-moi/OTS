@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useSession,signOut } from "next-auth/react";
 import styles from "./editModal.module.css";
 import ProfileEditImage from "./ProfileEditImage";
 import ProfileEditInfo from "./ProfileEditInfo";
 import ProfileEditPassword from "./ProfileEditPassword";
 import { fileDelete, fileUpload } from "@/util/firebase";
-import { profileEdit } from "@/util/api";
+import { deleteUser, profileEdit } from "@/util/api";
 import { profileUserDataContext } from "./ProfileWrap";
 import WorkStateModal from "../etc/WorkStateModal";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -65,7 +67,6 @@ const ProfileEditModal = ({ closeModal }: props) => {
     };
     if (editUserData.profileImgFile.length > 0) {
       const fileUrl = await fileUpload(editUserData.profileImgFile, "user");
-      console.log("파일 업로드 완료", fileUrl);
       if (fileUrl.length < 1) {
         alert("서버와의 연결이 올바르지 않습니다. 잠시 후 다시 시도해주세요");
         return;
@@ -75,24 +76,23 @@ const ProfileEditModal = ({ closeModal }: props) => {
     try {
       const response = await profileEdit(data);
       if (response.status === 200) {
-        if (userData.profileImgName) {
-          const file = [
-            {
-              url: userData.profileUrl,
-              name: userData.profileImgName,
-            },
-          ];
-          console.log(userData, "ekdma", editUserData);
-          await fileDelete(file, "user");
+        if (data.profileImgUrl.length > 0) {
+          if (userData.profileImgName !== data.profileImgUrl[0].name) {
+            const file = [
+              {
+                url: userData.profileUrl,
+                name: userData.profileImgName,
+              },
+            ];
+            await fileDelete(file, "user");
+          }
         }
-        setSuccess("success");
         sessionUpdate({
           info: {
-            _id: userData._id,
-            emailId: userData.emailId,
-            ...response.data.update,
+            ...response.data.token,
           },
         });
+        setSuccess("success");
       }
     } catch (error) {
       console.log(error);
@@ -100,6 +100,19 @@ const ProfileEditModal = ({ closeModal }: props) => {
         await fileDelete(data.profileImgUrl, "user");
       }
       setSuccess("fail");
+    }
+  };
+
+  const deleteUserHandle = async () => {
+    if (window.confirm("탈퇴하시겠습니까?")) {
+      try {
+        const response = await deleteUser(userData.emailId);
+        if (response.status === 200) {
+          signOut()
+        }
+      } catch (error) {
+        alert("서버와 연결이 끊어졌습니다.");
+      }
     }
   };
 
@@ -113,11 +126,15 @@ const ProfileEditModal = ({ closeModal }: props) => {
         />
       )}
       <div className={styles.editModalBack} onMouseDown={mouseDownHandle}>
+        <FontAwesomeIcon icon={faX} className={styles.closeBtn} />
         <section
           className={styles.editModal}
           onMouseDown={(e) => e.stopPropagation()}
         >
           <div className={styles.modalTitle}>
+            <button className={styles.userDelete} onClick={deleteUserHandle}>
+              회원탈퇴
+            </button>
             <h3>프로필 변경하기</h3>
           </div>
           <div className={styles.modalContent}>

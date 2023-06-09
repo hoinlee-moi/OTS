@@ -27,13 +27,27 @@
   transition: 0.2s;
   overflow: hidden;
 }
+
+
 .modalTitle {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 40px;
   width: 100%;
   border-bottom: 1px solid #fff;
+}
+.userDelete{
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  font-weight: bold;
+  color: #c73512;
+  background-color: #ffffff00;
+  cursor: pointer;
 }
 .modalContent {
   width: 70%;

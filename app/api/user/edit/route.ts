@@ -10,8 +10,6 @@ export async function PUT(request: NextRequest) {
   const data = await request.json();
   if (!session) return NextResponse.error().status;
   const user = session.user as any;
-    console.log(data,"들어온 데이터")
-    console.log(user,"세션데이터")
   if (data.email === user.emailId) {
     const db = (await connectDB).db("OTS");
     const nickDup = await db
@@ -23,51 +21,91 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-    console.log("중복검사 통과함")
     try {
-      const updateData = {
+      const updateData: any = {
         nickname: data.nickname,
         gender: data.gender,
-        profileUrl:
-          data.profileImgUrl.length < 1
-            ? user.profileUrl
-            : data.profileImgUrl[0].url,
-        profileImgName:
-          data.profileImgUrl.length < 1
-            ? user.profileImgName
-            : data.profileImgUrl[0].name,
       };
+      if (data.profileImgUrl.length > 0) {
+        updateData.profileUrl = data.profileImgUrl[0].url;
+        updateData.profileImgName = data.profileImgUrl[0].name;
+      }
       const response = await db.collection("user").updateOne(
         { _id: new ObjectId(user._id) },
         {
           $set: updateData,
         }
       );
-        
+
       if (response.acknowledged) {
         await db.collection("post").updateMany(
           { userId: new ObjectId(user._id) },
           {
             $set: {
               nickName: updateData.nickname,
-              userProfile: updateData.profileUrl,
+              userProfile:
+                data.profileImgUrl.length > 0
+                  ? data.profileImgUrl[0].url
+                  : user.profileUrl,
             },
           }
         );
-         await db.collection("postComment").updateMany(
-          { userId: user._id},
+        await db.collection("postComment").updateMany(
+          { userId: user._id },
           {
             $set: {
               nickname: updateData.nickname,
-              userProfile: updateData.profileUrl,
+              userProfile:
+                data.profileImgUrl.length > 0
+                  ? data.profileImgUrl[0].url
+                  : user.profileUrl,
             },
           }
         );
-        console.log(user,updateData)
-        return NextResponse.json({ update: updateData }, { status: 200 });
+        const newToken = {
+          _id: user._id,
+          emailId: user.emailId,
+          nickname: updateData.nickname,
+          gender: updateData.gender,
+          profileUrl:
+            data.profileImgUrl.length > 0
+              ? data.profileImgUrl[0].url
+              : user.profileUrl,
+          profileImgName:
+            data.profileImgUrl.length > 0
+              ? data.profileImgUrl[0].name
+              : user.profileImgName,
+        };
+        return NextResponse.json({ token: newToken }, { status: 200 });
       }
     } catch (error) {
       return NextResponse.error().status;
+    }
+  }
+  return NextResponse.error().status;
+}
+
+export async function DELETE(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  const param = request.nextUrl.searchParams;
+  const email = param.get("email");
+  if (session) {
+    const user = session.user as any;
+    if (email === user.emailId) {
+      const db = (await connectDB).db("OTS");
+      try {
+        const response = db
+          .collection("user")
+          .deleteOne({ _id: new ObjectId(user._id) });
+        if ((await response).acknowledged) {
+          return NextResponse.json(
+            { message: "success delete" },
+            { status: 200 }
+          );
+        }
+      } catch (error) {
+        return NextResponse.error().status;
+      }
     }
   }
   return NextResponse.error().status;

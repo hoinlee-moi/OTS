@@ -162,7 +162,7 @@ export default function SignUp({modalClose}:props) {
 
       try {
         const response = await signUp(signData);
-        if (response.data.status === 201) {
+        if (response.status === 201) {
           alert("회원가입이 완료되었습니다")
           modalClose&&modalClose(false)
         }

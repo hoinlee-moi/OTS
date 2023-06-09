@@ -1,6 +1,7 @@
 /* profile-user-info */
 
 .profileWrap {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,3 +129,14 @@
   overflow: hidden;
 }
 
+@media (max-width:600px) {
+  .profileWrap button {
+    position: absolute;
+    bottom: 20px;
+    right: 50%;
+  }
+  .boardWrap {
+    display: flex;
+    flex-direction: column;
+  }
+}

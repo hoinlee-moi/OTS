@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     jwt: async ({ token, user, trigger, session }: any) => {
-      
+      console.log(trigger,session)
       if (user) {
         delete user.password;
           token.user = {
@@ -64,6 +64,7 @@ export const authOptions: NextAuthOptions = {
           };
       }
       if (trigger === "update") {
+        console.log(trigger,session.info)
         if (session.info) {
           token.user = {
             ...session.info,

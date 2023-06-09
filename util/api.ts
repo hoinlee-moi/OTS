@@ -235,3 +235,12 @@ export const profileEdit = async (profileData: profileEdit) => {
     throw error
   }
 };
+
+export const deleteUser = async(email:string)=>{
+  try {
+    const response = await axios.delete(`/api/user/edit?email=${email}`)
+    return response
+  } catch (error) {
+    throw error
+  }
+}

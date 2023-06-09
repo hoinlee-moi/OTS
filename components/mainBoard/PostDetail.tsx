@@ -48,6 +48,7 @@ export default function PostDetail({ profile }: { profile: true | undefined }) {
   const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
+    console.log(data)
     document.body.style.cssText = `
     position: fixed; 
     top: -${window.scrollY}px;
@@ -62,6 +63,7 @@ export default function PostDetail({ profile }: { profile: true | undefined }) {
       line-height: 1;`;
       window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     };
+    
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,8 @@
+import { signUp } from "./../../../../util/api";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/util/database";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import KakaoProvider from "next-auth/providers/kakao";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
 
@@ -16,10 +17,6 @@ type user = {
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_OAUTH_ID || "",
-      clientSecret: process.env.GOOGLE_OAUTH_SECRET || "",
-    }),
     CredentialsProvider({
       type: "credentials",
       credentials: {},
@@ -58,21 +55,20 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, user, trigger, session }: any) => {
       if (user) {
         delete user.password;
-          token.user = {
-            ...user,
-          };
+        token.user = {
+          ...user,
+        };
       }
       if (trigger === "update") {
         if (session.info) {
           token.user = {
             ...session.info,
           };
-          ;
         }
       }
       return token as any;
     },
-    session: async ({ session, token }: any) => {
+    session: async ({ session, token, user }: any) => {
       session.user = token.user;
       return session;
     },

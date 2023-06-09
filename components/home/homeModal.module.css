@@ -1,137 +1,137 @@
 .modalBackgorund {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  .modalContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 485px;
-    min-height: 700px;
-    border-radius: 20px;
-    background-color: #fff;
-    animation: modalAni 0.2s;
-  }
-  .modalContent > span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    transform: scale(1.5);
-    cursor: pointer;
-  }
-  
-  .modalContent > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding-bottom: 40px;
-  }
-  
-  /* 로그인 부분, 회원가입 */
-  .logoImg {
-    width: 80px;
-    height: 80px;
-    margin-top: 20px;
-  }
-  .logoImg img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  .signUpContent,
-  .loginContent {
-    width: 350px;
-    line-height: 2.3em;
-    text-align: center;
-  }
-  .signUpContent h1,
-  .loginContent h1 {
-    margin: 0;
-    font-size: 30px;
-  }
-  .signUpContent p,
-  .loginContent p {
-    margin-top: 0;
-    color: #858585;
-  }
-  
-  .signUpInput,
-  .loginInput {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .signUpInput div,
-  .loginInput div {
-    position: relative;
-  }
-  .signUpInput div {
-    margin-bottom: 20px;
-  }
-  .loginInput div {
-    margin-bottom: 25px;
-  }
-  .signUpInput input,
-  .loginInput input {
-    font-size: 22px;
-    padding: 5px 10px;
-    border: 2px solid #b6b6b6;
-    border-radius: 10px;
-  }
-  
-  .signUpInput input:hover,
-  .loginInput input:hover {
-    border-color: #7a7a7a;
-  }
-  .signUpInput p,
-  .loginInput p {
-    width: 90%;
-    font-size: 16px;
-    color: red;
-    text-align: center;
-  }
-  .signUpInput span,
-  .loginInput span {
-    position: absolute;
-    left: calc(100% + 10px);
-    top: 5px;
-    transform: scale(1.5);
-    color: red;
-  }
-  
-  
-  .signUpInput button,
-  .loginInput button {
-    padding: 8px 80px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 30px;
-    color: #fff;
-    background-color: #414141;
-    cursor: pointer;
-  }
-  .loginInput button{
-    margin: 20px 0 5px 0;
-  }
-  .signUpInput button:hover,
-  .loginInput button:hover {
-    background-color: #727272;
-  }
-  
-  .kakaoLogin {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 485px;
+  min-height: 600px;
+  border-radius: 20px;
+  background-color: #fff;
+  animation: modalAni 0.2s;
+  transition: 0.4s;
+}
+.modalContent > span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.modalContent > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* 로그인 부분, 회원가입 */
+.logoImg {
+  width: 80px;
+  height: 80px;
+  margin-top: 20px;
+}
+.logoImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.signUpContent,
+.loginContent {
+  width: 350px;
+  line-height: 2.3em;
+  text-align: center;
+}
+.signUpContent h1,
+.loginContent h1 {
+  margin: 0;
+  font-size: 30px;
+}
+.signUpContent p,
+.loginContent p {
+  margin-top: 0;
+  color: #858585;
+}
+
+.signUpInput,
+.loginInput {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.signUpInput div,
+.loginInput div {
+  position: relative;
+}
+.signUpInput div {
+  margin-bottom: 20px;
+}
+.loginInput div {
+  margin-bottom: 25px;
+}
+.signUpInput input,
+.loginInput input {
+  font-size: 22px;
+  padding: 5px 10px;
+  border: 2px solid #b6b6b6;
+  border-radius: 10px;
+}
+
+.signUpInput input:hover,
+.loginInput input:hover {
+  border-color: #7a7a7a;
+}
+.signUpInput p,
+.loginInput p {
+  width: 90%;
+  font-size: 16px;
+  color: red;
+  text-align: center;
+}
+.signUpInput span,
+.loginInput span {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 5px;
+  transform: scale(1.5);
+  color: red;
+}
+
+.signUpInput button,
+.loginInput button {
+  padding: 8px 80px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #414141;
+  cursor: pointer;
+}
+.loginInput button {
+  margin: 20px 0 5px 0;
+}
+.signUpInput button:hover,
+.loginInput button:hover {
+  background-color: #727272;
+}
+
+/* .kakaoLogin {
     margin-top: 20px;
   }
   .kakaoLogin button {
@@ -144,47 +144,99 @@
     width: 100%;
     height: 100%;
     border-radius: 30px;
-  }
+  } */
 
-  .loginLoading svg {
-    width: 52px;
-    height: 52px;
-    margin-bottom: 30px;
-    animation: lodingSpinAni 2s infinite linear;
-  }
-  .loginLoading circle {
-    stroke: #554735;
-    stroke-width: 2;
-    /* getTotalLength()로 stroke의길이를 얻어올수 있음 */
-    stroke-dasharray: 157;
-    stroke-dashoffset: 0;
-    fill: transparent;
-    animation: lodingAni 0.8s infinite linear;
-  }
-  
+.loginLoading svg {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 30px;
+  animation: lodingSpinAni 2s infinite linear;
+}
+.loginLoading circle {
+  stroke: #554735;
+  stroke-width: 2;
+  /* getTotalLength()로 stroke의길이를 얻어올수 있음 */
+  stroke-dasharray: 157;
+  stroke-dashoffset: 0;
+  fill: transparent;
+  animation: lodingAni 0.8s infinite linear;
+}
 
-  @keyframes modalAni {
-    0%{
-      transform: scale(1.1);
-    }
-    100%{
-      transform: scale(1);
-    }
+@keyframes modalAni {
+  0% {
+    transform: scale(1.1);
   }
+  100% {
+    transform: scale(1);
+  }
+}
 
-  @keyframes lodingSpinAni {
-    100% {
-      transform: rotate(360deg);
-    }
+@keyframes lodingSpinAni {
+  100% {
+    transform: rotate(360deg);
   }
-  @keyframes lodingAni {
-    0% {
-      stroke-dashoffset: 157;
-    }
-    75% {
-      stroke-dashoffset: -147;
-    }
-    100% {
-      stroke-dashoffset: -157;
-    }
+}
+@keyframes lodingAni {
+  0% {
+    stroke-dashoffset: 157;
   }
+  75% {
+    stroke-dashoffset: -147;
+  }
+  100% {
+    stroke-dashoffset: -157;
+  }
+}
+
+@media (max-width: 500px) {
+  .modalContent {
+    width: 90%;
+    height: auto;
+    min-height: 500px;
+    aspect-ratio: 1/1;
+  }
+  .signUpContent h1,
+  .loginContent h1 {
+    font-size: 23px;
+  }
+  .signUpContent p,
+  .loginContent p {
+    font-size: 14px;
+  }
+  .signUpInput,
+  .loginInpu {
+    justify-content: center;
+  }
+  .signUpInput input,
+  .loginInput input {
+    font-size: 18px;
+  }
+  .signUpInput span,
+  .loginInput span {
+    transform: scale(1.2);
+  }
+}
+@media (max-width: 330px) {
+  .modalContent {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .signUpContent h1,
+  .loginContent h1 {
+    font-size: 21px;
+  }
+  .signUpContent p,
+  .loginContent p {
+    font-size: 13px;
+  }
+  .signUpInput,
+  .loginInpu {
+    padding: 0 5px;
+  }
+  .signUpInput input,
+  .loginInput input {
+    width: 100%;
+    font-size: 16px;
+  }
+}

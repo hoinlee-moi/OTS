@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import styles from "./HomeModal.module.css";
+import styles from "./homeModal.module.css";
 import useInput from "@/hooks/useInput";
 import { useRouter } from "next/navigation";
-import KakaoSignUp from "./KakaoSignUp";
 import { signIn } from "next-auth/react";
 
 export default function Login() {
@@ -37,16 +36,16 @@ export default function Login() {
         redirect: false,
         callbackUrl: "/main",
       });
-      if (response?.ok === false){
+      if (response?.ok === false) {
         setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
-        setLoginState(false)
+        setLoginState(false);
       }
       if (response?.status === 200 && response?.ok === true)
         router.push(response.url as string);
     } catch (err) {
       console.log(err);
       setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");
-      setLoginState(false)
+      setLoginState(false);
     }
   }, [userData]);
 
@@ -90,12 +89,6 @@ export default function Login() {
           <button onClick={loginHandle}>로그인</button>
         )}
       </div>
-      {!loginState && (
-        <>
-          <KakaoSignUp />
-          <button onClick={() => signIn()}>구글로 로그인</button>
-        </>
-      )}
     </div>
   );
 }

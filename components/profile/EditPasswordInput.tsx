@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./editModal.module.css";
-import useInput from "@/hooks/useInput";
+
 
 type props = {
   password: { curPw: string; newPw: string; newPwCheck: string };

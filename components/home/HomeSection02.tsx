@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import styles from "./HomeSection02.module.css";
+import styles from "./homeSection02.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,7 +19,7 @@ export default function HomeSection02() {
             <div className={styles.imgBoxContent}>
               <p>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
-                다이어트 도움되는 점심 식단{" "}
+                다이어트 도움되는 점심 식단
               </p>
             </div>
           </div>
@@ -33,7 +33,6 @@ export default function HomeSection02() {
               다이어트를 시작했는데 뭘 먹어야 할 지 잘 모르겠다고요? <br /> 음식
               칼로리를 검색하고 결과를 확인해 보세요
             </p>
-            <button>찾아보기</button>
           </div>
         </div>
       </article>

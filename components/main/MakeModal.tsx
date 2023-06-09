@@ -9,7 +9,6 @@ import ModalContent from "./ModalContent";
 import { createPostWrite } from "@/util/api";
 import { fileDelete, fileUpload } from "@/util/firebase";
 import WorkStateModal from "../etc/WorkStateModal";
-import { postData } from "../mainBoard/PostDetail";
 
 type props = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;

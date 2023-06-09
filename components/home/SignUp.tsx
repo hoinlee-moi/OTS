@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./HomeModal.module.css";
+import styles from "./homeModal.module.css";
 import useInput from "@/hooks/useInput";
 import {  useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";
-import KakaoSignUp from "./KakaoSignUp";
 import { REGULAR } from "@/util/reg";
 
 type props = {modalClose?: React.Dispatch<React.SetStateAction<boolean>>;}
@@ -223,7 +222,6 @@ export default function SignUp({modalClose}:props) {
         {alertMs !== "" && <p>{alertMs}</p>}
         <button onClick={signUpHandle} disabled={signUpState}>회원가입</button>
       </div>
-      <KakaoSignUp />
     </div>
   );
 }

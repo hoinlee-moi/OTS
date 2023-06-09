@@ -29,7 +29,9 @@
     /* opacity: 0; */
     /* z-index: 0; */
   }
-  
+  .smallLogo{
+    display: none;
+  }
   .logoBox svg {
     position: absolute;
     top: 50%;
@@ -239,6 +241,9 @@
     }
     .menuListBox article div,.menuListBox article a {
       width: 50%;
+    }
+    .smallLogo{
+      display: inline-block;
     }
   }
 

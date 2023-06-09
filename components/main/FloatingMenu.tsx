@@ -49,6 +49,7 @@ export default function FloatingMenu() {
                 ) : (
                   <img src="/assets/logo.png" />
                 )}
+                <FontAwesomeIcon icon={faUtensils} className={styles.smallLogo}/>
               </div>
               <div
                 className={

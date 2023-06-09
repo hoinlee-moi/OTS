@@ -1,13 +1,15 @@
-'use client'
-import React from "react";
+"use client";
 
-import styles from "./HomeSection03.module.css";
+import styles from "./homeSection03.module.css";
 import ImageArray from "./ImageArray";
 import SignUp from "./SignUp";
 
 const imgArr = ["a", "b", "c", "d", "e", "f", "g"];
 
 export default function HomeSection03() {
+
+
+
   return (
     <section className={styles.sectionContainer03}>
       <article className={styles.backgroundPic}>

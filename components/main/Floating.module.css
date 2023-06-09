@@ -182,6 +182,36 @@
   .searchContent h3 {
     padding: 10px;
   }
+  .searchList ul {
+    padding: 10px;
+  }
+  .searchList ul li{
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+    animation: liAni 0.4s;
+    transition: 0.4s;
+  }
+  @keyframes liAni {
+    0%{
+      transform: translateX(-100%);
+    }
+    100%{
+      transform: translateX(0)
+    }
+  }
+  .searchList ul li:hover {
+    font-weight: bold;
+  }
+  .searchList ul li svg{
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #c73512;
+    cursor: pointer;
+  }
   
   @keyframes logoAni {
     from {

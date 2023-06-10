@@ -1,6 +1,7 @@
+'use client'
 import React, { useContext, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./MakeModal.module.css";
+import styles from "./makeModal.module.css";
 import { faImages } from "@fortawesome/free-regular-svg-icons";
 import useFileUpload from "@/hooks/useFileUpload";
 import useAlert from "@/hooks/useAlert";
@@ -117,7 +118,7 @@ export default function ModalImage() {
           }
         >
           {uploadedImages.length < 1 ? (
-            "컴퓨터에서 선택"
+            "사진 업로드하기"
           ) : (
             <FontAwesomeIcon icon={faPlus} />
           )}

@@ -1,10 +1,11 @@
 "use client";
 
-import styles from "./HomeModal.module.css";
+import styles from "./homeModal.module.css";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import { useEffect, useState } from "react";
 
 type modalPorps = {
   content: string;
@@ -15,7 +16,6 @@ export default function HomeModal({ content, modalClose }: modalPorps) {
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) modalClose(false);
   };
-
   return (
     <div className={styles.modalBackgorund} onMouseDown={mouseDownHandle}>
       <section
@@ -25,7 +25,7 @@ export default function HomeModal({ content, modalClose }: modalPorps) {
         <span onClick={() => modalClose(false)}>
           <FontAwesomeIcon icon={faXmark} />
         </span>
-        {content === "signUp" ? <SignUp /> : <Login />}
+        {content === "signUp" ? <SignUp modalClose={modalClose}/> : <Login />}
       </section>
     </div>
   );

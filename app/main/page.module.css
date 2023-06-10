@@ -19,11 +19,5 @@
     margin-left: 70px;
   }
 }
-@media (max-width: 380px) {
-  .boardContainer {
-    width: 100%;
-    margin: 0;
-  }
-}
 
 

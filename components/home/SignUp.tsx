@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "./HomeModal.module.css";
+import styles from "./homeModal.module.css";
 import useInput from "@/hooks/useInput";
 import { useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";
-import KakaoSignUp from "./KakaoSignUp";
 import { REGULAR } from "@/util/reg";
+
+type props = { modalClose?: React.Dispatch<React.SetStateAction<boolean>> };
 
 export const reg = REGULAR;
 
-export default function SignUp() {
+const SignUp = ({ modalClose }: props) => {
   const router = useRouter();
   const [userData, setUserData] = useInput({
     email: "",
@@ -26,6 +27,7 @@ export default function SignUp() {
   const [rePsCheck, setRePsCheck] = useState(false);
   const [nikCheck, setNickCheck] = useState(false);
   const [alertMs, setAlertMs] = useState("");
+  const [signUpState, setSignUpState] = useState(false);
 
   useEffect(() => {
     setAlertMs("");
@@ -84,16 +86,18 @@ export default function SignUp() {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
+          console.log(response);
           if (response.status === 200) {
             setEmailDupStatus(true);
           }
-        } catch (err) {
-          if ((err as { status: number }).status === 400) {
+        } catch (err: any) {
+          console.log(err);
+          if (err.response.status === 405) {
             setEmailCheck(true);
             setAlertMs("E-Mail이 올바르지 않습니다");
             return;
           }
-          if ((err as { status: number }).status === 409) {
+          if (err.response.status === 400) {
             setEmailCheck(true);
             setAlertMs("사용중인 E-Mail입니다");
           }
@@ -109,7 +113,7 @@ export default function SignUp() {
       if (!reg.regNickname.test(e.target.value)) {
         setNickCheck(true);
         setAlertMs(
-          "닉네임은 2~12자이내 한글,영문,_,-를 포함하여 만들수 있습니다"
+          "닉네임은 2~12자이내 한글,숫자,영문,_,-를 포함하여 만들수 있습니다"
         );
         return;
       }
@@ -128,7 +132,6 @@ export default function SignUp() {
     },
     [userData.nickname, nickDupStatus]
   );
-
   const signUpHandle = useCallback(async () => {
     if (
       userData.email === "" ||
@@ -139,6 +142,9 @@ export default function SignUp() {
       setAlertMs("아직 입력되지 않은 부분이 있습니다");
       return;
     }
+
+    if (signUpState) return;
+
     if (
       emailDupStatus &&
       nickDupStatus &&
@@ -146,6 +152,7 @@ export default function SignUp() {
       !psCheck &&
       !rePsCheck
     ) {
+      setSignUpState(true);
       const signData = {
         emailId: userData.email,
         password: userData.password,
@@ -155,29 +162,13 @@ export default function SignUp() {
       try {
         const response = await signUp(signData);
         if (response.status === 201) {
-          alert("회원가입이 완료되었습니다. 로그인 해주세요");
-          router.push('/');
-          // const loginData = {
-          //   emailId: userData.email,
-          //   password: userData.password,
-          // };
-          // try {
-          //   const res = await login(loginData);
-          //   if (res.status === 201) {
-          //     alert("회원가입이 완료되었습니다. 로그인 해주세요")
-          //     router.push("/main")
-          //     // cookies().set("accessToken", res.data.accessToken);
-          //     // cookies().set("refreshToken", res.data.refreshToken);
-          //     // sessionStorage.setItem("emailId", res.data.emailId);
-          //     // router.push("/main");
-          //   }
-          // } catch (err) {
-          //   alert("서버와 접속이 끊어졌습니다. 다시 로그인 해주세요");
-          // }
+          alert("회원가입이 완료되었습니다");
+          modalClose && modalClose(false);
         }
       } catch (err) {
         console.log(err);
         setAlertMs("회원가입에 실패하였습니다. 잠시후 다시 실행해주세요");
+        setSignUpState(false);
       }
     }
   }, [userData, nickDupStatus, emailDupStatus]);
@@ -229,9 +220,11 @@ export default function SignUp() {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle}>회원가입</button>
+        <button onClick={signUpHandle} disabled={signUpState}>
+          회원가입
+        </button>
       </div>
-      <KakaoSignUp />
     </div>
   );
-}
+};
+export default React.memo(SignUp);

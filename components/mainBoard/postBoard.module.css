@@ -1,0 +1,128 @@
+.postItemBox,
+.postItemBox2 {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, minmax(200px, 280px));
+  grid-template-rows: minmax(120px, 290px) minmax(120px, 280px);
+  gap: 20px 30px;
+  width: 100%;
+  max-height: 700px;
+  padding: 15px;
+  aspect-ratio: 1/0.6;
+}
+.postItemBox div:nth-child(3) {
+  grid-column: 3/4;
+  grid-row: 1/3;
+}
+.postItemBox2 div:nth-child(1) {
+  grid-column: 1/2;
+  grid-row: 1/3;
+}
+.postItem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  cursor: pointer;
+}
+.postItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hoverDetail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #222222a4;
+  display: none;
+}
+
+.postItem:hover .hoverDetail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hoverDetail div {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'Dongle',sans-serif;
+}
+.hoverDetail div:nth-child(1) {
+  margin-right: 30px;
+}
+.hoverDetail div svg{
+  height: 30px;
+}
+.hoverDetail div p {
+  height: 30px;
+  margin: 0 5px;
+}
+
+
+
+/* scrollLoading */
+.ListLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+}
+.ListLoading p {
+  font-size: 20px;
+}
+.ListLoading svg {
+    width: 52px;
+    height: 52px;
+    animation: lodingSpinAni 2s infinite linear;
+  }
+.ListLoading svg circle {
+  stroke: url("#myGradient");
+  stroke-width: 2;
+  /* getTotalLength()로 stroke의길이를 얻어올수 있음 */
+  stroke-dasharray: 157;
+  stroke-dashoffset: 0;
+  fill: transparent;
+  animation: lodingAni 0.8s infinite linear;
+}
+
+@keyframes lodingSpinAni {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes lodingAni {
+  0% {
+    stroke-dashoffset: 157;
+  }
+  75% {
+    stroke-dashoffset: -147;
+  }
+  100% {
+    stroke-dashoffset: -157;
+  }
+}
+@media (max-width:750px) {
+  .postItemBox,.postItemBox2{
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    padding: 10px;
+    transition: 0.5s;
+  }
+  .postItem{
+    margin-bottom: 10px;
+    width: 80%;
+    transition: 0.5s;
+  }
+}

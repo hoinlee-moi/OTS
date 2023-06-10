@@ -1,3 +1,6 @@
+'use client'
+import Image from "next/image";
+
 type props = {
   props: string;
   order: boolean;
@@ -19,13 +22,30 @@ export default function ImageArray({ props, order }: props) {
     <div>
       {order
         ? imgArr[props].map((v, idx) => {
-            return <img src={`/assets/main/main_food_${v}.jpeg`} key={idx} />;
+            return (
+              <Image
+                src={`/assets/main/main_food_${v}.jpeg`}
+                alt="food"
+                key={idx}
+                width={400}
+                height={450}
+                priority
+                placeholder="blur"
+                blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
+              />
+            );
           })
         : imgArr[props].map((v, idx) => {
             return (
-              <img
+              <Image
                 src={`/assets/main/main_info/main_info_${v}.jpg`}
+                alt="food information"
                 key={idx}
+                width={400}
+                height={450}
+                priority
+                placeholder="blur"
+                blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
               />
             );
           })}

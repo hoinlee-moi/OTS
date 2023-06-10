@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import styles from "./Floating.module.css";
+import styles from "./floating.module.css";
 import FloatingSearch from "./FloatingSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faDoorOpen,
   faHouseChimney,
   faMagnifyingGlass,
   faPencil,
@@ -13,23 +14,23 @@ import {
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import MakeModal from "./MakeModal";
-
-
-
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function FloatingMenu() {
+  const{data}:any = useSession()
   const [searchState, setSearchState] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [makeModal,setMakeModal] = useState(false)
-
-
+  const [makeModal, setMakeModal] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
 
+  
+
   return (
     <>
-      {makeModal&&<MakeModal closeModal={setMakeModal}/>}
+      {makeModal && <MakeModal closeModal={setMakeModal} />}
       <section className={styles.floatingContainer}>
         {loading && (
           <>
@@ -48,6 +49,7 @@ export default function FloatingMenu() {
                 ) : (
                   <img src="/assets/logo.png" />
                 )}
+                <FontAwesomeIcon icon={faUtensils} className={styles.smallLogo}/>
               </div>
               <div
                 className={
@@ -55,7 +57,7 @@ export default function FloatingMenu() {
                 }
               >
                 <article>
-                  <Link href="/main">
+                  <Link href="/main" prefetch={false} >
                     <FontAwesomeIcon icon={faHouseChimney} size="lg" />
                     <p>홈</p>
                   </Link>
@@ -67,14 +69,18 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <p>검색</p>
                   </div>
-                  <div onClick={()=>setMakeModal(true)}>
+                  <div onClick={() => setMakeModal(true)}>
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>
-                  <Link href="/main/profile">
+                  <Link href={`/main/profile/${data&&data.user.nickname}`} prefetch={false} >
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>
+                  <div onClick={() => signOut()}>
+                    <FontAwesomeIcon icon={faDoorOpen} />
+                    <p>로그아웃</p>
+                  </div>
                 </article>
               </div>
             </div>

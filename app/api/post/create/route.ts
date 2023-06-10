@@ -2,8 +2,6 @@ import { ObjectId } from 'mongodb';
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import { getStorage, ref, uploadBytes } from "@firebase/storage";
-import { app } from "@/util/firebase";
 import { connectDB } from '@/util/database';
 
 

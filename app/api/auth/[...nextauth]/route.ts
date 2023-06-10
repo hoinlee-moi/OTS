@@ -1,8 +1,6 @@
-import { signUp } from "./../../../../util/api";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/util/database";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import KakaoProvider from "next-auth/providers/kakao";
 import bcrypt from "bcrypt";
 import { ObjectId } from "mongodb";
 

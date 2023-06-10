@@ -1,11 +1,12 @@
 import Image from "next/image";
 import styles from "./profile.module.css";
+import React from "react";
 
 type props = {
   profile: string;
 };
 
-export default function UserProfileImg({ profile }: props) {
+ const UserProfileImg=({ profile }: props) =>{
   return (
     <div className={styles.profileImg}>
       <Image
@@ -20,3 +21,4 @@ export default function UserProfileImg({ profile }: props) {
     </div>
   );
 }
+export default React.memo(UserProfileImg)

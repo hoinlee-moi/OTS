@@ -3,16 +3,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./homeModal.module.css";
 import useInput from "@/hooks/useInput";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { emailDuplicate, login, nickNameDuplicate, signUp } from "@/util/api";
 import InputWithIcon from "./InputWithIcon";
 import { REGULAR } from "@/util/reg";
 
-type props = {modalClose?: React.Dispatch<React.SetStateAction<boolean>>;}
+type props = { modalClose?: React.Dispatch<React.SetStateAction<boolean>> };
 
 export const reg = REGULAR;
 
-export default function SignUp({modalClose}:props) {
+const SignUp = ({ modalClose }: props) => {
   const router = useRouter();
   const [userData, setUserData] = useInput({
     email: "",
@@ -27,7 +27,7 @@ export default function SignUp({modalClose}:props) {
   const [rePsCheck, setRePsCheck] = useState(false);
   const [nikCheck, setNickCheck] = useState(false);
   const [alertMs, setAlertMs] = useState("");
-  const [signUpState, setSignUpState] = useState(false)
+  const [signUpState, setSignUpState] = useState(false);
 
   useEffect(() => {
     setAlertMs("");
@@ -86,12 +86,12 @@ export default function SignUp({modalClose}:props) {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
-          console.log(response)
+          console.log(response);
           if (response.status === 200) {
             setEmailDupStatus(true);
           }
-        } catch (err:any) {
-          console.log(err)
+        } catch (err: any) {
+          console.log(err);
           if (err.response.status === 405) {
             setEmailCheck(true);
             setAlertMs("E-Mail이 올바르지 않습니다");
@@ -143,7 +143,7 @@ export default function SignUp({modalClose}:props) {
       return;
     }
 
-    if(signUpState) return;
+    if (signUpState) return;
 
     if (
       emailDupStatus &&
@@ -152,7 +152,7 @@ export default function SignUp({modalClose}:props) {
       !psCheck &&
       !rePsCheck
     ) {
-      setSignUpState(true)
+      setSignUpState(true);
       const signData = {
         emailId: userData.email,
         password: userData.password,
@@ -162,13 +162,13 @@ export default function SignUp({modalClose}:props) {
       try {
         const response = await signUp(signData);
         if (response.status === 201) {
-          alert("회원가입이 완료되었습니다")
-          modalClose&&modalClose(false)
+          alert("회원가입이 완료되었습니다");
+          modalClose && modalClose(false);
         }
       } catch (err) {
         console.log(err);
         setAlertMs("회원가입에 실패하였습니다. 잠시후 다시 실행해주세요");
-        setSignUpState(false)
+        setSignUpState(false);
       }
     }
   }, [userData, nickDupStatus, emailDupStatus]);
@@ -220,8 +220,11 @@ export default function SignUp({modalClose}:props) {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle} disabled={signUpState}>회원가입</button>
+        <button onClick={signUpHandle} disabled={signUpState}>
+          회원가입
+        </button>
       </div>
     </div>
   );
-}
+};
+export default React.memo(SignUp);

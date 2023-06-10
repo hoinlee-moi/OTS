@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import UserInfo from "./UserInfo";
 import UserProfileImg from "./UserProfileImg";
@@ -12,11 +12,11 @@ import { useRouter } from "next/navigation";
 
 export const profileUserDataContext = createContext<any>({});
 
-export default function ProfileWrap({
+ const ProfileWrap=({
   param,
 }: {
   param: { nickname: string };
-}) {
+}) =>{
   const router = useRouter()
   const [pageLoading, setPageLoading] = useState(false);
   const [userData, setUserData] = useState<any>();
@@ -29,7 +29,7 @@ export default function ProfileWrap({
   }, []);
 
 
-  const getUserData = async () => {
+  const getUserData = useCallback( async () => {
     try {
       const response = await getUserProfile(param.nickname);
       if (response.status === 200) setUserData(response.data);
@@ -38,7 +38,7 @@ export default function ProfileWrap({
       alert("유저 정보가 존재하지 않습니다");
       console.log(error);
     }
-  };
+  },[data,param]);
   return (
       <profileUserDataContext.Provider value={{ userData }}>
         {profilEdit && <ProfileEditModal closeModal={setProfileEdit} />}
@@ -58,3 +58,4 @@ export default function ProfileWrap({
       </profileUserDataContext.Provider>
   );
 }
+export default React.memo(ProfileWrap)

@@ -5,7 +5,7 @@ import {
   faPersonDress,
   faPersonHalfDress,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { profileUserDataContext } from "./ProfileWrap";
 
 export type userData = {
@@ -17,7 +17,7 @@ export type userData = {
 };
 
 
-export default function UserInfo() {
+ const UserInfo=()=> {
   const {userData} = useContext(profileUserDataContext)
   return (
     <div className={styles.userInfoWrap}>
@@ -30,13 +30,14 @@ export default function UserInfo() {
           />
         )}
         {userData.gender === "male" && (
-          <FontAwesomeIcon icon={faPerson} className={styles.genderNone} />
+          <FontAwesomeIcon icon={faPerson} className={styles.genderMan} />
         )}
         {userData.gender === "female" && (
-          <FontAwesomeIcon icon={faPersonDress} className={styles.genderNone} />
+          <FontAwesomeIcon icon={faPersonDress} className={styles.genderWoman} />
         )}
         
       </div>
     </div>
   );
 }
+export default React.memo(UserInfo)

@@ -12,14 +12,16 @@ export async function PUT(request: NextRequest) {
   const user = session.user as any;
   if (data.email === user.emailId) {
     const db = (await connectDB).db("OTS");
-    const nickDup = await db
-      .collection("user")
-      .findOne({ nickname: data.nickname });
-    if (nickDup) {
-      return NextResponse.json(
-        { message: "Duplicate nickname found" },
-        { status: 400 }
-      );
+    if (user.nickname !== data.nickname) {
+      const nickDup = await db
+        .collection("user")
+        .findOne({ nickname: data.nickname });
+      if (nickDup) {
+        return NextResponse.json(
+          { message: "Duplicate nickname found" },
+          { status: 400 }
+        );
+      }
     }
     try {
       const updateData: any = {

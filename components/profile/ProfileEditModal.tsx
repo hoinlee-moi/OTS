@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSession,signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import styles from "./editModal.module.css";
 import ProfileEditImage from "./ProfileEditImage";
 import ProfileEditInfo from "./ProfileEditInfo";
@@ -40,7 +40,7 @@ const ProfileEditModal = ({ closeModal }: props) => {
   const [nickCheck, setNickCheck] = useState(false);
   const [editState, setEditState] = useState(false);
   const [success, setSuccess] = useState("loading");
-
+  const [btnState, setBtnState] = useState(false);
   useEffect(() => {
     setSuccess("loading");
   }, [editState]);
@@ -50,6 +50,16 @@ const ProfileEditModal = ({ closeModal }: props) => {
       router.push(`/main/profile/${user.nickname}`);
     }
   }, [success]);
+  useEffect(() => {
+    if (
+      editUserData.nickname !== userData.nickname ||
+      editUserData.gender !== userData.gender ||
+      editUserData.profileImgFile.length > 0
+    )
+      setBtnState(true)
+      else setBtnState(false);
+  }, [editUserData]);
+
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button === 0) {
       closeModal(false);
@@ -57,7 +67,9 @@ const ProfileEditModal = ({ closeModal }: props) => {
   };
 
   const profileEditHandle = async () => {
-    if (!nickCheck) return;
+    if (editUserData.nickname !== userData.nickname) {
+      if (!nickCheck) return;
+    }
     setEditState(true);
     const data: updateData = {
       email: userData.emailId,
@@ -108,7 +120,7 @@ const ProfileEditModal = ({ closeModal }: props) => {
       try {
         const response = await deleteUser(userData.emailId);
         if (response.status === 200) {
-          signOut()
+          signOut();
         }
       } catch (error) {
         alert("서버와 연결이 끊어졌습니다.");
@@ -154,7 +166,7 @@ const ProfileEditModal = ({ closeModal }: props) => {
             )}
           </div>
           <div className={styles.profileEditBtn}>
-            <button onClick={profileEditHandle} disabled={!nickCheck}>
+            <button onClick={profileEditHandle} disabled={!btnState}>
               변경하기
             </button>
           </div>

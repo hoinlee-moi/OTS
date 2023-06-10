@@ -6,7 +6,7 @@ import useInput from "@/hooks/useInput";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-export default function Login() {
+const Login=() =>{
   const router = useRouter();
   const [userData, setUserData] = useInput({
     emailId: "",
@@ -19,9 +19,9 @@ export default function Login() {
     setLoginFailMs("");
   }, [userData]);
 
-  const keyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandle =useCallback( (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") loginHandle();
-  };
+  },[userData]);
 
   const loginHandle = useCallback(async () => {
     if (userData.emailId === "" || userData.password === "") {
@@ -92,3 +92,4 @@ export default function Login() {
     </div>
   );
 }
+export default React.memo(Login)

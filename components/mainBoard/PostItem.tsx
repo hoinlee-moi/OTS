@@ -5,12 +5,13 @@ import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { post } from "./PostBoard";
 
 import Image from "next/image";
+import React from "react";
 
 type props = {
   listItem: post;
 };
 
-export default function PostItem({ listItem }: props) {
+ const PostItem=({ listItem }: props)=> {
   return (
     <>
       <Image
@@ -35,3 +36,4 @@ export default function PostItem({ listItem }: props) {
     </>
   );
 }
+export default React.memo(PostItem)

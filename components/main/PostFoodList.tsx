@@ -2,7 +2,7 @@
 import styles from "./makeModal.module.css";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { newPostData, food, newPostContext } from "./MakeModal";
 
 type foodNu = {
@@ -12,9 +12,9 @@ type foodNu = {
   fat: number;
 };
 
-export default function PostFoodList() {
+ const PostFoodList=()=> {
   const { postData, setPostData } = useContext(newPostContext);
-  const listDeleteHandle = (e: React.MouseEvent<HTMLTableCellElement>) => {
+  const listDeleteHandle = useCallback((e: React.MouseEvent<HTMLTableCellElement>) => {
     const target = e.target as HTMLElement;
     const tr = target.closest("tr") as HTMLElement;
     if (tr.id) {
@@ -28,7 +28,7 @@ export default function PostFoodList() {
         };
       });
     }
-  };
+  },[postData]);
   useEffect(() => {
     if (postData.foodList.length > 0) {
       const nutrient: foodNu = postData.foodList.reduce(
@@ -102,3 +102,4 @@ export default function PostFoodList() {
     </div>
   );
 }
+export default React.memo(PostFoodList)

@@ -1,63 +1,71 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./editModal.module.css";
-import {  profileUserDataContext } from "./ProfileWrap";
+import { profileUserDataContext } from "./ProfileWrap";
 import { editData } from "./ProfileEditModal";
 import { REGULAR } from "@/util/reg";
 import { nickNameDuplicate } from "@/util/api";
 
-
 type props = {
-  setEditUserData : React.Dispatch<React.SetStateAction<editData>>
-  setNickCheck:React.Dispatch<React.SetStateAction<boolean>>
-}
+  setEditUserData: React.Dispatch<React.SetStateAction<editData>>;
+  setNickCheck: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const ProfileEditInfo = ({setEditUserData,setNickCheck}:props) => {
+const ProfileEditInfo = ({ setEditUserData, setNickCheck }: props) => {
   const { userData } = useContext(profileUserDataContext);
   const [gender, setGender] = useState("");
   const [editNickname, setEditNickname] = useState("");
   const [failMs, setFailMs] = useState("");
 
   useEffect(() => {
-    if (userData) setGender(userData.gender);
+    if (userData) {
+      setGender(userData.gender);
+      setEditNickname(userData.nickname);
+    }
   }, []);
-  useEffect(()=>{
-    setFailMs("")
-  },[editNickname])
-  useEffect(()=>{
-    setEditUserData((snap:editData)=>{
-        return {
-            ...snap,
-            nickname:editNickname
-        }
-    })
-  },[editNickname])
+  useEffect(() => {
+    setFailMs("");
+  }, [editNickname]);
+  useEffect(() => {
+    setEditUserData((snap: editData) => {
+      return {
+        ...snap,
+        nickname: editNickname,
+      };
+    });
+  }, [editNickname]);
 
-  useEffect(()=>{
-    setEditUserData((snap:editData)=>{
-        return {
-            ...snap,
-            gender:gender
-        }
-    })
-  },[gender])
+  useEffect(() => {
+    setEditUserData((snap: editData) => {
+      return {
+        ...snap,
+        gender: gender,
+      };
+    });
+  }, [gender]);
 
-  const nicknameDupCheck = async(e: React.FocusEvent<HTMLInputElement>) => {
-    const reg = REGULAR;
-    if (!reg.regNickname.test(e.target.value)) {
-      setFailMs("닉네임은 2~12자이내 한글,숫자,영문,_,-를 포함할 수 있습니다")
-      return;
-    }
-    try {
-      const response = await nickNameDuplicate(e.target.value)
-      if(response.status===200) {
-        setNickCheck(true)
-        setFailMs("")
+  const nicknameDupCheck = useCallback(
+    async (e: React.FocusEvent<HTMLInputElement>) => {
+      if (userData.nickname === e.target.value) return;
+      const reg = REGULAR;
+      if (!reg.regNickname.test(e.target.value)) {
+        setFailMs(
+          "닉네임은 2~12자이내 한글,숫자,영문,_,-를 포함할 수 있습니다"
+        );
+        return;
       }
-    } catch (error) {
-      setNickCheck(false)
-      setFailMs("사용중인 닉네임 입니다")
-    }
-  };
+      try {
+        const response = await nickNameDuplicate(e.target.value);
+        if (response.status === 200) {
+          setNickCheck(true);
+          setFailMs("");
+        }
+      } catch (error) {
+        setNickCheck(false);
+        setFailMs("사용중인 닉네임 입니다");
+      }
+    },
+    []
+  );
 
   return (
     <div>
@@ -88,8 +96,8 @@ const ProfileEditInfo = ({setEditUserData,setNickCheck}:props) => {
             <span>여</span>
             <input
               type="radio"
-              value="femail"
-              checked={gender === "femail"}
+              value="female"
+              checked={gender === "female"}
               onChange={(e) => setGender(e.target.value)}
             />
           </label>
@@ -108,4 +116,4 @@ const ProfileEditInfo = ({setEditUserData,setNickCheck}:props) => {
   );
 };
 
-export default ProfileEditInfo;
+export default React.memo(ProfileEditInfo);

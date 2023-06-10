@@ -1,14 +1,14 @@
 'use client'
-import { ChangeEvent, useContext, useEffect } from "react";
+import React, { ChangeEvent, useCallback, useContext, useEffect } from "react";
 import styles from "./makeModal.module.css";
 import PostFoodList from "./PostFoodList";
 import { newPostData, newPostContext } from "./MakeModal";
 import ContentFoodSearch from "./ContentFoodSearch";
 
-export default function ModalContent() {
+const ModalContent=()=> {
   const { postData, setPostData } = useContext(newPostContext);
 
-  const setPostDataContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const setPostDataContent = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.length > 300) {
       setPostData((snap: newPostData) => {
         return { ...snap };
@@ -18,7 +18,7 @@ export default function ModalContent() {
     setPostData((snap: newPostData) => {
       return { ...snap, content: e.target.value };
     });
-  };
+  },[postData]);
 
   useEffect(() => {
     if (postData.foodList.length === 1) {
@@ -45,3 +45,4 @@ export default function ModalContent() {
     </div>
   );
 }
+export default React.memo(ModalContent)

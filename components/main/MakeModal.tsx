@@ -36,7 +36,7 @@ export type newPostData = {
 
 export const newPostContext = React.createContext<any>({});
 
-export default function MakeModal({ closeModal }: props) {
+ const MakeModal=({ closeModal }: props) =>{
   const [postData, setPostData] = useState<newPostData>({
     content: "",
     file: [],
@@ -76,7 +76,7 @@ export default function MakeModal({ closeModal }: props) {
     if (success === "close") closeModal(false);
   }, [success]);
 
-  const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
+  const mouseDownHandle = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (writeState) {
       return;
     }
@@ -87,21 +87,23 @@ export default function MakeModal({ closeModal }: props) {
       }
       closeModal(false);
     }
-  };
-  const backPageHandle = (e: any) => {
+  },[writeState,postData]);
+
+  const backPageHandle = useCallback((e: any) => {
     if (pageIndex === 0) {
       mouseDownHandle(e);
       return;
     }
     setPageIndex(pageIndex - 1);
-  };
-  const nextPageHandle = (e: React.MouseEvent<HTMLParagraphElement>) => {
+  },[pageIndex]);
+
+  const nextPageHandle = useCallback((e: React.MouseEvent<HTMLParagraphElement>) => {
     let target = e.target as HTMLElement;
     if (target.textContent === "다음") {
       setPageIndex(pageIndex + 1);
       return;
     }
-  };
+  },[pageIndex]);
 
   const closeCheckRepeat = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -116,7 +118,7 @@ export default function MakeModal({ closeModal }: props) {
     [modalAlert, postData]
   );
 
-  const createPostHandle = async () => {
+  const createPostHandle = useCallback( async () => {
     if (debounce) {
       return;
     }
@@ -145,7 +147,7 @@ export default function MakeModal({ closeModal }: props) {
       }
     }
     setDebounce(false);
-  };
+  },[postData,writeState,debounce]);
 
   return (
     <newPostContext.Provider value={{ postData, setPostData }}>
@@ -194,3 +196,4 @@ export default function MakeModal({ closeModal }: props) {
     </newPostContext.Provider>
   );
 }
+export default React.memo(MakeModal)

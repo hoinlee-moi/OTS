@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./postDetail.module.css";
 import PostDetailComment from "./PostDetailComment";
 import { detailPostDataContext } from "./PostDetail";
@@ -15,7 +15,7 @@ export type commentList={
   _id:string
 }
 
-export default function PostDetailCommentList() {
+ const PostDetailCommentList=()=> {
   const { postData } = useContext(detailPostDataContext);
   const [comment, setCommnet] = useState("");
   const [postState, setPostState] = useState(false);
@@ -25,11 +25,11 @@ export default function PostDetailCommentList() {
     getPostComment();
   }, [postData]);
 
-  const keyDownHandle = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandle = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") commentPostHandle();
-  };
+  },[comment]);
 
-  const getPostComment = async () => {
+  const getPostComment = useCallback( async () => {
     if (postData) {
       try {
         const response = await getCommentList(postData._id);
@@ -40,9 +40,9 @@ export default function PostDetailCommentList() {
         console.log(error);
       }
     }
-  };
+  },[postData]);
 
-  const commentPostHandle = async () => {
+  const commentPostHandle = useCallback( async () => {
     if (comment.trim().length < 1 || postState) return;
     setPostState(true);
     try {
@@ -61,7 +61,7 @@ export default function PostDetailCommentList() {
       console.log(error);
       setPostState(false);
     }
-  };
+  },[comment,postData]);
 
   
 
@@ -88,3 +88,4 @@ export default function PostDetailCommentList() {
     </div>
   );
 }
+export default React.memo(PostDetailCommentList)

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import styles from "./editModal.module.css";
 
 
@@ -75,4 +75,4 @@ const EditPasswordInput = ({ password, setPassword }: props) => {
   );
 };
 
-export default EditPasswordInput;
+export default EditPasswordInput ;

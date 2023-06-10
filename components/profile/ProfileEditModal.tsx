@@ -85,11 +85,12 @@ const ProfileEditModal = ({ closeModal }: props) => {
       }
       data.profileImgUrl = fileUrl;
     }
+  
     try {
       const response = await profileEdit(data);
       if (response.status === 200) {
         if (data.profileImgUrl.length > 0) {
-          if (userData.profileImgName !== data.profileImgUrl[0].name) {
+          if (userData.profileImgName !== data.profileImgUrl[0].name&&userData.profileUrl!=="/assets/basic_profile.jpg") {
             const file = [
               {
                 url: userData.profileUrl,

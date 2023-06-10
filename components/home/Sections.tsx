@@ -9,6 +9,7 @@ import HomeSection03 from "./HomeSection03";
 export default function Sections() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [touchStartY, setTouchStartY] = useState(0);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -55,6 +56,55 @@ export default function Sections() {
       containerRefCurrent?.removeEventListener("wheel", wheelHandler);
     };
   }, [isScrolling]);
+
+  useEffect(() => {
+    const touchStartHandler = (e: TouchEvent) => {
+      setTouchStartY(e.touches[0].clientY);
+    };
+
+    const touchMoveHandler = (e: TouchEvent) => {
+      e.preventDefault();
+      if (isScrolling) return;
+      setIsScrolling(true);
+
+      const touchCurrentY = e.touches[0].clientY;
+      const touchDeltaY = touchStartY - touchCurrentY;
+      const pageHeight = window.innerHeight;
+
+      if (containerRef.current) {
+        const { scrollTop } = containerRef.current;
+        if (touchDeltaY > 0) {
+          if (scrollTop === pageHeight * 2) {
+            scrollEnd(false);
+            return;
+          }
+          containerRef.current.scrollTo({
+            top: pageHeight * (Math.floor(scrollTop / pageHeight) + 1),
+            behavior: "smooth",
+          });
+        } else {
+          if (scrollTop === 0) {
+            scrollEnd(false);
+            return;
+          }
+          containerRef.current.scrollTo({
+            top: scrollTop - pageHeight,
+            left: 0,
+            behavior: "smooth",
+          });
+        }
+        scrollEnd(true);
+      }
+    };
+
+    const containerRefCurrent = containerRef.current;
+    containerRefCurrent?.addEventListener("touchstart", touchStartHandler);
+    containerRefCurrent?.addEventListener("touchmove", touchMoveHandler);
+    return () => {
+      containerRefCurrent?.removeEventListener("touchstart", touchStartHandler);
+      containerRefCurrent?.removeEventListener("touchmove", touchMoveHandler);
+    };
+  }, [ touchStartY]);
 
   const scrollEnd = (bool: boolean) => {
     if (bool) {

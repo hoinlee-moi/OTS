@@ -243,4 +243,14 @@
   .icon {
     font-size: 15px;
   }
+  .picture1 div:nth-child(4),
+  .picture2 div:nth-child(4) {
+    padding-top: 200px;
+  }
+  .picture1 div:nth-child(3),
+  .picture1 div:nth-child(5),
+  .picture2 div:nth-child(3),
+  .picture2 div:nth-child(5){
+    padding-top: 150px;
+  }
 }

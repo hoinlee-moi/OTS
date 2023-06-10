@@ -234,7 +234,7 @@
 .sizeBtnWrap {
   position: absolute;
   bottom: calc(100% + 10px);
-  width: 100px;
+  width: 110px;
   border-radius: 10px;
   background-color: #00000096;
   overflow: hidden;

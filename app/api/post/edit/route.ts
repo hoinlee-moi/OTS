@@ -7,7 +7,6 @@ import { ObjectId } from "mongodb";
 export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions)
     const data = await request.json()
-    console.log(data)
     if(session) {
         const user = session.user as any
         const postId = data.postId

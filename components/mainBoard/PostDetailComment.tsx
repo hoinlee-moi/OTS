@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useCallback, useEffect, useState } from "react";
 import Avatar from "../Avatar";
 import styles from "./postDetail.module.css";
@@ -13,7 +13,7 @@ type props = {
   getPostComment: any;
 };
 
-const PostDetailComment=({ comment, getPostComment }: props)=> {
+const PostDetailComment = ({ comment, getPostComment }: props) => {
   const { data }: any = useSession();
   const [myComment, setMyComment] = useState(false);
   const [updateState, setUpdateState] = useState(false);
@@ -23,21 +23,24 @@ const PostDetailComment=({ comment, getPostComment }: props)=> {
   useEffect(() => {
     if (data.user._id === comment.userId) {
       setMyComment(true);
-    } else{
-      setMyComment(false)
+    } else {
+      setMyComment(false);
     }
   }, [comment, data]);
 
-  const keyDownHandle = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") updateComment();
-  },[]);
+  const keyDownHandle = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") updateComment();
+    },
+    [updateCommentVal]
+  );
 
-  const deleteCommentHandle = useCallback( async () => {
+  const deleteCommentHandle = useCallback(async () => {
     if (window.confirm("삭제하시겠습니까?")) {
       const deleteData = {
         _id: comment._id,
         userId: comment.userId,
-        postId:comment.postId
+        postId: comment.postId,
       };
       try {
         const response = await deleteComment(deleteData);
@@ -49,9 +52,9 @@ const PostDetailComment=({ comment, getPostComment }: props)=> {
         console.log(error);
       }
     }
-  },[comment]);
+  }, [comment]);
 
-  const updateComment = useCallback( async () => {
+  const updateComment = useCallback(async () => {
     if (update) return;
     setUpdate(true);
     const updateData = {
@@ -69,7 +72,7 @@ const PostDetailComment=({ comment, getPostComment }: props)=> {
       setUpdate(false);
       alert("서버와 연결이 올바르지 않습니다");
     }
-  },[comment,updateCommentVal]);
+  }, [comment, updateCommentVal]);
 
   return (
     <div className={styles.comment}>
@@ -100,13 +103,15 @@ const PostDetailComment=({ comment, getPostComment }: props)=> {
           <span onClick={() => setUpdateState(!updateState)}>
             <FontAwesomeIcon icon={faPen} />
           </span>
-          {!updateState&&<span onClick={deleteCommentHandle}>
-            <FontAwesomeIcon icon={faX} />
-          </span>}
+          {!updateState && (
+            <span onClick={deleteCommentHandle}>
+              <FontAwesomeIcon icon={faX} />
+            </span>
+          )}
         </div>
       )}
     </div>
   );
-}
+};
 
-export default React.memo(PostDetailComment)
+export default React.memo(PostDetailComment);

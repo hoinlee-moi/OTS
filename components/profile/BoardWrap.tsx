@@ -56,7 +56,6 @@ export default function BoardWrap({ param }: { param: { nickname: string } }) {
           setPage((prevPage) => prevPage + 1);
         }
         const data = response.data.response;
-        console.log(data,tag,page)
         setUserPost((snap: post[]) => {
           return [...snap, ...data];
         });

@@ -86,7 +86,6 @@ const SignUp = ({ modalClose }: props) => {
       if (!emailDupStatus) {
         try {
           const response = await emailDuplicate(inputValue);
-          console.log(response);
           if (response.status === 200) {
             setEmailDupStatus(true);
           }
@@ -219,9 +218,7 @@ const SignUp = ({ modalClose }: props) => {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle}>
-          회원가입
-        </button>
+        <button onClick={signUpHandle}>회원가입</button>
       </div>
     </div>
   );

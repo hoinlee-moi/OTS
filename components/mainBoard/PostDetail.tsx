@@ -48,7 +48,6 @@ export default function PostDetail({ profile }: { profile: true | undefined }) {
   const [updateState, setUpdateState] = useState(false);
 
   useEffect(() => {
-    console.log(data)
     document.body.style.cssText = `
     position: fixed; 
     top: -${window.scrollY}px;
@@ -141,7 +140,6 @@ export default function PostDetail({ profile }: { profile: true | undefined }) {
       };
       try {
         const response = await updatePost(updateData);
-        console.log(response);
         setUpdateState(false);
         setEditState(false);
         setPostData((snap: any) => {

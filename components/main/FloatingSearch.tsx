@@ -77,7 +77,6 @@ export default function FloatingSearch({ onState, closeSearch }: props) {
   const liClickHandle = (e: React.MouseEvent<HTMLLIElement>) => {
     const target = e.target as HTMLElement;
     const id = target.id;
-    console.log(target.tagName)
     if (target.tagName === "LI") {
       router.push(`/main/profile/${id}`);
     }

@@ -144,7 +144,6 @@ const SignUp = ({ modalClose }: props) => {
     }
 
     if (signUpState) return;
-
     if (
       emailDupStatus &&
       nickDupStatus &&
@@ -220,7 +219,7 @@ const SignUp = ({ modalClose }: props) => {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle} disabled={signUpState}>
+        <button onClick={signUpHandle}>
           회원가입
         </button>
       </div>

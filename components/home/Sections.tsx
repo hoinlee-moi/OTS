@@ -19,7 +19,7 @@ export default function Sections() {
   }, []);
 
   useEffect(() => {
-    const wheelHandler = (e: WheelEvent) => {
+    const wheelHandler = (e: any) => {
       e.preventDefault();
       if (isScrolling) return;
       setIsScrolling(true);
@@ -52,59 +52,63 @@ export default function Sections() {
     };
     const containerRefCurrent = containerRef.current;
     containerRefCurrent?.addEventListener("wheel", wheelHandler);
+    containerRefCurrent?.addEventListener("touchstart", wheelHandler);
+    containerRefCurrent?.addEventListener("touchmove", wheelHandler);
     return () => {
       containerRefCurrent?.removeEventListener("wheel", wheelHandler);
+      containerRefCurrent?.removeEventListener("touchstart", wheelHandler);
+      containerRefCurrent?.removeEventListener("touchmove", wheelHandler);
     };
   }, [isScrolling]);
 
-  useEffect(() => {
-    const touchStartHandler = (e: TouchEvent) => {
-      setTouchStartY(e.touches[0].clientY);
-    };
+  // useEffect(() => {
+  //   const touchStartHandler = (e: TouchEvent) => {
+  //     setTouchStartY(e.touches[0].clientY);
+  //   };
 
-    const touchMoveHandler = (e: TouchEvent) => {
-      e.preventDefault();
-      if (isScrolling) return;
-      setIsScrolling(true);
+  //   const touchMoveHandler = (e: TouchEvent) => {
+  //     e.preventDefault();
+  //     if (isScrolling) return;
+  //     setIsScrolling(true);
 
-      const touchCurrentY = e.touches[0].clientY;
-      const touchDeltaY = touchStartY - touchCurrentY;
-      const pageHeight = window.innerHeight;
+  //     const touchCurrentY = e.touches[0].clientY;
+  //     const touchDeltaY = touchStartY - touchCurrentY;
+  //     const pageHeight = window.innerHeight;
 
-      if (containerRef.current) {
-        const { scrollTop } = containerRef.current;
-        if (touchDeltaY > 0) {
-          if (scrollTop === pageHeight * 2) {
-            scrollEnd(false);
-            return;
-          }
-          containerRef.current.scrollTo({
-            top: pageHeight * (Math.floor(scrollTop / pageHeight) + 1),
-            behavior: "smooth",
-          });
-        } else {
-          if (scrollTop === 0) {
-            scrollEnd(false);
-            return;
-          }
-          containerRef.current.scrollTo({
-            top: scrollTop - pageHeight,
-            left: 0,
-            behavior: "smooth",
-          });
-        }
-        scrollEnd(true);
-      }
-    };
+  //     if (containerRef.current) {
+  //       const { scrollTop } = containerRef.current;
+  //       if (touchDeltaY > 0) {
+  //         if (scrollTop === pageHeight * 2) {
+  //           scrollEnd(false);
+  //           return;
+  //         }
+  //         containerRef.current.scrollTo({
+  //           top: pageHeight * (Math.floor(scrollTop / pageHeight) + 1),
+  //           behavior: "smooth",
+  //         });
+  //       } else {
+  //         if (scrollTop === 0) {
+  //           scrollEnd(false);
+  //           return;
+  //         }
+  //         containerRef.current.scrollTo({
+  //           top: scrollTop - pageHeight,
+  //           left: 0,
+  //           behavior: "smooth",
+  //         });
+  //       }
+  //       scrollEnd(true);
+  //     }
+  //   };
 
-    const containerRefCurrent = containerRef.current;
-    containerRefCurrent?.addEventListener("touchstart", touchStartHandler);
-    containerRefCurrent?.addEventListener("touchmove", touchMoveHandler);
-    return () => {
-      containerRefCurrent?.removeEventListener("touchstart", touchStartHandler);
-      containerRefCurrent?.removeEventListener("touchmove", touchMoveHandler);
-    };
-  }, [ touchStartY]);
+  //   const containerRefCurrent = containerRef.current;
+  //   containerRefCurrent?.addEventListener("touchstart", touchStartHandler);
+  //   containerRefCurrent?.addEventListener("touchmove", touchMoveHandler);
+  //   return () => {
+  //     containerRefCurrent?.removeEventListener("touchstart", touchStartHandler);
+  //     containerRefCurrent?.removeEventListener("touchmove", touchMoveHandler);
+  //   };
+  // }, [ touchStartY]);
 
   const scrollEnd = (bool: boolean) => {
     if (bool) {

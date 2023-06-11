@@ -18,15 +18,13 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 
 export default function FloatingMenu() {
-  const{data}:any = useSession()
+  const { data }: any = useSession();
   const [searchState, setSearchState] = useState(false);
   const [loading, setLoading] = useState(false);
   const [makeModal, setMakeModal] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  
 
   return (
     <>
@@ -49,7 +47,10 @@ export default function FloatingMenu() {
                 ) : (
                   <img src="/assets/logo.png" />
                 )}
-                <FontAwesomeIcon icon={faUtensils} className={styles.smallLogo}/>
+                <FontAwesomeIcon
+                  icon={faUtensils}
+                  className={styles.smallLogo}
+                />
               </div>
               <div
                 className={
@@ -57,7 +58,7 @@ export default function FloatingMenu() {
                 }
               >
                 <article>
-                  <Link href="/main" prefetch={false} >
+                  <Link href="/main">
                     <FontAwesomeIcon icon={faHouseChimney} size="lg" />
                     <p>홈</p>
                   </Link>
@@ -73,7 +74,7 @@ export default function FloatingMenu() {
                     <FontAwesomeIcon icon={faPencil} />
                     <p>글쓰기</p>
                   </div>
-                  <Link href={`/main/profile/${data&&data.user.nickname}`} prefetch={false} >
+                  <Link href={`/main/profile/${data && data.user.nickname}`}>
                     <FontAwesomeIcon icon={faUser} />
                     <p>프로필</p>
                   </Link>

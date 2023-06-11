@@ -56,8 +56,8 @@ const ProfileEditModal = ({ closeModal }: props) => {
       editUserData.gender !== userData.gender ||
       editUserData.profileImgFile.length > 0
     )
-      setBtnState(true)
-      else setBtnState(false);
+      setBtnState(true);
+    else setBtnState(false);
   }, [editUserData]);
 
   const mouseDownHandle = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -85,12 +85,15 @@ const ProfileEditModal = ({ closeModal }: props) => {
       }
       data.profileImgUrl = fileUrl;
     }
-  
+
     try {
       const response = await profileEdit(data);
       if (response.status === 200) {
         if (data.profileImgUrl.length > 0) {
-          if (userData.profileImgName !== data.profileImgUrl[0].name&&userData.profileUrl!=="/assets/basic_profile.jpg") {
+          if (
+            userData.profileImgName !== data.profileImgUrl[0].name &&
+            userData.profileUrl !== "/assets/basic_profile.jpg"
+          ) {
             const file = [
               {
                 url: userData.profileUrl,
@@ -121,6 +124,15 @@ const ProfileEditModal = ({ closeModal }: props) => {
       try {
         const response = await deleteUser(userData.emailId);
         if (response.status === 200) {
+          if (userData.profileUrl !== "/assets/basic_profile.jpg") {
+            const file = [
+              {
+                url: userData.profileUrl,
+                name: userData.profileImgName,
+              },
+            ];
+            await fileDelete(file,"user")
+          }
           signOut();
         }
       } catch (error) {

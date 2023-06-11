@@ -41,7 +41,7 @@ const Login=() =>{
         setLoginState(false);
       }
       if (response?.status === 200 && response?.ok === true)
-        router.push(response.url as string);
+        router.replace(response.url as string);
     } catch (err) {
       console.log(err);
       setLoginFailMs("E-Mail 또는 비밀번호가 올바르지 않습니다");

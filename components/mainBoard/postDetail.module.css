@@ -340,6 +340,7 @@
 .commentInput button {
   width: 40px;
   height: 100%;
+  margin: auto;
   font-size: 15px;
   font-weight: bold;
   color: #c31952;
@@ -432,6 +433,12 @@
     aspect-ratio: 0;
     border-radius: 0;
     overflow: auto;
+  }
+  .modalTitle {
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
   }
   .phoneCloseBtn {
     position: absolute;

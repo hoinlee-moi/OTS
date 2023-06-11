@@ -62,7 +62,6 @@ export default function PostDetail({ profile }: { profile: true | undefined }) {
       line-height: 1;`;
       window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     };
-    
   }, []);
 
   useEffect(() => {

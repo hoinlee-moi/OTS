@@ -83,7 +83,8 @@ export default function PostDetailImg() {
               width={1000}
               height={1000}
               ref={imgRef}
-              priority
+              placeholder="blur"
+              blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8fPl8PQAH7AL2dy8SSgAAAABJRU5ErkJggg=="
             />
             {currentIndex !== 0 && (
               <button

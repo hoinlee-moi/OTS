@@ -218,7 +218,15 @@ const SignUp = ({ modalClose }: props) => {
           checkState={nikCheck}
         />
         {alertMs !== "" && <p>{alertMs}</p>}
-        <button onClick={signUpHandle}>회원가입</button>
+        {signUpState ? (
+          <div className={styles.loginLoading}>
+            <svg>
+              <circle cx="50%" cy="50%" r="25"></circle>
+            </svg>
+          </div>
+        ) : (
+          <button onClick={signUpHandle}>회원가입</button>
+        )}
       </div>
     </div>
   );

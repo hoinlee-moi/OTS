@@ -456,6 +456,9 @@
   .postEditBtn button:nth-child(1) {
     margin-right: 10px;
   }
+  .nutrient {
+    top: 25px;
+  }
   .contentContainer {
     flex-direction: column;
   }

@@ -96,8 +96,12 @@ export default function Sections() {
     const containerRefCurrent = containerRef.current;
 
     if (isMobile) {
-      containerRefCurrent?.addEventListener("touchstart", touchStartHandler);
-      containerRefCurrent?.addEventListener("touchmove", touchMoveHandler);
+      containerRefCurrent?.addEventListener("touchstart", touchStartHandler, {
+        passive: true,
+      });
+      containerRefCurrent?.addEventListener("touchmove", touchMoveHandler, {
+        passive: true,
+      });
       return () => {
         containerRefCurrent?.removeEventListener(
           "touchstart",
@@ -106,7 +110,9 @@ export default function Sections() {
         containerRefCurrent?.removeEventListener("touchmove", touchMoveHandler);
       };
     } else {
-      containerRefCurrent?.addEventListener("wheel", wheelHandler);
+      containerRefCurrent?.addEventListener("wheel", wheelHandler, {
+        passive: true,
+      });
       return () => {
         containerRefCurrent?.removeEventListener("wheel", wheelHandler);
       };

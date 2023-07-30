@@ -55,9 +55,8 @@ export const newPostContext = React.createContext<any>({});
 
   useEffect(() => {
     document.body.style.cssText = `
-    position: fixed; 
     top: -${window.scrollY}px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     width: 100%;`;
     return () => {
       const scrollY = document.body.style.top;

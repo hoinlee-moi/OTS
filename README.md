@@ -32,7 +32,8 @@ Back-end
 
 >## 3. 구현기능
 
-### 3-1. 메인페이지 :mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/components/home/Sections.tsx#L23)
+### 3-1. 메인페이지 
+:mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/components/home/Sections.tsx#L23)
 <br>
 첫 접속시 사이트를 소개하기 위한 페이지를 구현했고 scroll이 일어날 때마다 한 section씩 이동하도록 구현하였습니다. <br>
 또한 상단 고정 navbar를 통해 회원가입과 로그인을 modal창으로 가능하도록 했습니다.<br><br>
@@ -49,7 +50,8 @@ Back-end
 
 <br>
 
-### 3-2. 회원기능 :mag: [코드확인1](https://github.com/hoinlee-moi/OTS/blob/main/components/home/Login.tsx)[코드확인2](https://github.com/hoinlee-moi/OTS/blob/main/components/home/SignUp.tsx)
+### 3-2. 회원기능 
+:mag: [코드확인1](https://github.com/hoinlee-moi/OTS/blob/main/components/home/Login.tsx) <br> :mag: [코드확인2](https://github.com/hoinlee-moi/OTS/blob/main/components/home/SignUp.tsx)
 <br>
 Next Auth를 이용해 로그인을 구현하였고 MongoDB 검사를 통해 통과시 JWT,session을 통해 로그인 상태와 로그인한 유저 정보를 쿠키에 저장되도록 구현하였습니다. <br>
 회원가입은 동작 전 각 입력값이 벗어날 때 onBlur를 이용해 유효성 검사와 email과 nickname에는 중복 검사가 되도록 구현하였습니다.<br>
@@ -71,7 +73,8 @@ profile 페이지에서 Next.js의 Dynamic Routes를 통해 유저 닉네임을 
 
 <br><br>
 
-### 3-3. 게시판 기능 :mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/components/mainBoard/PostBoard.tsx)
+### 3-3. 게시판 기능 
+:mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/components/mainBoard/PostBoard.tsx)
 <br>
 페이지의 가장 중요한 부분이고 댓글을 포함하여 게시글과 댓글은 전부 DB에 저장하였습니다. <br>
 이때 게시글 db에 너무 많은 데이터가 들어가지 않도록 댓글 테이블을 따로 구성하여 저장했습니다.<br>
@@ -92,14 +95,16 @@ update를 사용할 땐 세션에 저장된 id정보와 각 게시글과 댓글�
 
 <br><br>
 
-### 3-4. 오픈 API를 활용한 음식 영양소 :mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/app/api/post/foodSearch/route.ts)
+### 3-4. 오픈 API를 활용한 음식 영양소 
+:mag: [코드확인](https://github.com/hoinlee-moi/OTS/blob/main/app/api/post/foodSearch/route.ts)
 <br>
 공공 데이터 포탈의 서비스를 이용해 식품 영양성분 정보를 검색할 수 있게 만들었습니다.<br>
 모달창 내에서 검색하도록 하였고 비슷한 이름의 음식들을 최대 40개까지 불러올 수 있게 하였고 선택시 글 작성시 음식 이름, 영양 성분들을 저장할 수 있도록 구현하였습니다.
 
 <br><br>
 
-### 3-5. 게시판 무한스크롤 기능 :mag: [코드확인1](https://github.com/hoinlee-moi/OTS/blob/main/components/mainBoard/PostBoard.tsx) [코드확인2](https://github.com/hoinlee-moi/OTS/blob/main/hooks/useObserve.ts)
+### 3-5. 게시판 무한스크롤 기능 
+:mag: [코드확인1](https://github.com/hoinlee-moi/OTS/blob/main/components/mainBoard/PostBoard.tsx) <br> :mag: [코드확인2](https://github.com/hoinlee-moi/OTS/blob/main/hooks/useObserve.ts)
 <br>
 커스텀훅을 이용하여 게시판 글 마지막에 붙어있는 공간을 옵저빙 하여 스크롤을 통해 유저 화면에 들어올 경우 다음 페이지의 글을 불러오도록 구현하였습니다 <br>
 한번 로드시 15개씩 가져올 수 있도록 했고 MongoDB의 쿼리를 사용하였고 더이상 불러올 데이터가 없을 때의 상태값을 보내 로딩이 더 진행되지 않도록 했습니다<br>
@@ -107,7 +112,8 @@ update를 사용할 땐 세션에 저장된 id정보와 각 게시글과 댓글�
 
 <br><br>
 
-### 3-6. firebase storage를 통한 이미지 파일 관리 :mag:[코드확인](https://github.com/hoinlee-moi/OTS/blob/main/util/firebase.ts)
+### 3-6. firebase storage를 통한 이미지 파일 관리 
+:mag:[코드확인](https://github.com/hoinlee-moi/OTS/blob/main/util/firebase.ts)
 
 <br>
 

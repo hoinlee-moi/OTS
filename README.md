@@ -7,7 +7,6 @@
 >## 1. 제작기간 & 참여인원
 
 - 2023.05.20 ~ 2023.06.10
-- 1인 개발
 
 <br>
 
@@ -16,8 +15,6 @@
 Front-end
 - React 18
 - TypeScript 5
-- Axios 1.4
-- Fontawesome 6
 <br>
 
 Back-end
@@ -25,8 +22,6 @@ Back-end
 - mongodb 5.5
 - firebase/storage
 - Next auth 4
-- bcrypt 5
-- dotenv
 
 <br>
 
